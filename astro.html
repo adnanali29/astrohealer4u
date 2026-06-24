@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether & Sol — Editorial Astrology & Celestial Apothecary</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cinzel Decorative & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cinzel Decorative"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            celestial: {
+              cream: '#FAF9F5',
+              lavender: '#E9E3F8',
+              rose: '#FBE8EB',
+              sage: '#E5F1EB',
+              gold: '#DFD1B0',
+              deep: '#1C1917',
+              muted: '#78716C'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Premium custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF9F5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E2DFD2;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C2BFB2;
+    }
+
+    /* Cosmic Glow Animations */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.08); }
+    }
+    .celestial-glow-lavender {
+      background: radial-gradient(circle, rgba(233,227,248,0.6) 0%, rgba(250,249,245,0) 70%);
+      animation: pulseGlow 12s infinite ease-in-out;
+    }
+    .celestial-glow-rose {
+      background: radial-gradient(circle, rgba(251,232,235,0.6) 0%, rgba(250,249,245,0) 70%);
+      animation: pulseGlow 16s infinite ease-in-out;
+    }
+
+    /* 3D Card Flip CSS Engine */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+    
+    /* Elegant tracking transition */
+    .tab-active-indicator {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Soft shimmer */
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+    .shimmer-element::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      transform: translateX(-100%);
+      background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 20%,
+        rgba(255, 255, 255, 0.6) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: shimmer 2.5s infinite;
+    }
+
+    /* Accordion Custom heights */
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-celestial-deep bg-celestial-cream selection:bg-celestial-lavender selection:text-purple-900 transition-all duration-300">
+
+  <!-- CUSTOM FLOATING CELESTIAL AUDIO BUTTON (Synthesized Sound System) -->
+  <button onclick="toggleAudioSystem()" id="sound-toggle-btn" class="fixed bottom-6 left-6 z-50 flex items-center gap-2 bg-white/95 border border-stone-200/80 hover:border-amber-400 px-4 py-2.5 rounded-full shadow-lg transition-all transform hover:-translate-y-0.5 active:scale-95 group">
+    <div class="relative w-5 h-5 flex items-center justify-center">
+      <i data-lucide="music-4" id="sound-icon" class="w-4 h-4 text-purple-700 animate-pulse"></i>
+      <span id="sound-wave-bar" class="absolute w-2 h-2 rounded-full bg-amber-400 -top-0.5 -right-0.5 scale-0 transition-transform"></span>
+    </div>
+    <span class="text-xs font-semibold text-stone-700 tracking-wider font-sans" id="sound-text">Celestial Sound: On</span>
+  </button>
+
+  <!-- Dynamic Global Toast System -->
+  <div id="global-toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none max-w-sm w-full px-4"></div>
+
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-40 bg-[#FAF9F5]/90 backdrop-blur-md border-b border-stone-200/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        
+        <!-- Interactive Brand Logo -->
+        <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('home')">
+          <div class="relative w-11 h-11 rounded-full bg-gradient-to-tr from-celestial-lavender via-celestial-rose to-amber-100 flex items-center justify-center border border-white/60 shadow-sm overflow-hidden transition-transform duration-500 group-hover:rotate-180">
+            <i data-lucide="sparkles" class="w-5.5 h-5.5 text-purple-700 animate-pulse"></i>
+          </div>
+          <div>
+            <span class="font-serif text-lg tracking-widest uppercase font-bold text-stone-800 block leading-tight">Aether & Sol</span>
+            <span class="text-[9px] tracking-[0.25em] text-celestial-muted uppercase block font-semibold">Celestial Alchemy</span>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Bar -->
+        <nav class="hidden md:flex items-center space-x-1.5 relative">
+          <button onclick="switchTab('home')" id="nav-home" class="nav-btn relative px-4 py-2.5 text-xs tracking-wider uppercase font-semibold text-purple-900 rounded-full transition-all">
+            Home
+          </button>
+          <button onclick="switchTab('consultation')" id="nav-consultation" class="nav-btn relative px-4 py-2.5 text-xs tracking-wider uppercase font-semibold text-stone-600 hover:text-purple-700 rounded-full transition-all">
+            Consultations
+          </button>
+          <button onclick="switchTab('shop')" id="nav-shop" class="nav-btn relative px-4 py-2.5 text-xs tracking-wider uppercase font-semibold text-stone-600 hover:text-purple-700 rounded-full transition-all">
+            Celestial Shop
+          </button>
+          <button onclick="switchTab('about')" id="nav-about" class="nav-btn relative px-4 py-2.5 text-xs tracking-wider uppercase font-semibold text-stone-600 hover:text-purple-700 rounded-full transition-all">
+            About Astraea
+          </button>
+          <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn relative px-4 py-2.5 text-xs tracking-wider uppercase font-semibold text-stone-600 hover:text-purple-700 rounded-full transition-all">
+            Get in Touch
+          </button>
+        </nav>
+
+        <!-- Right Side Nav Actions -->
+        <div class="flex items-center gap-3">
+          
+          <!-- Wishlist tracking counter -->
+          <button onclick="viewWishlistItems()" class="relative p-2.5 text-stone-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all group" title="Wishlist">
+            <i data-lucide="heart" id="wishlist-icon" class="w-5 h-5 transition-transform group-hover:scale-110"></i>
+            <span id="wishlist-counter" class="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 bg-rose-400 text-white text-[9px] font-bold rounded-full flex items-center justify-center px-1 scale-0 transition-transform">0</span>
+          </button>
+
+          <!-- Floating Bag Button -->
+          <button onclick="toggleCartDrawer(true)" class="relative p-2.5 text-stone-600 hover:text-purple-700 hover:bg-purple-50 rounded-full transition-all group" title="Celestial Bundle">
+            <i data-lucide="shopping-bag" class="w-5 h-5 transition-transform group-hover:scale-110"></i>
+            <span id="cart-counter" class="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 bg-purple-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center px-1 scale-0 transition-transform">0</span>
+          </button>
+
+          <!-- Responsive Drawer Hamburger -->
+          <button onclick="toggleMobileMenu(true)" class="md:hidden p-2 text-stone-600 hover:text-purple-700 hover:bg-purple-50 rounded-full transition-all">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu Overlay -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-50 bg-stone-900/50 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="mobile-menu-drawer" class="absolute top-0 right-0 w-80 h-full bg-celestial-cream p-6 shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out">
+      <div class="space-y-6">
+        <div class="flex justify-between items-center">
+          <span class="font-serif text-sm tracking-widest uppercase font-bold text-stone-800">Aether Menu</span>
+          <button onclick="toggleMobileMenu(false)" class="p-1.5 hover:bg-stone-100 rounded-lg">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <div class="flex flex-col gap-2.5">
+          <button onclick="switchTab('home')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold tracking-wide hover:bg-purple-50/50 hover:text-purple-800 transition-all">Home Oracle</button>
+          <button onclick="switchTab('consultation')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold tracking-wide hover:bg-purple-50/50 hover:text-purple-800 transition-all">1-on-1 Consultations</button>
+          <button onclick="switchTab('shop')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold tracking-wide hover:bg-purple-50/50 hover:text-purple-800 transition-all">Celestial Shop</button>
+          <button onclick="switchTab('about')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold tracking-wide hover:bg-purple-50/50 hover:text-purple-800 transition-all">Astraea's Journey</button>
+          <button onclick="switchTab('contact')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold tracking-wide hover:bg-purple-50/50 hover:text-purple-800 transition-all">Connect Directly</button>
+        </div>
+      </div>
+      <div class="border-t border-stone-200/60 pt-4 text-[10px] text-celestial-muted leading-relaxed">
+        Let dynamic star alignments coordinate your natural earthly endeavors. Sedona Base GMT coordinates.
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Visual Backdrop Gradients -->
+  <div class="absolute inset-x-0 top-0 h-[600px] overflow-hidden pointer-events-none z-0">
+    <div class="absolute -top-32 left-[10%] w-[500px] h-[500px] rounded-full celestial-glow-lavender"></div>
+    <div class="absolute top-[10%] -right-48 w-[600px] h-[600px] rounded-full celestial-glow-rose"></div>
+  </div>
+
+  <!-- MAIN BODY STAGE -->
+  <main class="flex-grow relative z-10">
+
+    <!-- ============================================
+         TAB: HOME
+         ============================================ -->
+    <section id="tab-content-home" class="tab-pane">
+      
+      <!-- Interactive Hero Panel with Canvas Starfield Background -->
+      <div class="relative py-12 md:py-24 px-4 overflow-hidden">
+        <!-- Interactive Canvas Background for mouse physics stars -->
+        <canvas id="hero-stars-canvas" class="absolute inset-0 w-full h-full pointer-events-auto opacity-70 z-0"></canvas>
+        
+        <div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10 pointer-events-none">
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left pointer-events-auto">
+            <div class="inline-flex items-center gap-2 bg-purple-50 border border-purple-100 px-4 py-1.5 rounded-full text-purple-700 text-xs font-bold uppercase tracking-widest shadow-xs animate-bounce" style="animation-duration: 3s">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              Celestial Navigation & Holistic Alignment
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-serif font-bold text-stone-800 leading-tight">
+              Unveil Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-rose-500 to-amber-600 italic font-bold">Cosmic Blueprint</span>
+            </h1>
+            
+            <p class="text-stone-700 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-semibold">
+              We align physical objects, cosmic transits, and customized daily astrological calendars to guide your spatial and spiritual energy toward harmonic tranquility.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-2">
+              <button onclick="switchTab('consultation')" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-stone-800 to-stone-900 hover:from-purple-900 hover:to-indigo-950 text-white font-bold text-xs sm:text-sm tracking-widest uppercase rounded-full shadow-md hover:shadow-xl transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                Begin Soul Reading
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+              <button onclick="switchTab('shop')" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-stone-50 text-stone-700 border border-stone-200/80 font-bold text-xs sm:text-sm tracking-widest uppercase rounded-full shadow-xs hover:shadow-md transition-all flex items-center justify-center gap-2">
+                <i data-lucide="shopping-bag" class="w-4 h-4 text-purple-600"></i>
+                Browse Apothecary
+              </button>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-3 gap-4 pt-10 border-t border-stone-200/50 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
+              <div>
+                <span class="block text-2xl sm:text-3xl font-serif font-bold text-purple-800 leading-none">12,500+</span>
+                <span class="text-[10px] text-stone-500 tracking-wider uppercase font-bold block mt-1">Charts Calibrated</span>
+              </div>
+              <div class="border-x border-stone-200/60 px-4">
+                <span class="block text-2xl sm:text-3xl font-serif font-bold text-rose-600 leading-none">4.96 ★</span>
+                <span class="text-[10px] text-stone-500 tracking-wider uppercase font-bold block mt-1">Client Praise</span>
+              </div>
+              <div>
+                <span class="block text-2xl sm:text-3xl font-serif font-bold text-amber-600 leading-none">100%</span>
+                <span class="text-[10px] text-stone-500 tracking-wider uppercase font-bold block mt-1">Spiritual Ethics</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Beautiful Orbital Graphics Engine -->
+          <div class="lg:col-span-5 flex justify-center pointer-events-auto">
+            <div class="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center">
+              
+              <!-- Orbital Rings -->
+              <div class="absolute inset-0 rounded-full border-2 border-dashed border-purple-200/30 animate-spin" style="animation-duration: 45s"></div>
+              <div class="absolute inset-6 rounded-full border border-rose-200/40 animate-reverse-spin" style="animation-duration: 30s"></div>
+              <div class="absolute inset-16 rounded-full border border-amber-200/25"></div>
+
+              <!-- Central Interactive Sun Element with custom oscillator chime on click -->
+              <div onclick="generateCelestialTone(587.33, 'triangle', 0.8)" class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-full bg-gradient-to-tr from-purple-100 via-rose-50 to-amber-100 p-4 shadow-xl flex flex-col items-center justify-center border border-white/60 hover:scale-105 transition-transform duration-300 cursor-pointer group" title="Tap for Solar Vibrations">
+                <div class="absolute inset-3 rounded-full border border-amber-300/30 group-hover:scale-110 transition-transform"></div>
+                <i data-lucide="sun" class="w-10 h-10 sm:w-14 sm:h-14 text-amber-500 animate-pulse mb-1.5"></i>
+                <span class="text-[9px] tracking-[0.25em] font-serif uppercase text-stone-500 font-bold block">VIBRATIONAL</span>
+                <span class="text-[11px] text-purple-700 italic font-sans font-semibold mt-0.5">HEARTBEAT</span>
+              </div>
+
+              <!-- Animated Floating Orbs representing Planets -->
+              <div class="absolute top-6 right-12 w-9 h-9 rounded-full bg-purple-200/80 flex items-center justify-center text-xs animate-bounce" style="animation-delay: 0.1s">♈</div>
+              <div class="absolute bottom-8 left-8 w-11 h-11 rounded-full bg-rose-200/80 flex items-center justify-center text-sm animate-bounce" style="animation-delay: 0.4s">♎</div>
+              <div class="absolute top-1/2 left-0 w-8 h-8 rounded-full bg-teal-100/80 flex items-center justify-center text-xs">♊</div>
+              <div class="absolute bottom-1/2 right-0 w-7 h-7 rounded-full bg-amber-100/80 flex items-center justify-center text-xs">☉</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE TAROT DRAWER: Draw Your Celestial Advice Card of the Day -->
+      <div class="py-16 bg-white border-y border-stone-100 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="text-center space-y-3 mb-10 max-w-2xl mx-auto">
+            <span class="text-xs uppercase tracking-widest text-purple-600 font-semibold block">Interactive Divine Oracle</span>
+            <h2 class="text-3xl font-serif text-stone-800">Your Daily Cosmic Tarot Deck</h2>
+            <p class="text-stone-500 text-sm font-light">
+              Focus on a question about your path. Click any face-down cosmic card to draw and flip it to synthesize your custom advice aspect.
+            </p>
+          </div>
+
+          <!-- Dynamic 3D Tarot Board -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto px-4">
+            
+            <!-- Card 1 -->
+            <div class="tarot-card-container perspective-1000 w-full h-80 cursor-pointer" onclick="flipTarotCard(this, 'c1')">
+              <div class="tarot-card-inner relative w-full h-full transform-style-3d transition-transform duration-700 rounded-2xl shadow-md border border-stone-200/60">
+                <!-- Back (Face down) -->
+                <div class="absolute inset-0 backface-hidden w-full h-full bg-gradient-to-tr from-stone-800 to-stone-950 p-4 rounded-2xl flex flex-col items-center justify-between text-amber-200 border-4 border-amber-100/20">
+                  <span class="text-xs tracking-widest text-amber-300 font-serif font-semibold">AETHER ORACLE</span>
+                  <div class="w-16 h-16 rounded-full border-2 border-dashed border-amber-200/40 flex items-center justify-center">
+                    <i data-lucide="compass" class="w-8 h-8 animate-spin" style="animation-duration: 20s"></i>
+                  </div>
+                  <span class="text-[10px] tracking-wider text-amber-200/60 font-mono">REVEAL ALIGNMENT</span>
+                </div>
+                <!-- Front (Revealed) -->
+                <div class="absolute inset-0 backface-hidden w-full h-full rotate-y-180 bg-gradient-to-tr from-purple-50 to-white p-6 rounded-2xl flex flex-col items-center justify-between text-stone-800 border-2 border-purple-200">
+                  <div class="text-xs uppercase tracking-widest font-bold text-purple-700">The Luminary Star</div>
+                  <div class="text-5xl animate-bounce">✨</div>
+                  <div class="text-center space-y-1">
+                    <p class="text-xs text-stone-600 leading-normal font-light">"A beacon of hope, clarity, and unexpected breakthroughs. Trust that the Universe is paving your roadmap right now."</p>
+                    <span class="text-[9px] font-mono text-purple-600 block pt-1 font-semibold">Alignment Element: Ether</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="tarot-card-container perspective-1000 w-full h-80 cursor-pointer" onclick="flipTarotCard(this, 'c2')">
+              <div class="tarot-card-inner relative w-full h-full transform-style-3d transition-transform duration-700 rounded-2xl shadow-md border border-stone-200/60">
+                <!-- Back (Face down) -->
+                <div class="absolute inset-0 backface-hidden w-full h-full bg-gradient-to-tr from-stone-800 to-stone-950 p-4 rounded-2xl flex flex-col items-center justify-between text-amber-200 border-4 border-amber-100/20">
+                  <span class="text-xs tracking-widest text-amber-300 font-serif font-semibold">AETHER ORACLE</span>
+                  <div class="w-16 h-16 rounded-full border-2 border-dashed border-amber-200/40 flex items-center justify-center">
+                    <i data-lucide="sparkles" class="w-8 h-8 animate-spin" style="animation-duration: 20s"></i>
+                  </div>
+                  <span class="text-[10px] tracking-wider text-amber-200/60 font-mono">REVEAL ALIGNMENT</span>
+                </div>
+                <!-- Front (Revealed) -->
+                <div class="absolute inset-0 backface-hidden w-full h-full rotate-y-180 bg-gradient-to-tr from-rose-50 to-white p-6 rounded-2xl flex flex-col items-center justify-between text-stone-800 border-2 border-rose-200">
+                  <div class="text-xs uppercase tracking-widest font-bold text-rose-700">The Divine Empress</div>
+                  <div class="text-5xl animate-bounce">🌸</div>
+                  <div class="text-center space-y-1">
+                    <p class="text-xs text-stone-600 leading-normal font-light">"Nurture your physical body and creative projects. Great manifestations demand patience, sensory comfort, and self-kindness."</p>
+                    <span class="text-[9px] font-mono text-rose-600 block pt-1 font-semibold">Alignment Element: Earth</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="tarot-card-container perspective-1000 w-full h-80 cursor-pointer" onclick="flipTarotCard(this, 'c3')">
+              <div class="tarot-card-inner relative w-full h-full transform-style-3d transition-transform duration-700 rounded-2xl shadow-md border border-stone-200/60">
+                <!-- Back (Face down) -->
+                <div class="absolute inset-0 backface-hidden w-full h-full bg-gradient-to-tr from-stone-800 to-stone-950 p-4 rounded-2xl flex flex-col items-center justify-between text-amber-200 border-4 border-amber-100/20">
+                  <span class="text-xs tracking-widest text-amber-300 font-serif font-semibold">AETHER ORACLE</span>
+                  <div class="w-16 h-16 rounded-full border-2 border-dashed border-amber-200/40 flex items-center justify-center">
+                    <i data-lucide="moon" class="w-8 h-8 animate-spin" style="animation-duration: 20s"></i>
+                  </div>
+                  <span class="text-[10px] tracking-wider text-amber-200/60 font-mono">REVEAL ALIGNMENT</span>
+                </div>
+                <!-- Front (Revealed) -->
+                <div class="absolute inset-0 backface-hidden w-full h-full rotate-y-180 bg-gradient-to-tr from-sky-50 to-white p-6 rounded-2xl flex flex-col items-center justify-between text-stone-800 border-2 border-sky-200">
+                  <div class="text-xs uppercase tracking-widest font-bold text-sky-700">The Cosmic Void</div>
+                  <div class="text-5xl animate-bounce">🌌</div>
+                  <div class="text-center space-y-1">
+                    <p class="text-xs text-stone-600 leading-normal font-light">"A call to pause and reflect. Silence external noises. Your subconscious currently holds the keys you seek."</p>
+                    <span class="text-[9px] font-mono text-sky-600 block pt-1 font-semibold">Alignment Element: Void</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="text-center mt-8">
+            <button onclick="resetTarotDeck()" class="px-5 py-2.5 text-xs text-purple-700 font-bold bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+              Reshuffle Sacred Deck
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION: HOROSCOPES GRID & DETAILED READING PANEL -->
+      <div class="py-20 bg-celestial-cream relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="text-center space-y-3 mb-12">
+            <span class="text-xs uppercase tracking-widest text-purple-600 font-semibold block">Planetary Alignment</span>
+            <h2 class="text-3xl font-serif text-stone-800">Your Celestial Zodiac Oracle</h2>
+            <p class="text-stone-500 max-w-xl mx-auto font-light text-sm">
+              Tap any native alignment sign below to unlock real-time zodiac characteristics and ruling parameters.
+            </p>
+          </div>
+
+          <!-- Zodiac Grid Dynamic Renderer -->
+          <div id="zodiac-signs-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-3 mb-10">
+            <!-- Programmatically populated by JS -->
+          </div>
+
+          <!-- Horoscope Display Sheet -->
+          <div class="bg-white border border-stone-200/60 rounded-3xl p-6 sm:p-10 shadow-sm max-w-4xl mx-auto relative overflow-hidden">
+            <!-- Subtle backdrop gradient -->
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-300 via-rose-300 to-amber-300"></div>
+
+            <div class="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between border-b border-stone-100 pb-6 mb-6">
+              <div class="flex items-center gap-5">
+                <div id="selected-zodiac-symbol-badge" class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-100 to-rose-100 flex items-center justify-center text-3xl shadow-xs border border-white">
+                  ♈
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 id="selected-zodiac-name" class="text-2xl font-serif font-bold text-stone-800">Aries</h3>
+                    <span id="selected-zodiac-element" class="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-rose-50 text-rose-800 border border-stone-200/20">
+                      Fire
+                    </span>
+                  </div>
+                  <p id="selected-zodiac-date" class="text-xs text-stone-500 font-medium">Mar 21 - Apr 19 • Ruling Planet: Mars</p>
+                </div>
+              </div>
+
+              <!-- Timeframe Tabs -->
+              <div class="flex bg-stone-100/80 p-1 rounded-xl self-stretch md:self-auto justify-between gap-1">
+                <button onclick="changeHoroscopeTimeframe('Today')" id="tf-Today" class="flex-1 md:flex-none px-4 py-2 text-xs font-semibold rounded-lg bg-white text-purple-700 shadow-xs transition-all">Today</button>
+                <button onclick="changeHoroscopeTimeframe('Weekly')" id="tf-Weekly" class="flex-1 md:flex-none px-4 py-2 text-xs font-semibold rounded-lg text-stone-500 hover:text-stone-800 transition-all">Weekly</button>
+                <button onclick="changeHoroscopeTimeframe('Yearly')" id="tf-Yearly" class="flex-1 md:flex-none px-4 py-2 text-xs font-semibold rounded-lg text-stone-500 hover:text-stone-800 transition-all">Yearly</button>
+              </div>
+            </div>
+
+            <!-- Reading Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="md:col-span-2 space-y-4">
+                <span class="text-xs uppercase tracking-wider text-purple-600 font-bold block">Intuitive Guidance</span>
+                <p id="horoscope-text-display" class="text-stone-700 leading-relaxed font-light text-base">
+                  The solar transit highlights your primary desires. Today is magnificent for setting fresh parameters in relationships and acting upon immediate instincts. Avoid over-analyzing minor shifts in the wind.
+                </p>
+                <p id="zodiac-desc-display" class="text-xs italic text-stone-400">
+                  "Courageous, passionate, and trail-blazing leader."
+                </p>
+              </div>
+
+              <div class="space-y-4 bg-celestial-cream/60 p-5 rounded-2xl border border-stone-100">
+                <span class="text-xs uppercase tracking-wider text-rose-600 font-bold block">Aether Sign Parameters</span>
+                <div class="space-y-3">
+                  <div class="flex justify-between text-xs border-b border-stone-200/40 pb-1.5">
+                    <span class="text-stone-500">Love Vibration:</span>
+                    <span id="para-love" class="font-semibold text-stone-700">92%</span>
+                  </div>
+                  <div class="flex justify-between text-xs border-b border-stone-200/40 pb-1.5">
+                    <span class="text-stone-500">Aura Color:</span>
+                    <span id="para-aura" class="font-semibold text-stone-700 capitalize">Dusty Lilac</span>
+                  </div>
+                  <div class="flex justify-between text-xs border-b border-stone-200/40 pb-1.5">
+                    <span class="text-stone-500">Lucky Number:</span>
+                    <span id="para-lucky" class="font-semibold text-purple-700 font-mono">7, 14, 22</span>
+                  </div>
+                  <div class="flex justify-between text-xs pb-1">
+                    <span class="text-stone-500">Strong Synergy:</span>
+                    <span id="para-synergy" class="font-semibold text-stone-700">Leo & Libra</span>
+                  </div>
+                </div>
+                <button onclick="switchTab('consultation')" class="w-full py-2.5 bg-white hover:bg-purple-50 text-purple-700 text-xs font-semibold rounded-xl transition-colors border border-purple-100/30 flex items-center justify-center gap-1.5 shadow-2xs">
+                  Deepen with full 1-on-1 reading
+                  <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PLANETARY BIRTH CHART CALCULATOR (WITH DYNAMIC INTERACTIVE PLANET WHEEL) -->
+      <div class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="bg-[#FAF9F5]/70 border border-stone-200/60 rounded-3xl overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-12">
+            
+            <!-- Input Form Panel -->
+            <div class="lg:col-span-5 p-8 sm:p-12 space-y-6">
+              <div>
+                <span class="text-xs uppercase tracking-widest text-purple-600 font-bold block mb-1">Stellar Calibration</span>
+                <h2 class="text-2xl sm:text-3xl font-serif text-stone-800">Procedural Natal Blueprint</h2>
+                <p class="text-stone-500 text-sm font-light mt-2">
+                  Input your exact terrestrial coordinates to map your foundational planet structures.
+                </p>
+              </div>
+
+              <form onsubmit="calculatePlanetaryChart(event)" class="space-y-4">
+                <div>
+                  <label class="block text-xs font-semibold text-stone-600 mb-1.5">Date of Descent</label>
+                  <input type="date" id="chart-birth-date" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-white text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all" required>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-stone-600 mb-1.5">Descent Time</label>
+                    <input type="time" id="chart-birth-time" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-white text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all" required>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-stone-600 mb-1.5">Descent Location</label>
+                    <input type="text" id="chart-birth-place" placeholder="Paris, France" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-white text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all" required>
+                  </div>
+                </div>
+
+                <button type="submit" id="chart-btn" class="w-full py-4 bg-stone-900 hover:bg-stone-950 text-white font-medium text-xs tracking-wider uppercase rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="compass" class="w-4 h-4 text-amber-300"></i>
+                  Calculate Astral Mapping
+                </button>
+              </form>
+            </div>
+
+            <!-- SVG Visualizer Chart Panel -->
+            <div class="lg:col-span-7 bg-white p-8 sm:p-12 flex flex-col justify-center items-center border-t lg:border-t-0 lg:border-l border-stone-200/60 min-h-[400px]">
+              
+              <!-- State 1: Ready & Waiting -->
+              <div id="chart-waiting-state" class="text-center space-y-4 max-w-sm">
+                <div class="w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center mx-auto text-purple-400">
+                  <i data-lucide="star" class="w-8 h-8 animate-spin" style="animation-duration: 8s"></i>
+                </div>
+                <h3 class="text-lg font-serif text-stone-700">Awaiting Alignment Values</h3>
+                <p class="text-xs text-stone-400 font-light leading-relaxed">
+                  Enter your physical parameters to activate the astrological projection matrix. The procedural wheel below will calibrate immediately.
+                </p>
+              </div>
+
+              <!-- State 2: Simulated Calculation Spinner -->
+              <div id="chart-calculating-state" class="hidden text-center space-y-4">
+                <div class="w-20 h-20 relative flex items-center justify-center mx-auto">
+                  <div class="absolute inset-0 rounded-full border-4 border-dashed border-purple-200 animate-spin"></div>
+                  <i data-lucide="compass" class="w-8 h-8 text-purple-600 animate-pulse"></i>
+                </div>
+                <h3 class="text-lg font-serif text-purple-800 animate-pulse">Consulting Ephemeris Registers...</h3>
+              </div>
+
+              <!-- State 3: Rendered Interactive Blueprint -->
+              <div id="chart-results-state" class="hidden w-full space-y-6">
+                
+                <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                  <span class="text-xs uppercase tracking-widest text-purple-600 font-bold block">YOUR PROPORTIONAL ALIGNMENT</span>
+                  <button onclick="resetBirthChartCalculator()" class="text-xs text-rose-500 hover:underline">Re-calibrate</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  
+                  <!-- Vector Chart Wheel -->
+                  <div class="flex justify-center">
+                    <svg id="astrology-chart-svg" class="w-56 h-56 transition-transform duration-1000 ease-out" viewBox="0 0 200 200">
+                      <!-- Base Outer Circle -->
+                      <circle cx="100" cy="100" r="95" fill="none" stroke="#E2DFD2" stroke-width="1" />
+                      <!-- Inner divisions and constellations lines -->
+                      <circle cx="100" cy="100" r="70" fill="none" stroke="#E2DFD2" stroke-width="0.7" />
+                      <circle cx="100" cy="100" r="45" fill="none" stroke="#E2DFD2" stroke-dasharray="2,2" stroke-width="0.7" />
+                      
+                      <!-- House Axes -->
+                      <line x1="100" y1="5" x2="100" y2="195" stroke="#E2DFD2" stroke-width="0.5" />
+                      <line x1="5" y1="100" x2="195" y2="100" stroke="#E2DFD2" stroke-width="0.5" />
+                      <line x1="33" y1="33" x2="167" y2="167" stroke="#E2DFD2" stroke-width="0.3" stroke-dasharray="1,1" />
+                      <line x1="167" y1="33" x2="33" y2="167" stroke="#E2DFD2" stroke-width="0.3" stroke-dasharray="1,1" />
+
+                      <!-- Planets markers -->
+                      <g id="svg-planet-group">
+                        <!-- Sun Marker -->
+                        <circle cx="100" cy="40" r="4" fill="#DFD1B0" />
+                        <line x1="100" y1="100" x2="100" y2="40" stroke="#DFD1B0" stroke-width="0.8" />
+                        <text x="100" y="32" font-size="6" fill="#78716C" text-anchor="middle">☉</text>
+
+                        <!-- Moon Marker -->
+                        <circle cx="150" cy="80" r="4" fill="#93C5FD" />
+                        <line x1="100" y1="100" x2="150" y2="80" stroke="#93C5FD" stroke-width="0.8" />
+                        <text x="156" y="80" font-size="6" fill="#78716C" text-anchor="middle">☽</text>
+
+                        <!-- Ascendant Marker -->
+                        <circle cx="60" cy="130" r="4" fill="#C084FC" />
+                        <line x1="100" y1="100" x2="60" y2="130" stroke="#C084FC" stroke-width="0.8" />
+                        <text x="54" y="136" font-size="6" fill="#78716C" text-anchor="middle">ASC</text>
+                      </g>
+                    </svg>
+                  </div>
+
+                  <!-- Textual Reading Analysis -->
+                  <div class="space-y-4">
+                    <div class="space-y-2">
+                      <div class="flex items-center gap-1.5">
+                        <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
+                        <span class="text-xs text-stone-500">Sun:</span>
+                        <span id="natal-sun" class="text-xs font-semibold text-stone-800">Aries (1st House)</span>
+                      </div>
+                      <div class="flex items-center gap-1.5">
+                        <i data-lucide="moon" class="w-4 h-4 text-sky-400"></i>
+                        <span class="text-xs text-stone-500">Moon:</span>
+                        <span id="natal-moon" class="text-xs font-semibold text-stone-800">Scorpio (8th House)</span>
+                      </div>
+                      <div class="flex items-center gap-1.5">
+                        <i data-lucide="compass" class="w-4 h-4 text-purple-400"></i>
+                        <span class="text-xs text-stone-500">Ascendant:</span>
+                        <span id="natal-asc" class="text-xs font-semibold text-stone-800">Leo (1st House)</span>
+                      </div>
+                    </div>
+
+                    <div class="p-4 bg-purple-50/50 rounded-xl border border-purple-100/30 text-xs text-purple-950 font-light leading-relaxed">
+                      <strong>Aura Spectrum Matrix:</strong> <span id="natal-summary">Your emotional landscape demonstrates a powerful synthesis of transformative waters and fiery direct action. Balancing crystals recommended.</span>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- NEW SECTION: PORTAL ENTRANCE FOR 1-ON-1 CONSULTATIONS (Teaser) -->
+      <div class="py-20 bg-celestial-cream/40 border-t border-stone-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="text-center space-y-3 mb-12 max-w-2xl mx-auto">
+            <span class="text-xs uppercase tracking-widest text-purple-600 font-semibold block">Celestial Guidance Sessions</span>
+            <h2 class="text-3xl font-serif text-stone-800">Sacred 1-on-1 Engagements</h2>
+            <p class="text-stone-500 text-sm font-light leading-relaxed">
+              Step into high-integrity energetic readings calibrated to clear real-world milestones. Select your custom blueprint stream below to coordinate your time frame.
+            </p>
+          </div>
+
+          <!-- Live dynamic preview cards of the 3 premium packages -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            
+            <div class="bg-white rounded-3xl p-6 border border-stone-200/50 flex flex-col justify-between hover:shadow-lg hover:border-purple-200 transition-all duration-300">
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <div class="p-2.5 bg-purple-50 rounded-xl">
+                    <i data-lucide="compass" class="w-5 h-5 text-purple-700"></i>
+                  </div>
+                  <span class="text-[10px] tracking-wider font-bold bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full uppercase">60 min</span>
+                </div>
+                <h4 class="font-serif text-lg font-bold text-stone-800">Divine Natal Mapping</h4>
+                <p class="text-xs text-stone-500 leading-relaxed font-light">Explore career, ancestral karma, transit cycles, and your core life mission through raw planetary calculations.</p>
+              </div>
+              <div class="pt-5 mt-6 border-t border-stone-100 flex items-center justify-between">
+                <span class="text-base font-mono font-bold text-stone-800">$120.00</span>
+                <button onclick="teaserBookSession('c1')" class="px-4 py-2 bg-stone-900 text-white rounded-xl text-xs font-semibold hover:bg-purple-800 transition-all">Coordinate Time</button>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 border border-stone-200/50 flex flex-col justify-between hover:shadow-lg hover:border-rose-200 transition-all duration-300">
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <div class="p-2.5 bg-rose-50 rounded-xl">
+                    <i data-lucide="heart" class="w-5 h-5 text-rose-600"></i>
+                  </div>
+                  <span class="text-[10px] tracking-wider font-bold bg-rose-50 text-rose-700 px-2.5 py-1 rounded-full uppercase">75 min</span>
+                </div>
+                <h4 class="font-serif text-lg font-bold text-stone-800">Cosmic Synastry mapping</h4>
+                <p class="text-xs text-stone-500 leading-relaxed font-light">Calibrate relational synergies, emotional languages, and collaborative business/personal alignments.</p>
+              </div>
+              <div class="pt-5 mt-6 border-t border-stone-100 flex items-center justify-between">
+                <span class="text-base font-mono font-bold text-stone-800">$160.00</span>
+                <button onclick="teaserBookSession('c2')" class="px-4 py-2 bg-stone-900 text-white rounded-xl text-xs font-semibold hover:bg-rose-800 transition-all">Coordinate Time</button>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 border border-stone-200/50 flex flex-col justify-between hover:shadow-lg hover:border-sky-200 transition-all duration-300">
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <div class="p-2.5 bg-sky-50 rounded-xl">
+                    <i data-lucide="moon" class="w-5 h-5 text-sky-700"></i>
+                  </div>
+                  <span class="text-[10px] tracking-wider font-bold bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full uppercase">45 min</span>
+                </div>
+                <h4 class="font-serif text-lg font-bold text-stone-800">Lunar Roadmap transits</h4>
+                <p class="text-xs text-stone-500 leading-relaxed font-light">Build a personalized year-ahead PDF roadmap and planning parameters aligned with major eclipse gates.</p>
+              </div>
+              <div class="pt-5 mt-6 border-t border-stone-100 flex items-center justify-between">
+                <span class="text-base font-mono font-bold text-stone-800">$95.00</span>
+                <button onclick="teaserBookSession('c3')" class="px-4 py-2 bg-stone-900 text-white rounded-xl text-xs font-semibold hover:bg-sky-800 transition-all">Coordinate Time</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- NEW SECTION: CELSTIAL TESTIMONIALS SLIDER / GRID -->
+      <div class="py-20 bg-white relative overflow-hidden">
+        <!-- Background orbital vector element -->
+        <div class="absolute -right-20 top-20 w-80 h-80 rounded-full border border-dashed border-stone-200/80 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="text-center space-y-3 mb-16 max-w-2xl mx-auto">
+            <span class="text-xs uppercase tracking-widest text-purple-600 font-semibold block">Blessed Feedback</span>
+            <h2 class="text-3xl font-serif text-stone-800">Words from the Star Lodge</h2>
+            <p class="text-stone-500 text-sm font-light leading-relaxed">
+              Discover how our procedural calendars and natural apothecary layouts have restored energetic balances inside diverse modern homes.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="bg-celestial-cream/50 rounded-3xl p-8 border border-stone-200/40 space-y-6 flex flex-col justify-between hover:scale-[1.01] transition-transform duration-300">
+              <div class="space-y-4">
+                <div class="flex text-amber-400 gap-1">
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-xs sm:text-sm text-stone-700 font-light leading-relaxed italic">
+                  "Astraea’s Natal blueprint mapping was a revelation. It didn’t just list astronomical charts; it translated abstract aspects into highly actionable guidance for my creative career. My workspace feels reborn."
+                </p>
+              </div>
+              <div class="flex items-center gap-3 pt-4 border-t border-stone-200/40">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-100 to-rose-100 border border-white flex items-center justify-center font-serif text-sm font-bold text-purple-800">EV</div>
+                <div>
+                  <h5 class="text-xs font-bold text-stone-800 uppercase leading-none">Eleonora Vance</h5>
+                  <span class="text-[10px] text-stone-400 block mt-1">Fine Artist & Taurus • California</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-celestial-cream/50 rounded-3xl p-8 border border-stone-200/40 space-y-6 flex flex-col justify-between hover:scale-[1.01] transition-transform duration-300">
+              <div class="space-y-4">
+                <div class="flex text-amber-400 gap-1">
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-xs sm:text-sm text-stone-700 font-light leading-relaxed italic">
+                  "The Amethyst clusters are breathtakingly unique and ethically clean. Tapping into Astraea’s lunar batch candle rituals has completely cleared the sluggish energetic channels in our Sedona studio."
+                </p>
+              </div>
+              <div class="flex items-center gap-3 pt-4 border-t border-stone-200/40">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-teal-100 to-sky-100 border border-white flex items-center justify-center font-serif text-sm font-bold text-teal-800">JM</div>
+                <div>
+                  <h5 class="text-xs font-bold text-stone-800 uppercase leading-none">Julian Mercer</h5>
+                  <span class="text-[10px] text-stone-400 block mt-1">Design Founder & Gemini • Arizona</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-celestial-cream/50 rounded-3xl p-8 border border-stone-200/40 space-y-6 flex flex-col justify-between hover:scale-[1.01] transition-transform duration-300">
+              <div class="space-y-4">
+                <div class="flex text-amber-400 gap-1">
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-xs sm:text-sm text-stone-700 font-light leading-relaxed italic">
+                  "Calculated my Sun and Ascendant triad in seconds, ordered the matching Luminous pendant, and received pre-reading files within hours. Highly organized interface with true artistic integrity."
+                </p>
+              </div>
+              <div class="flex items-center gap-3 pt-4 border-t border-stone-200/40">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-100 to-rose-100 border border-white flex items-center justify-center font-serif text-sm font-bold text-rose-800">SL</div>
+                <div>
+                  <h5 class="text-xs font-bold text-stone-800 uppercase leading-none">Sophia Lin</h5>
+                  <span class="text-[10px] text-stone-400 block mt-1">Stellar Scholar & Libra • London</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- NEW SECTION: CELESTIAL FAQ ACCORDION -->
+      <div class="py-20 bg-[#FAF9F5] border-t border-stone-200/40 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-center space-y-3 mb-16">
+            <span class="text-xs uppercase tracking-widest text-purple-600 font-semibold block">Cosmic Inquiries</span>
+            <h2 class="text-3xl font-serif text-stone-800">Stellar FAQ Parameters</h2>
+            <p class="text-stone-500 text-sm font-light">
+              Expand our coordinates registry to clarify calculations, consultation bookings, and apothecary shipping times.
+            </p>
+          </div>
+
+          <!-- Interactive Accordions -->
+          <div class="space-y-4">
+            
+            <div class="bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-2xs">
+              <button onclick="toggleFaqAccordion(this)" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group">
+                <span class="text-xs sm:text-sm font-bold text-stone-800 uppercase tracking-wide group-hover:text-purple-700 transition-colors">How exact must my descent (birth) parameters be?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-stone-400 transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content transition-all">
+                <p class="px-6 pb-5 text-xs sm:text-sm text-stone-500 font-light leading-relaxed">
+                  While birth dates are solid anchors, approximate birth hours ensure the accuracy of your Rising Sign (Ascendant) and House coordinate angles, which fluctuate every few minutes. If unspecified, we synthesize your chart aligned to solar noon transits.
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-2xs">
+              <button onclick="toggleFaqAccordion(this)" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group">
+                <span class="text-xs sm:text-sm font-bold text-stone-800 uppercase tracking-wide group-hover:text-purple-700 transition-colors">Are the crystals and candles ethically sourced?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-stone-400 transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content transition-all">
+                <p class="px-6 pb-5 text-xs sm:text-sm text-stone-500 font-light leading-relaxed">
+                  Yes, absolute ecological integrity is our foundation. All crystals are hand-selected from family-owned mining blocks in Uruguay during designated full lunar cycles. Our soy candles are completely phthalate-free and hand-poured in Sedona.
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-2xs">
+              <button onclick="toggleFaqAccordion(this)" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group">
+                <span class="text-xs sm:text-sm font-bold text-stone-800 uppercase tracking-wide group-hover:text-purple-700 transition-colors">What happens after I schedule a 1-on-1 reading?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-stone-400 transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content transition-all">
+                <p class="px-6 pb-5 text-xs sm:text-sm text-stone-500 font-light leading-relaxed">
+                  Once booking is secured, our automatic system prepares your high-resolution vector PDF transit charts. You will receive an initial email checklist with preparatory question fields, followed by a secure custom Zoom invitation for our live hour.
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-2xs">
+              <button onclick="toggleFaqAccordion(this)" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group">
+                <span class="text-xs sm:text-sm font-bold text-stone-800 uppercase tracking-wide group-hover:text-purple-700 transition-colors">Can I order items to be gifted to another's coordinates?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-stone-400 transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content transition-all">
+                <p class="px-6 pb-5 text-xs sm:text-sm text-stone-500 font-light leading-relaxed">
+                  Certainly. Simply customize your destination coordinates during our checkout bundle process. We will wrap the package in elegant, unbranded linen sheets accompanied by a beautiful custom handwritten zodiac-theme card.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         TAB: CONSULTATIONS
+         ============================================ -->
+    <section id="tab-content-consultation" class="tab-pane hidden py-12 md:py-20 px-4">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center space-y-4 mb-16 max-w-2xl mx-auto">
+          <span class="text-xs uppercase tracking-widest text-purple-600 font-semibold block">Energy Alignments</span>
+          <h1 class="text-4xl font-serif text-stone-800">Personal Astrology Readings</h1>
+          <p class="text-stone-500 font-light text-sm md:text-base">
+            Book highly descriptive, authentic zoom consultations focused entirely on the aspects of your earthly journey. Complete recordings and PDF blueprint charts are provided.
+          </p>
+        </div>
+
+        <!-- Consultations Grid -->
+        <div id="consultation-cards-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Interactive Appointment Planner Box -->
+        <div id="booking-stage-container" class="max-w-3xl mx-auto scroll-mt-24">
+          <div class="bg-white border border-stone-200/60 rounded-3xl p-6 sm:p-10 shadow-xs relative overflow-hidden">
+            
+            <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-purple-50/40 blur-2xl"></div>
+
+            <div id="booking-empty-state" class="text-center py-6 space-y-3">
+              <div class="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center mx-auto text-stone-300">
+                <i data-lucide="calendar" class="w-6 h-6"></i>
+              </div>
+              <h4 class="text-lg font-serif text-stone-700">Ready to Coordinate Time?</h4>
+              <p class="text-sm text-stone-400 font-light max-w-md mx-auto">
+                Please select your preferred alignment session card above to activate the scheduling forms.
+              </p>
+            </div>
+
+            <div id="booking-form-area" class="hidden space-y-6">
+              <div class="border-b border-stone-100 pb-4 flex justify-between items-start gap-4">
+                <div>
+                  <span class="text-xs uppercase tracking-widest text-purple-600 font-bold block">Selected Session</span>
+                  <h3 id="booking-active-title" class="text-xl font-serif text-stone-800">Natal Blueprint Reading</h3>
+                  <p id="booking-active-meta" class="text-xs text-stone-400 mt-0.5">Duration: 60 Minutes • Energy Exchange: $120.00</p>
+                </div>
+                <button onclick="resetBookingForm()" class="text-stone-400 hover:text-stone-800 text-xs flex items-center gap-1 bg-stone-50 px-2 py-1 rounded-lg border border-stone-200/50">
+                  <i data-lucide="x" class="w-3.5 h-3.5"></i> Change
+                </button>
+              </div>
+
+              <!-- State: Sched Form -->
+              <div id="booking-fields-wrap">
+                <form onsubmit="handleSessionBooking(event)" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-xs font-semibold text-stone-600 mb-1.5">Sacred Name</label>
+                      <input type="text" id="book-name" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-celestial-cream/40 text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-400 transition-all" required>
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-stone-600 mb-1.5">Sacred Email</label>
+                      <input type="email" id="book-email" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-celestial-cream/40 text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-400 transition-all" required>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-xs font-semibold text-stone-600 mb-1.5">Calendar Date</label>
+                      <input type="date" id="book-date" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-celestial-cream/40 text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-400 transition-all" required>
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-stone-600 mb-1.5">Preferred Time Block</label>
+                      <select id="book-time" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-celestial-cream/40 text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-400 transition-all" required>
+                        <option value="">Choose block...</option>
+                        <option value="10:00 AM">10:00 AM (Aether Peak)</option>
+                        <option value="01:30 PM">01:30 PM (Solar Zenith)</option>
+                        <option value="04:00 PM">04:00 PM (Dusk Descent)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="w-full py-4 bg-stone-900 hover:bg-stone-950 text-white font-medium text-xs tracking-widest uppercase rounded-xl shadow-xs transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                    Schedule Alignment Slot
+                  </button>
+                </form>
+              </div>
+
+              <!-- State: Booking Success -->
+              <div id="booking-success-wrap" class="hidden text-center py-8 space-y-4 max-w-md mx-auto">
+                <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+                  <i data-lucide="check-circle" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-xl font-serif text-stone-800">Temporal Alignment Scheduled</h4>
+                <p class="text-sm text-stone-500 font-light leading-relaxed">
+                  A verification beacon has been dispatched to your email. Astraea will greet your energies at the designated zoom node.
+                </p>
+                <button onclick="resetBookingForm()" class="text-xs font-semibold text-purple-700 hover:underline">
+                  Book alternative aspect session
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         TAB: CELESTIAL SHOP
+         ============================================ -->
+    <section id="tab-content-shop" class="tab-pane hidden py-12 md:py-20 px-4">
+      <div class="max-w-7xl mx-auto">
+        
+        <!-- Header wrapper dynamic toggle -->
+        <div id="shop-header-wrapper" class="text-center space-y-4 mb-16 max-w-2xl mx-auto">
+          <span class="text-xs uppercase tracking-widest text-purple-600 font-semibold block">Blessed Relics</span>
+          <h1 class="text-4xl font-serif text-stone-800">The Celestial Apothecary</h1>
+          <p class="text-stone-500 font-light text-sm md:text-base">
+            Integrate high-frequency, clean, sustainable artifacts into your everyday physical spaces.
+          </p>
+        </div>
+
+        <!-- Dynamic Product Detail Container -->
+        <div id="shop-detail-view" class="hidden max-w-4xl mx-auto bg-white border border-stone-200/60 rounded-3xl p-6 sm:p-10 shadow-sm relative overflow-hidden mb-12">
+          <!-- Dynamic Content Rendered procedurally on card click -->
+        </div>
+
+        <!-- Catalog layout view -->
+        <div id="shop-catalog-view" class="flex flex-col md:flex-row gap-8 items-start">
+          
+          <!-- Category Filter Bar (Sidebar) -->
+          <div class="w-full md:w-64 bg-white p-6 rounded-2xl border border-stone-200/60 shrink-0 space-y-6">
+            <div>
+              <h3 class="text-xs uppercase font-bold tracking-wider text-stone-500 mb-4">Astral Domains</h3>
+              <div class="space-y-1.5" id="category-filter-list">
+                <!-- Dynamically Populated by JS -->
+              </div>
+            </div>
+
+            <div class="pt-6 border-t border-stone-100 space-y-3">
+              <h3 class="text-xs uppercase font-bold tracking-wider text-stone-500">Sacred Promise</h3>
+              <div class="flex gap-2 text-xs text-stone-500">
+                <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                <span>All crystals sourced ethically during full-moon cycles.</span>
+              </div>
+              <div class="flex gap-2 text-xs text-stone-500">
+                <i data-lucide="leaf" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                <span>100% natural organic soy candles, hand-poured in small batches.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Grid Area -->
+          <div class="flex-grow">
+            <div class="flex justify-between items-center mb-6 text-xs text-stone-500">
+              <span>Showing <span id="product-count" class="font-bold text-stone-700">0</span> artifacts</span>
+              <button onclick="toggleCartDrawer(true)" class="text-purple-700 hover:underline md:hidden">View Bundle</button>
+            </div>
+
+            <div id="shop-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Dynamically Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         TAB: ABOUT ASTRAEA
+         ============================================ -->
+    <section id="tab-content-about" class="tab-pane hidden py-12 md:py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Portrait Graphic Frame -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative">
+              <div class="absolute -inset-4 rounded-full border border-amber-200/40 animate-spin" style="animation-duration: 35s"></div>
+              <div class="absolute -inset-8 rounded-full border border-purple-200/35 animate-reverse-spin" style="animation-duration: 45s"></div>
+
+              <!-- High-End Editorial Portrait Archetype -->
+              <div class="relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-t-full bg-gradient-to-tr from-purple-100 via-rose-100 to-amber-50 p-6 flex flex-col justify-end items-center shadow-2xl border-4 border-white overflow-hidden group">
+                <div class="absolute inset-0 bg-stone-900/5 group-hover:bg-transparent transition-colors duration-300 pointer-events-none"></div>
+                <div class="text-8xl mb-8 select-none filter drop-shadow-md animate-bounce" style="animation-duration: 4s">🔮</div>
+                
+                <div class="bg-white/95 backdrop-blur-md px-6 py-4 rounded-2xl border border-stone-200/50 shadow-sm text-center w-full max-w-[240px] mb-4">
+                  <span class="block font-serif text-lg font-bold text-stone-800 leading-tight">Astraea Solis</span>
+                  <span class="text-[9px] uppercase tracking-widest text-purple-600 font-bold block mt-1">High Astrologer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Narrative Text Content -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="space-y-2">
+              <span class="text-xs uppercase tracking-widest text-purple-600 font-bold block">The Celestial Vessel</span>
+              <h1 class="text-3xl sm:text-4xl font-serif text-stone-800">Astraea's Stellar Legacy</h1>
+              <p class="text-stone-500 font-light italic">"A compiler of astronomical alignments, translating starry transits since 2012."</p>
+            </div>
+
+            <div class="text-stone-600 space-y-4 font-light leading-relaxed text-sm sm:text-base">
+              <p>
+                Hello, curious seeker of the skies. I am Astraea. My devotion to cosmic patterns began during deep exploration in old astronomical archives, where I discovered that planetary transits do not dictate our future—they simply map out the natural layout of our highest potentials.
+              </p>
+              <p>
+                I hold a structured background in both contemporary mathematical astrology and intuitive psychological archetypes. My methodology seeks to strip away superstitions, providing clean, structural, and actionable mental strategies for creative minds, entrepreneurs, and seekers.
+              </p>
+              <p>
+                Beyond standard readings, I compile the Celestial Apothecary. Each candle soy-blend, crystal parcel, and talisman are synchronized during specific planetary cycles to enhance spatial, protective, and focus alignments within your home.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 pt-6 border-t border-stone-200/60 text-xs">
+              <div class="space-y-1">
+                <span class="block font-bold uppercase text-stone-700">Holistic Integrity</span>
+                <p class="text-stone-500 leading-relaxed font-light">Your transits are personal. I guarantee highly confidential, gentle, and non-judgmental counseling protocols.</p>
+              </div>
+              <div class="space-y-1">
+                <span class="block font-bold uppercase text-stone-700">Astral Alignment Batching</span>
+                <p class="text-stone-500 leading-relaxed font-light">Every single apothecary artifact is poured, handled, and polished strictly according to the lunar schedule.</p>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button onclick="switchTab('contact')" class="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 hover:bg-purple-900 text-white font-medium text-xs tracking-wider uppercase rounded-full transition-all shadow-md">
+                Initiate Dialogue
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         TAB: GET IN TOUCH (CONTACT)
+         ============================================ -->
+    <section id="tab-content-contact" class="tab-pane hidden py-12 md:py-20 px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="bg-white border border-stone-200/60 rounded-3xl overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-12">
+          
+          <!-- Contact Details (Pastel Side) -->
+          <div class="lg:col-span-5 bg-gradient-to-tr from-purple-50/50 via-rose-50/40 to-amber-50/30 p-8 sm:p-12 space-y-8 flex flex-col justify-between">
+            <div class="space-y-4">
+              <span class="text-xs uppercase tracking-widest text-purple-600 font-bold block mb-1">Aura Messenger</span>
+              <h2 class="text-2xl sm:text-3xl font-serif text-stone-800">Stellar Dispatch</h2>
+              <p class="text-stone-500 text-xs sm:text-sm font-light leading-relaxed">
+                Send a courier with questions about birth mappings, customized celestial corporate schedules, or product details.
+              </p>
+            </div>
+
+            <!-- Detail blocks -->
+            <div class="space-y-4 text-xs">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-purple-600 border border-stone-200/40 shadow-2xs">
+                  <i data-lucide="map-pin" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-[9px] uppercase tracking-wider block text-stone-400 font-bold">Temple Location</span>
+                  <span class="font-semibold text-stone-700">Sedona, Arizona</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-purple-600 border border-stone-200/40 shadow-2xs">
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-[9px] uppercase tracking-wider block text-stone-400 font-bold">Dispatch Node</span>
+                  <span class="font-semibold text-stone-700">astraea@aetherandsol.com</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-purple-600 border border-stone-200/40 shadow-2xs">
+                  <i data-lucide="phone" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-[9px] uppercase tracking-wider block text-stone-400 font-bold">Vocal Coordinates</span>
+                  <span class="font-semibold text-stone-700">+1 (928) 424-ASTRA</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-stone-400 leading-relaxed font-light">
+              Couriers usually safely deliver return alignments in 1-2 solar cycles.
+            </div>
+          </div>
+
+          <!-- Contact Form Panel -->
+          <div class="lg:col-span-7 p-8 sm:p-12 justify-center flex flex-col">
+            
+            <div id="contact-success-stage" class="hidden text-center py-8 space-y-4 max-w-sm mx-auto">
+              <div class="w-16 h-16 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mx-auto">
+                <i data-lucide="sparkles" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-xl font-serif text-stone-800">Dispatch Propagated</h3>
+              <p class="text-sm text-stone-500 font-light leading-relaxed">
+                Your energetic message has been launched successfully. Astraea will parse your frequency values shortly.
+              </p>
+              <button onclick="resetContactForm()" class="text-xs font-semibold text-purple-700 hover:underline">
+                Send another dispatch
+              </button>
+            </div>
+
+            <form id="contact-form" onsubmit="handleContactSubmission(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-stone-600 mb-1.5">Your Full Name</label>
+                <input type="text" id="contact-name" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-celestial-cream/40 text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all" required>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-stone-600 mb-1.5">Email Destination</label>
+                <input type="email" id="contact-email" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-celestial-cream/40 text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all" required>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-stone-600 mb-1.5">Inquiry Frequency</label>
+                <textarea id="contact-msg" rows="4" class="w-full px-4 py-3 rounded-xl border border-stone-200/60 bg-celestial-cream/40 text-stone-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all" required></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-4 bg-stone-900 hover:bg-stone-950 text-white font-medium text-xs tracking-widest uppercase rounded-xl transition-all shadow-sm">
+                Transmit Message
+              </button>
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       GLOBAL CART DRAWER COMPONENT
+       ============================================ -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="cart-drawer-inner" class="absolute top-0 right-0 w-full max-w-md h-full bg-[#FAF9F5] shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out border-l border-stone-200/60">
+      
+      <!-- Drawer Header -->
+      <div class="px-6 py-5 border-b border-stone-200/60 bg-white flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-purple-700"></i>
+          <h3 class="text-lg font-serif font-bold text-stone-800">Sacred Bundle</h3>
+          <span id="cart-drawer-count" class="text-xs px-2.5 py-0.5 bg-purple-50 text-purple-700 font-bold rounded-full">0</span>
+        </div>
+        <button onclick="toggleCartDrawer(false)" class="p-1.5 hover:bg-stone-100 rounded-lg text-stone-400 hover:text-stone-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Drawer Content -->
+      <div class="flex-1 overflow-y-auto px-6 py-4 space-y-4" id="cart-drawer-items-list">
+        <!-- Dynamically Rendered items or empty state -->
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="bg-white border-t border-stone-200/60 p-6 space-y-4" id="cart-drawer-totals">
+        <div class="space-y-1.5 text-xs text-stone-600">
+          <div class="flex justify-between">
+            <span>Subtotal Value:</span>
+            <span id="cart-val-subtotal" class="font-mono font-semibold">$0.00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Planetary Calibration (8%):</span>
+            <span id="cart-val-tax" class="font-mono font-semibold">$0.00</span>
+          </div>
+          <div class="flex justify-between text-sm font-bold text-stone-800 pt-1.5 border-t border-stone-100">
+            <span>Total Exchange:</span>
+            <span id="cart-val-total" class="font-mono text-purple-800">$0.00</span>
+          </div>
+        </div>
+
+        <button onclick="handleCartCheckout()" class="w-full py-4 bg-gradient-to-r from-purple-700 to-indigo-900 hover:from-purple-800 hover:to-indigo-950 text-white font-medium text-xs sm:text-sm tracking-widest uppercase rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5">
+          <i data-lucide="check" class="w-4 h-4"></i> Dispatch Celestial Order
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-900 text-stone-300 py-16 border-t border-stone-800 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+      
+      <!-- Brand & Mission statement -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-purple-400 via-rose-300 to-amber-200 flex items-center justify-center border border-white/25 shadow-sm">
+            <i data-lucide="sparkles" class="w-4 h-4 text-stone-900"></i>
+          </div>
+          <span class="font-serif text-base tracking-widest uppercase font-bold text-white block">Aether & Sol</span>
+        </div>
+        <p class="text-xs text-stone-400 leading-relaxed font-light">
+          Premium visual alignment schemas, botanical formulas, and tailored astronomical calendars crafted with strict integrity at our Arizona research base.
+        </p>
+      </div>
+
+      <!-- Quick Portals -->
+      <div>
+        <h4 class="text-xs uppercase font-bold tracking-widest text-white mb-4">Astral Portals</h4>
+        <ul class="space-y-2 text-xs text-stone-400">
+          <li><button onclick="switchTab('home')" class="hover:text-purple-400 transition-colors text-left">Home Oracle</button></li>
+          <li><button onclick="switchTab('consultation')" class="hover:text-purple-400 transition-colors text-left">Personal Consultations</button></li>
+          <li><button onclick="switchTab('shop')" class="hover:text-purple-400 transition-colors text-left">Planetary Boutique</button></li>
+          <li><button onclick="switchTab('about')" class="hover:text-purple-400 transition-colors text-left">Astraea's Legacy</button></li>
+        </ul>
+      </div>
+
+      <!-- Promises -->
+      <div>
+        <h4 class="text-xs uppercase font-bold tracking-widest text-white mb-4">Integrity Grid</h4>
+        <ul class="space-y-2 text-xs text-stone-400">
+          <li>Secure Client Portals</li>
+          <li>Non-judgmental Astrological Philosophy</li>
+          <li>Sustainably Harvested Herbs & Crystals</li>
+          <li>100% Phthalate-free Wax Batching</li>
+        </ul>
+      </div>
+
+      <!-- Newsletter subscription form -->
+      <div class="space-y-4">
+        <h4 class="text-xs uppercase font-bold tracking-widest text-white">Stellar Epistles</h4>
+        <p class="text-xs text-stone-400 leading-relaxed font-light">
+          Receive a weekly planetary transit layout and small batch shop updates. Pure light frequency, never spam.
+        </p>
+        <form onsubmit="handleEpistleSubscription(event)" class="flex gap-2">
+          <input type="email" id="epistle-email" placeholder="email@example.com" class="bg-stone-800 text-xs px-3 py-2 rounded-lg text-white placeholder-stone-500 w-full focus:outline-none focus:ring-1 focus:ring-purple-400" required>
+          <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors shrink-0">Join</button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-stone-800 text-center text-[10px] text-stone-500 leading-relaxed">
+      <p>© 2026 Aether & Sol Inc. Sedona, Arizona coordinates. All astrological representations are intended for alignment, personal design, and artistic discovery purposes.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       APPLICATION SCRIPT (ALL INCLUSIVE WEB FX)
+       ============================================ -->
+  <script>
+    
+    // ==========================================
+    // AUDIO SYNTH SYSTEM (Native Web Audio API)
+    // ==========================================
+    let audioContext = null;
+    let isAudioSystemEnabled = true;
+
+    function initAudioContext() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+    }
+
+    function toggleAudioSystem() {
+      isAudioSystemEnabled = !isAudioSystemEnabled;
+      const text = document.getElementById('sound-text');
+      const wave = document.getElementById('sound-wave-bar');
+      const icon = document.getElementById('sound-icon');
+      
+      if (isAudioSystemEnabled) {
+        text.innerText = 'Celestial Sound: On';
+        wave.classList.remove('scale-100');
+        wave.classList.add('scale-0');
+        icon.classList.add('animate-pulse');
+        initAudioContext();
+        generateCelestialTone(880, 'sine', 0.1);
+        showToast('Celestial Chime systems synchronized successfully ✨');
+      } else {
+        text.innerText = 'Celestial Sound: Off';
+        wave.classList.remove('scale-0');
+        wave.classList.add('scale-100');
+        icon.classList.remove('animate-pulse');
+        showToast('Soundscape system muted.');
+      }
+    }
+
+    // High quality procedural bell oscillator helper
+    function generateCelestialTone(frequency, type = 'sine', volumeValue = 0.25) {
+      if (!isAudioSystemEnabled) return;
+      try {
+        initAudioContext();
+        
+        const osc = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        osc.type = type;
+        osc.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        
+        // Dynamic celestial chiming envelope (long gentle decay)
+        gainNode.gain.setValueAtTime(volumeValue, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1.8);
+        
+        osc.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        osc.start();
+        osc.stop(audioContext.currentTime + 1.8);
+      } catch (e) {
+        console.warn('Audio Context interaction pending user swipe.');
+      }
+    }
+
+    // ==========================================
+    // DATA ARRAYS
+    // ==========================================
+    const ZODIAC_SIGNS = [
+      { name: 'Aries', date: 'Mar 21 - Apr 19', element: 'Fire', rulingPlanet: 'Mars', symbol: '♈', description: 'Courageous, passionate, and trail-blazing leader.', color: 'from-rose-100 to-amber-100', text: 'text-rose-800', love: '92%', aura: 'Amber Glow', lucky: '7, 14, 22', synergy: 'Leo & Libra' },
+      { name: 'Taurus', date: 'Apr 20 - May 20', element: 'Earth', rulingPlanet: 'Venus', symbol: '♉', description: 'Reliable, patient, and lover of sensory pleasures.', color: 'from-emerald-100 to-teal-100', text: 'text-teal-800', love: '88%', aura: 'Emerald Mint', lucky: '5, 12, 18', synergy: 'Virgo & Pisces' },
+      { name: 'Gemini', date: 'May 21 - Jun 20', element: 'Air', rulingPlanet: 'Mercury', symbol: '♊', description: 'Expressive, curious, and incredibly versatile.', color: 'from-sky-100 to-indigo-100', text: 'text-sky-800', love: '95%', aura: 'Celestial Sky', lucky: '3, 9, 21', synergy: 'Aquarius & Libra' },
+      { name: 'Cancer', date: 'Jun 21 - Jul 22', element: 'Water', rulingPlanet: 'Moon', symbol: '♋', description: 'Intuitive, sentimental, and deeply protective of loved ones.', color: 'from-blue-100 to-indigo-100', text: 'text-indigo-800', love: '97%', aura: 'Iridescent Blue', lucky: '2, 7, 11', synergy: 'Pisces & Taurus' },
+      { name: 'Leo', date: 'Jul 23 - Aug 22', element: 'Fire', rulingPlanet: 'Sun', symbol: '♌', description: 'Radiant, generous, and natural-born majestic leader.', color: 'from-amber-100 to-rose-100', text: 'text-amber-800', love: '90%', aura: 'Solar Flare Gold', lucky: '1, 5, 19', synergy: 'Aries & Sagittarius' },
+      { name: 'Virgo', date: 'Aug 23 - Sep 22', element: 'Earth', rulingPlanet: 'Mercury', symbol: '♍', description: 'Analytical, helpful, and deeply connected to nature.', color: 'from-teal-100 to-amber-50', text: 'text-teal-800', love: '85%', aura: 'Sage Mint', lucky: '4, 8, 14', synergy: 'Taurus & Capricorn' },
+      { name: 'Libra', date: 'Sep 23 - Oct 22', element: 'Air', rulingPlanet: 'Venus', symbol: '♎', description: 'Diplomatic, artistic, and always seeking cosmic balance.', color: 'from-pink-100 to-purple-100', text: 'text-pink-800', love: '94%', aura: 'Dusty Lilac', lucky: '6, 15, 24', synergy: 'Gemini & Aquarius' },
+      { name: 'Scorpio', date: 'Oct 23 - Nov 21', element: 'Water', rulingPlanet: 'Pluto', symbol: '♏', description: 'Passionate, resourceful, and master of personal transformation.', color: 'from-purple-100 to-rose-100', text: 'text-purple-800', love: '91%', aura: 'Deep Orchid', lucky: '9, 18, 27', synergy: 'Cancer & Pisces' },
+      { name: 'Sagittarius', date: 'Nov 22 - Dec 21', element: 'Fire', rulingPlanet: 'Jupiter', symbol: '♐', description: 'Optimistic, freedom-loving, and seeker of ultimate wisdom.', color: 'from-orange-100 to-amber-100', text: 'text-amber-900', love: '89%', aura: 'Apricot Radiance', lucky: '3, 12, 30', synergy: 'Leo & Aries' },
+      { name: 'Capricorn', date: 'Dec 22 - Jan 19', element: 'Earth', rulingPlanet: 'Saturn', symbol: '♑', description: 'Disciplined, ambitious, and grounded anchor of the zodiac.', color: 'from-stone-200 to-emerald-100', text: 'text-stone-800', love: '86%', aura: 'Obsidian Sheen', lucky: '8, 10, 22', synergy: 'Virgo & Taurus' },
+      { name: 'Aquarius', date: 'Jan 20 - Feb 18', element: 'Air', rulingPlanet: 'Uranus', symbol: '♒', description: 'Humanitarian, original, and visionary catalyst of change.', color: 'from-cyan-100 to-blue-100', text: 'text-cyan-800', love: '93%', aura: 'Aqua Quartz', lucky: '2, 11, 20', synergy: 'Libra & Gemini' },
+      { name: 'Pisces', date: 'Feb 19 - Mar 20', element: 'Water', rulingPlanet: 'Neptune', symbol: '♓', description: 'Compassionate, artistic, and deeply intuitive dreamer.', color: 'from-fuchsia-100 to-violet-100', text: 'text-violet-800', love: '96%', aura: 'Lavender Opal', lucky: '7, 11, 21', synergy: 'Cancer & Scorpio' }
+    ];
+
+    const HOROSCOPES_TEXT_BANK = {
+      Today: [
+        "The solar transit highlights your primary desires. Today is magnificent for setting fresh parameters in relationships and acting upon immediate instincts. Avoid over-analyzing minor shifts in the wind.",
+        "A gentle moon aspect invites absolute stillness. Quiet reflection will unlock creative visions that have been clouding your subconscious. Wear soft shades of your color today to optimize this flux.",
+        "Your governing rulers suggest a sudden burst of communication. An unexpected email, card, or cosmic message may disrupt your quiet afternoon. Greet it with open arms and soft intentions."
+      ],
+      Weekly: [
+        "As the celestial tides adjust, you will find clarity in physical environments. Tackle organizational changes in your home/office to reset sluggish pathways. Trust that the universe supports this layout transformation.",
+        "The planetary alignments favor relationship calibration this week. A heart-to-heart conversation with an old acquaintance or a current partner will heal a lingering cycle. Prepare to speak with deep authenticity.",
+        "Your planetary aspect invites you to treat yourself. Indulge in warm sensory healing—essential oils, salt baths, or beautiful gem-faceting. True wellness starts with deliberate physical grounding."
+      ],
+      Yearly: [
+        "2026 demands complete alignment of your life mission and external actions. It is the perfect year for career transits or initiating long-term spiritual masterclasses. Your luck doubles during your native season.",
+        "You are breaking free from ancestral karmic patterns that have previously stalled your personal path. Cultivate patience, study ancestral elements, and trust that the stars have aligned your path beautifully.",
+        "A major shift in Jupiter invites incredible creative and financial manifestation over the coming seasons. Establish strong foundations now so that this bounty is preserved and multiplied."
+      ]
+    };
+
+    const CONSULTATIONS_DATA = [
+      {
+        id: 'c1',
+        title: 'Divine Natal Blueprint Mapping',
+        duration: '60 Minutes',
+        price: 120.00,
+        type: 'Live Zoom Video Call',
+        icon: 'compass',
+        bgColor: 'bg-purple-50/70 hover:bg-purple-100/70 border-purple-100',
+        textColor: 'text-purple-700',
+        desc: 'A comprehensive map of the sky at your exact birth moment. We will uncover your soul mission, career pathways, karmic patterns, and upcoming celestial transits.'
+      },
+      {
+        id: 'c2',
+        title: 'Cosmic Synastry: Relationship Sync',
+        duration: '75 Minutes',
+        price: 160.00,
+        type: 'Live Zoom Video Call',
+        icon: 'heart',
+        bgColor: 'bg-rose-50/70 hover:bg-rose-100/70 border-rose-100',
+        textColor: 'text-rose-700',
+        desc: 'Perfect for couples, siblings, or co-founders. Analyze the chemical interplay of two unique astrological frameworks. Understand alignment, learning hurdles, and relational strengths.'
+      },
+      {
+        id: 'c3',
+        title: 'Lunar Transit & Year Ahead Roadmap',
+        duration: '45 Minutes',
+        price: 95.00,
+        type: 'Video Recording + PDF Report',
+        icon: 'moon',
+        bgColor: 'bg-sky-50/70 hover:bg-sky-100/70 border-sky-100',
+        textColor: 'text-sky-700',
+        desc: 'Plan your next 12 months with absolute lunar alignment. Learn exactly when to plant seeds of intention, step back, launch initiatives, or surrender to transit energies.'
+      }
+    ];
+
+    const SHOP_PRODUCTS_DATA = [
+      { id: 'p1', name: 'Amethyst Awakening Cluster', price: 42.00, category: 'Crystals', image: '💜', desc: 'Sourced from Uruguay. Promotes deep spiritual insight, dream lucidity, and physical relaxation.', label: 'Best Seller' },
+      { id: 'p2', name: 'Ritual Soy Candle: Lunar Eclipse', price: 26.00, category: 'Rituals', image: '🕯️', desc: 'Hand-poured with lavender, frankincense, and obsidian chips. Designed for shadow-work.', label: 'Limited Run' },
+      { id: 'p3', name: 'Ethereal Star Tarot Deck & Guidebook', price: 38.00, category: 'Tarot', image: '🃏', desc: '78 hand-gilded cards displaying pastel watercolor cosmic themes. Ideal for both beginners and scholars.', label: 'Artisan' },
+      { id: 'p4', name: 'Luminous Sun & Moon Pendant', price: 64.00, category: 'Jewelry', image: '🌙', desc: '14k gold-filled double talisman. Symbolizes the divine marriage of conscious and unconscious mind.', label: 'Premium' },
+      { id: 'p5', name: 'Celestial Aura Cleansing Spray', price: 18.00, category: 'Rituals', image: '✨', desc: 'Infused with moon water, white sage, and neroli essential oils. Refreshes negative energies.', label: 'Eco-Friendly' },
+      { id: 'p6', name: 'Rose Quartz Eternal Harmony Sphere', price: 34.00, category: 'Crystals', image: '🌸', desc: 'Gorgeous rosy pink sphere representing unconditional love and emotional restoration.', label: 'New Arrival' }
+    ];
+
+    // ==========================================
+    // STATE REGISTERS
+    // ==========================================
+    let activeTab = 'home';
+    let currentSelectedZodiac = ZODIAC_SIGNS[0];
+    let currentHoroscopeTimeframe = 'Today';
+    let cart = [];
+    let wishlist = [];
+    let selectedConsultation = null;
+    let selectedCategory = 'All';
+
+    // ==========================================
+    // EVENT LISTENERS & LIFECYCLE
+    // ==========================================
+    window.addEventListener('DOMContentLoaded', () => {
+      // 1. Populate Zodiac Selector Grid
+      renderZodiacGrid();
+      
+      // 2. Populate Consultations
+      renderConsultationCards();
+
+      // 3. Populate Shop Items
+      renderCategoryFilters();
+      renderShopProducts();
+
+      // 4. Initialize Lucide Icons
+      lucide.createIcons();
+
+      // 5. Initialize the Interactive Starfield Background Canvas
+      initStarfieldBackground();
+    });
+
+    // ==========================================
+    // INTERACTIVE STARFIELD BACKGROUND FX (Canvas)
+    // ==========================================
+    function initStarfieldBackground() {
+      const canvas = document.getElementById('hero-stars-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      
+      let width = canvas.width = canvas.offsetWidth;
+      let height = canvas.height = canvas.offsetHeight;
+
+      // Handle Resize smoothly
+      window.addEventListener('resize', () => {
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
+      });
+
+      const starsCount = 65;
+      const starsArray = [];
+
+      // Create procedural star structures
+      for (let i = 0; i < starsCount; i++) {
+        starsArray.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: Math.random() * 1.5 + 0.4,
+          speed: Math.random() * 0.05 + 0.01,
+          opacity: Math.random() * 0.7 + 0.2,
+          pulseSpeed: Math.random() * 0.02 + 0.005,
+          glow: Math.random() > 0.8
+        });
+      }
+
+      // Track mouse coordinates for gravity pull
+      let mouseX = null;
+      let mouseY = null;
+
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        mouseX = null;
+        mouseY = null;
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        starsArray.forEach(star => {
+          // Slow continuous drifts downward-right
+          star.y += star.speed;
+          star.x += star.speed * 0.2;
+
+          // Wrap stars around boundaries
+          if (star.y > height) star.y = 0;
+          if (star.x > width) star.x = 0;
+
+          // Pulse star transparency values
+          star.opacity += star.pulseSpeed;
+          if (star.opacity > 0.95 || star.opacity < 0.15) {
+            star.pulseSpeed = -star.pulseSpeed;
+          }
+
+          // Compute gravity interaction with mouse
+          let drawX = star.x;
+          let drawY = star.y;
+
+          if (mouseX !== null && mouseY !== null) {
+            const dx = mouseX - star.x;
+            const dy = mouseY - star.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 150) {
+              const pull = (150 - dist) * 0.06;
+              drawX += (dx / dist) * pull;
+              drawY += (dy / dist) * pull;
+            }
+          }
+
+          // Render Stars
+          ctx.beginPath();
+          ctx.arc(drawX, drawY, star.size, 0, Math.PI * 2);
+          
+          if (star.glow) {
+            ctx.fillStyle = `rgba(139, 92, 246, ${star.opacity})`; // Soft Lavender
+          } else {
+            ctx.fillStyle = `rgba(120, 113, 108, ${star.opacity * 0.45})`; // Soft Earth Grey
+          }
+          ctx.fill();
+
+          // Connect stars with soft gossamer threads under closer ranges
+          if (star.glow && mouseX !== null) {
+            const distToMouse = Math.hypot(mouseX - drawX, mouseY - drawY);
+            if (distToMouse < 80) {
+              ctx.beginPath();
+              ctx.moveTo(drawX, drawY);
+              ctx.lineTo(mouseX, mouseY);
+              ctx.strokeStyle = `rgba(139, 92, 246, ${(1 - distToMouse/80) * 0.15})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        });
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
+    // ==========================================
+    // TOAST SYSTEM
+    // ==========================================
+    function showToast(message) {
+      const container = document.getElementById('global-toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = "flex items-center gap-3 bg-stone-900/95 text-stone-100 px-5 py-4 rounded-xl shadow-2xl backdrop-blur-md border border-stone-800 transition-all duration-300 transform translate-y-2 opacity-0 select-none pointer-events-auto max-w-sm";
+      toast.innerHTML = `
+        <i data-lucide="sparkles" class="w-5 h-5 text-amber-300 animate-pulse shrink-0"></i>
+        <p class="text-xs font-semibold tracking-wide font-sans">${message}</p>
+        <button onclick="this.parentElement.remove()" class="ml-auto text-stone-400 hover:text-white transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      `;
+      
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      // Trigger animations
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 50);
+
+      // Auto discard
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // ==========================================
+    // TAB NAVIGATION HANDLERS
+    // ==========================================
+    function switchTab(tabId) {
+      // Audio cue on tab transition
+      generateCelestialTone(440, 'sine', 0.1);
+
+      // Update Active Navigation Button Classes
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-purple-900', 'font-bold');
+        btn.classList.add('text-stone-600');
+      });
+      const activeBtn = document.getElementById(`nav-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-stone-600');
+        activeBtn.classList.add('text-purple-900', 'font-bold');
+      }
+
+      // Hide all panes
+      document.querySelectorAll('.tab-pane').forEach(pane => {
+        pane.classList.add('hidden');
+      });
+
+      // Show selected pane
+      const selectedPane = document.getElementById(`tab-content-${tabId}`);
+      if (selectedPane) {
+        selectedPane.classList.remove('hidden');
+      }
+
+      if (tabId === 'shop') {
+        closeProductDetail();
+      }
+
+      activeTab = tabId;
+      toggleMobileMenu(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu(open) {
+      const overlay = document.getElementById('mobile-menu-overlay');
+      const drawer = document.getElementById('mobile-menu-drawer');
+      
+      if (open) {
+        overlay.classList.remove('pointer-events-none', 'opacity-0');
+        drawer.classList.remove('translate-x-full');
+      } else {
+        overlay.classList.add('pointer-events-none', 'opacity-0');
+        drawer.classList.add('translate-x-full');
+      }
+    }
+
+    // Home Page Consultation Teaser Redirection Action
+    function teaserBookSession(sessionId) {
+      switchTab('consultation');
+      initiateBookingSession(sessionId);
+    }
+
+    // ==========================================
+    // 3D TAROT DRAW ENGINE
+    // ==========================================
+    function flipTarotCard(element, cardId) {
+      const inner = element.querySelector('.tarot-card-inner');
+      if (inner.classList.contains('rotate-y-180')) {
+        // If already flipped, don't re-flip unless reset
+        return;
+      }
+      
+      // Perform Synth Playback
+      generateCelestialTone(523.25, 'triangle', 0.3); // High-C bell tone
+
+      // Rotate card front
+      inner.classList.add('rotate-y-180');
+      showToast("Celestial Tarot aspect revealed! ✨");
+    }
+
+    function resetTarotDeck() {
+      generateCelestialTone(293.66, 'sine', 0.15); // Re-shuffle tone
+      document.querySelectorAll('.tarot-card-inner').forEach(inner => {
+        inner.classList.remove('rotate-y-180');
+      });
+      showToast("Sacred deck shuffled and distributed face down.");
+    }
+
+    // ==========================================
+    // ACCORDION TOGGLE MECHANICS (Sound-active)
+    // ==========================================
+    function toggleFaqAccordion(element) {
+      const parent = element.parentElement;
+      const content = parent.querySelector('.faq-content');
+      const icon = element.querySelector('[data-lucide="chevron-down"]');
+      const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+      // Reset other FAQ elements for a clean single-open layout
+      document.querySelectorAll('.faq-content').forEach(el => {
+        el.style.maxHeight = '0px';
+        el.style.paddingTop = '0px';
+      });
+      document.querySelectorAll('[data-lucide="chevron-down"]').forEach(ic => {
+        elRotation(ic, false);
+      });
+
+      if (!isOpen) {
+        // Play crystalline sound when opening an inquiry
+        generateCelestialTone(659.25, 'sine', 0.12); // E5 Chime
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.paddingTop = '10px';
+        elRotation(icon, true);
+      } else {
+        generateCelestialTone(329.63, 'sine', 0.08); // E4 Chime
+        content.style.maxHeight = '0px';
+        content.style.paddingTop = '0px';
+        elRotation(icon, false);
+      }
+    }
+
+    function elRotation(element, rotate) {
+      if (!element) return;
+      if (rotate) {
+        element.style.transform = 'rotate(180deg)';
+      } else {
+        element.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // ==========================================
+    // ZODIAC INTERACTIVE REGISTRATION
+    // ==========================================
+    function renderZodiacGrid() {
+      const container = document.getElementById('zodiac-signs-grid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      ZODIAC_SIGNS.forEach(sign => {
+        const isSel = currentSelectedZodiac.name === sign.name;
+        const btn = document.createElement('button');
+        btn.onclick = () => selectZodiacSign(sign);
+        btn.className = `p-3.5 rounded-2xl flex flex-col items-center justify-center gap-1 transition-all duration-300 transform hover:-translate-y-1 border ${
+          isSel 
+            ? 'bg-gradient-to-tr from-purple-100 via-purple-50 to-rose-50 border-purple-300 shadow-md scale-105' 
+            : 'bg-white hover:bg-stone-50 hover:border-stone-200 border-stone-200/40'
+        }`;
+        btn.innerHTML = `
+          <span class="text-2xl ${isSel ? 'scale-110' : 'text-stone-500'}">${sign.symbol}</span>
+          <span class="text-xs font-semibold text-stone-700 block truncate w-full text-center">${sign.name}</span>
+          <span class="text-[9px] text-stone-400 block truncate">${sign.element}</span>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    function selectZodiacSign(sign) {
+      // Synthesis bell
+      generateCelestialTone(329.63, 'sine', 0.12);
+
+      currentSelectedZodiac = sign;
+      renderZodiacGrid();
+      updateHoroscopeCard();
+    }
+
+    // ==========================================
+    // PORTAL SHOP DETAILS PANEL
+    // ==========================================
+    function openProductDetail(id) {
+      generateCelestialTone(587.33, 'triangle', 0.15); // Celestial High tone
+      const product = SHOP_PRODUCTS_DATA.find(p => p.id === id);
+      if (!product) return;
+
+      const detailContainer = document.getElementById('shop-detail-view');
+      const catalogContainer = document.getElementById('shop-catalog-view');
+      const headerWrapper = document.getElementById('shop-header-wrapper');
+
+      if (!detailContainer || !catalogContainer) return;
+
+      // Find complementary cross-sell recommendation
+      const crossSell = SHOP_PRODUCTS_DATA.find(p => p.id !== id && (p.category === product.category || p.category === 'Rituals')) || SHOP_PRODUCTS_DATA.find(p => p.id !== id);
+
+      const isFav = wishlist.includes(product.id);
+      const isCrossFav = crossSell ? wishlist.includes(crossSell.id) : false;
+
+      // Metaphysical specifications parameter matching
+      const metaSpecs = {
+        Crystals: { key: "528Hz Solfeggio Aura Calibration", chakra: "Crown & Soul Star Gateway", cycle: "Waxing Gibbous Peak Extraction" },
+        Rituals: { key: "432Hz Somatic Resonance Oil Blend", chakra: "Third Eye & Heart Resonance", cycle: "Full Blue Moon Celestial Pour" },
+        Tarot: { key: "396Hz Ancestral Frequency Activation", chakra: "All Chakra Blueprint Alignment", cycle: "Vernal Equinox Cosmic Press" },
+        Jewelry: { key: "639Hz Solar Meridian Bonded Metal", chakra: "Heart & Solar Plexus Infusion", cycle: "Waxing Gibbous Solar Meridian Casting" }
+      }[product.category] || { key: "Universal Cosmic Harmonic Wave", chakra: "Multi-Chakra Energy Point Harmony", cycle: "Astraea Hermitage Transit Peak" };
+
+      detailContainer.innerHTML = `
+        <!-- Top Action Header & Breadcrumb -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-stone-100 pb-5 mb-8">
+          <div class="flex items-center gap-2 text-xs text-stone-500">
+            <button onclick="closeProductDetail()" class="hover:text-purple-700 font-medium transition-colors">Boutique</button>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            <span class="text-stone-400">${product.category}</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            <span class="text-purple-900 font-semibold">${product.name}</span>
+          </div>
+          <button onclick="closeProductDetail()" class="flex items-center gap-1.5 px-4 py-2 bg-stone-50 hover:bg-stone-100 border border-stone-200/60 rounded-xl text-xs font-semibold text-stone-700 transition-all">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            Back to Apothecary Catalog
+          </button>
+        </div>
+
+        <!-- Product Main Showcase -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start pb-10 border-b border-stone-100">
+          <!-- Image Graphic Block -->
+          <div class="w-full h-80 bg-celestial-cream/60 rounded-3xl flex items-center justify-center text-8xl shadow-sm relative overflow-hidden border border-stone-100">
+            <span class="z-10 select-none">${product.image}</span>
+            <div class="absolute inset-0 bg-gradient-to-tr from-purple-100/30 via-rose-100/30 to-amber-100/20 pointer-events-none"></div>
+            <!-- Sparkle decorations -->
+            <div class="absolute top-4 left-4 text-purple-300 animate-pulse text-xl">✦</div>
+            <div class="absolute bottom-4 right-4 text-amber-300 animate-pulse text-xl">★</div>
+          </div>
+
+          <!-- Description and Action Panel -->
+          <div class="space-y-6">
+            <div class="space-y-2">
+              <span class="text-xs uppercase font-bold tracking-wider px-3 py-1 bg-purple-50 text-purple-700 rounded-full border border-purple-100/40 inline-block">
+                ${product.label}
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-serif font-bold text-stone-800 leading-tight">${product.name}</h2>
+              <div class="flex items-center gap-3">
+                <span class="font-mono text-2xl font-bold text-stone-900">$${product.price.toFixed(2)}</span>
+                <span class="text-xs text-stone-400">In Stock (Ethically Synchronized)</span>
+              </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
+              ${product.desc}
+            </p>
+
+            <!-- Metaphysical parameters -->
+            <div class="bg-celestial-cream/50 border border-stone-200/50 p-4 rounded-2xl space-y-2 text-xs">
+              <span class="font-bold text-purple-800 uppercase tracking-wide block">Metaphysical Spec Parameters</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-stone-600 font-light">
+                <div><span class="font-medium text-stone-700">Spectral Resonance:</span> ${metaSpecs.key}</div>
+                <div><span class="font-medium text-stone-700">Celestial Node:</span> ${metaSpecs.chakra}</div>
+                <div><span class="font-medium text-stone-700">Sourcing Transit Phase:</span> ${metaSpecs.cycle}</div>
+              </div>
+            </div>
+
+            <!-- Add to Bundle Actions -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+              <button onclick="addProductToBundle('${product.id}')" class="flex-grow py-4 bg-gradient-to-r from-purple-700 to-indigo-900 hover:from-purple-800 hover:to-indigo-950 text-white font-semibold text-xs tracking-widest uppercase rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                <i data-lucide="plus" class="w-4 h-4"></i> Incorporate Into Bundle
+              </button>
+              <button onclick="toggleWishlistItem('${product.id}'); openProductDetail('${product.id}')" class="px-5 py-4 border border-stone-200 bg-white hover:bg-rose-50 text-stone-600 hover:text-rose-500 rounded-xl transition-all flex items-center justify-center gap-2">
+                <i data-lucide="heart" class="w-4 h-4 ${isFav ? 'fill-rose-400 text-rose-500' : ''}"></i>
+                <span>${isFav ? 'Favourited' : 'Save To Desires'}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CROSS SELL PANEL -->
+        ${crossSell ? `
+        <div class="pt-10 space-y-6 animate-fade-in">
+          <div class="flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-5 h-5 text-amber-400 animate-spin" style="animation-duration: 10s"></i>
+            <h4 class="font-serif text-lg font-bold text-stone-800">Frequently Aligned Energies</h4>
+          </div>
+          <p class="text-xs text-stone-500 font-light -mt-4 leading-relaxed">
+            Astrological wisdom dictates that incorporating complementary structural elements enhances spatial aura restoration. Synthesize your alignment with this accompanying artifact:
+          </p>
+
+          <div class="bg-[#FAF9F5] border border-stone-200/60 rounded-3xl p-5 sm:p-6 hover:border-purple-200/80 transition-all duration-300 flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden group">
+            <div class="flex flex-col sm:flex-row items-center gap-5">
+              <div onclick="openProductDetail('${crossSell.id}')" class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center text-4xl shrink-0 shadow-2xs border border-stone-100 cursor-pointer relative overflow-hidden">
+                <span class="z-10 group-hover:scale-105 transition-transform duration-350">${crossSell.image}</span>
+                <div class="absolute inset-0 bg-gradient-to-tr from-purple-50/10 to-amber-50/10"></div>
+              </div>
+              <div class="space-y-1 text-center sm:text-left">
+                <div class="flex flex-col sm:flex-row items-center gap-2">
+                  <h5 onclick="openProductDetail('${crossSell.id}')" class="font-serif text-base font-bold text-stone-800 cursor-pointer hover:text-purple-800 transition-colors">${crossSell.name}</h5>
+                  <span class="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-100/30 inline-block">${crossSell.label}</span>
+                </div>
+                <p class="text-xs text-stone-400 leading-normal font-light line-clamp-1 max-w-md">${crossSell.desc}</p>
+                <span class="text-xs font-mono font-bold text-stone-700 block sm:inline-block">$${crossSell.price.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+              <button onclick="addProductToBundle('${crossSell.id}')" class="flex-grow sm:flex-none px-5 py-3 bg-stone-900 hover:bg-purple-800 text-white font-semibold text-xs tracking-wider uppercase rounded-xl transition-all shadow-2xs flex items-center justify-center gap-1.5">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Merge Energies
+              </button>
+              <button onclick="toggleWishlistItem('${crossSell.id}'); openProductDetail('${product.id}')" class="p-3 border border-stone-200 bg-white hover:bg-rose-50 text-stone-400 hover:text-rose-500 rounded-xl transition-all">
+                <i data-lucide="heart" class="w-4 h-4 ${isCrossFav ? 'fill-rose-400 text-rose-500' : ''}"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        ` : ''}
+      `;
+
+      catalogContainer.classList.add('hidden');
+      headerWrapper.classList.add('hidden');
+      detailContainer.classList.remove('hidden');
+
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeProductDetail() {
+      generateCelestialTone(392.00, 'sine', 0.08); // Return soft chime
+
+      const detailContainer = document.getElementById('shop-detail-view');
+      const catalogContainer = document.getElementById('shop-catalog-view');
+      const headerWrapper = document.getElementById('shop-header-wrapper');
+
+      if (!detailContainer || !catalogContainer || !headerWrapper) return;
+
+      detailContainer.classList.add('hidden');
+      catalogContainer.classList.remove('hidden');
+      headerWrapper.classList.remove('hidden');
+
+      renderShopProducts();
+    }
+
+    function changeHoroscopeTimeframe(tf) {
+      generateCelestialTone(392.00, 'sine', 0.08);
+
+      currentHoroscopeTimeframe = tf;
+      ['Today', 'Weekly', 'Yearly'].forEach(time => {
+        const btn = document.getElementById(`tf-${time}`);
+        if (btn) {
+          if (time === tf) {
+            btn.className = "flex-1 md:flex-none px-4 py-2 text-xs font-semibold rounded-lg bg-white text-purple-700 shadow-xs transition-all";
+          } else {
+            btn.className = "flex-1 md:flex-none px-4 py-2 text-xs font-semibold rounded-lg text-stone-500 hover:text-stone-800 transition-all";
+          }
+        }
+      });
+      updateHoroscopeCard();
+    }
+
+    function updateHoroscopeCard() {
+      const symbol = document.getElementById('selected-zodiac-symbol-badge');
+      const name = document.getElementById('selected-zodiac-name');
+      const element = document.getElementById('selected-zodiac-element');
+      const date = document.getElementById('selected-zodiac-date');
+      const desc = document.getElementById('zodiac-desc-display');
+      const text = document.getElementById('horoscope-text-display');
+
+      const love = document.getElementById('para-love');
+      const aura = document.getElementById('para-aura');
+      const lucky = document.getElementById('para-lucky');
+      const synergy = document.getElementById('para-synergy');
+
+      if (!symbol) return;
+
+      symbol.className = `w-16 h-16 rounded-2xl bg-gradient-to-tr ${currentSelectedZodiac.color} flex items-center justify-center text-3xl shadow-xs border border-white`;
+      symbol.innerText = currentSelectedZodiac.symbol;
+      name.innerText = currentSelectedZodiac.name;
+      element.innerText = currentSelectedZodiac.element;
+      
+      // Update element colors dynamically
+      element.className = `text-xs px-2.5 py-0.5 rounded-full font-semibold border border-stone-200/20 ${currentSelectedZodiac.color} ${currentSelectedZodiac.text}`;
+      
+      date.innerText = `${currentSelectedZodiac.date} • Ruling Planet: ${currentSelectedZodiac.rulingPlanet}`;
+      desc.innerText = `"${currentSelectedZodiac.description}"`;
+      
+      // Compute dynamic deterministic reading output
+      const txtBankIndex = currentSelectedZodiac.name.charCodeAt(0) % 3;
+      text.innerText = HOROSCOPES_TEXT_BANK[currentHoroscopeTimeframe][txtBankIndex];
+
+      love.innerText = currentSelectedZodiac.love;
+      aura.innerText = currentSelectedZodiac.aura;
+      lucky.innerText = currentSelectedZodiac.lucky;
+      synergy.innerText = currentSelectedZodiac.synergy;
+    }
+
+    // ==========================================
+    // PLANETARY BIRTH CHART CALCULATOR (SVG Rotate)
+    // ==========================================
+    function calculatePlanetaryChart(e) {
+      e.preventDefault();
+      
+      const birthDate = document.getElementById('chart-birth-date').value;
+      const birthPlace = document.getElementById('chart-birth-place').value;
+      
+      if (!birthDate || !birthPlace) return;
+
+      const waitState = document.getElementById('chart-waiting-state');
+      const calcState = document.getElementById('chart-calculating-state');
+      const resultsState = document.getElementById('chart-results-state');
+
+      // Play calculation chime sequence
+      generateCelestialTone(440, 'sine', 0.15);
+      setTimeout(() => generateCelestialTone(659.25, 'triangle', 0.15), 350);
+
+      waitState.classList.add('hidden');
+      calcState.classList.remove('hidden');
+      resultsState.classList.add('hidden');
+
+      setTimeout(() => {
+        // Compute procedural alignment metrics based on date inputs
+        const parsedDate = new Date(birthDate);
+        const day = parsedDate.getDate() || 15;
+        const month = parsedDate.getMonth() || 6;
+
+        // Choose planetary assignments
+        const sunSign = ZODIAC_SIGNS[month % 12];
+        const moonSign = ZODIAC_SIGNS[(day * 2) % 12];
+        const ascSign = ZODIAC_SIGNS[(day + month) % 12];
+
+        // Synthesize summary
+        const elementsList = ['Ethereal stardust elements', 'Igniting high flame potentials', 'Grounded fertile earth foundations', 'Breezy mental pathways', 'Fluid intuitive tide streams'];
+        const syntheticAnalysis = `Your stellar coordinates demonstrate a magnificent interaction between ${sunSign.name} sun and ${moonSign.name} aspects. Your spatial field is highly optimized by introducing ${elementsList[day % 5]}.`;
+
+        // Update Text results
+        document.getElementById('natal-sun').innerText = `${sunSign.name} (House ${ (day % 12) + 1 })`;
+        document.getElementById('natal-moon').innerText = `${moonSign.name} (House ${ ((day + month) % 12) + 1 })`;
+        document.getElementById('natal-asc').innerText = `${ascSign.name} (Ascendant Zenith)`;
+        document.getElementById('natal-summary').innerText = syntheticAnalysis;
+
+        // Animate Rotate Vector Chart Wheel
+        const svgWheel = document.getElementById('astrology-chart-svg');
+        const rotationDegrees = 180 + (day * 15) % 360;
+        svgWheel.style.transform = `rotate(${rotationDegrees}deg)`;
+
+        // Update States
+        calcState.classList.add('hidden');
+        resultsState.classList.remove('hidden');
+
+        // Play resolution sound (Major pentatonic arpeggio)
+        generateCelestialTone(523.25, 'sine', 0.2); // C5
+        setTimeout(() => generateCelestialTone(659.25, 'sine', 0.15), 150); // E5
+        setTimeout(() => generateCelestialTone(783.99, 'sine', 0.15), 300); // G5
+        setTimeout(() => generateCelestialTone(1046.50, 'sine', 0.25), 450); // C6
+
+        showToast("Astral blueprint calculated! Dynamic house lines structured successfully. 🔮");
+      }, 1500);
+    }
+
+    function resetBirthChartCalculator() {
+      generateCelestialTone(293.66, 'sine', 0.15);
+      
+      document.getElementById('chart-waiting-state').classList.remove('hidden');
+      document.getElementById('chart-calculating-state').classList.add('hidden');
+      document.getElementById('chart-results-state').classList.add('hidden');
+      
+      document.getElementById('chart-birth-date').value = '';
+      document.getElementById('chart-birth-time').value = '';
+      document.getElementById('chart-birth-place').value = '';
+    }
+
+    // ==========================================
+    // CONSULTATIONS ENGINE
+    // ==========================================
+    function renderConsultationCards() {
+      const container = document.getElementById('consultation-cards-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      CONSULTATIONS_DATA.forEach(session => {
+        const card = document.createElement('div');
+        card.className = `rounded-3xl p-8 border transition-all duration-300 flex flex-col justify-between ${session.bgColor} border-transparent hover:shadow-lg hover:border-purple-200`;
+        card.innerHTML = `
+          <div class="space-y-5">
+            <div class="flex justify-between items-start">
+              <div class="p-3 bg-white rounded-2xl shadow-2xs">
+                <i data-lucide="${session.icon}" class="w-6 h-6 text-stone-800"></i>
+              </div>
+              <span class="text-xs uppercase font-bold tracking-wider px-2.5 py-1 bg-white rounded-full border border-stone-200/20 ${session.textColor}">
+                ${session.duration}
+              </span>
+            </div>
+
+            <div class="space-y-1.5">
+              <h3 class="text-xl font-serif font-bold text-stone-800 leading-tight">${session.title}</h3>
+              <span class="text-xs text-stone-400 block font-semibold">${session.type}</span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
+              ${session.desc}
+            </p>
+          </div>
+
+          <div class="pt-6 mt-8 border-t border-stone-200/50 flex items-center justify-between">
+            <div>
+              <span class="block text-[9px] text-stone-400 uppercase tracking-widest font-semibold">Exchange</span>
+              <span class="text-2xl font-mono font-bold text-stone-800">$${session.price.toFixed(2)}</span>
+            </div>
+            
+            <button onclick="initiateBookingSession('${session.id}')" class="px-5 py-2.5 bg-stone-800 hover:bg-stone-950 text-white font-medium text-xs tracking-wider uppercase rounded-xl shadow-xs transition-all flex items-center gap-1.5">
+              Select Aspect
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function initiateBookingSession(id) {
+      generateCelestialTone(493.88, 'sine', 0.15); // Celestial selection tone
+      
+      selectedConsultation = CONSULTATIONS_DATA.find(c => c.id === id);
+      if (!selectedConsultation) return;
+
+      document.getElementById('booking-empty-state').classList.add('hidden');
+      document.getElementById('booking-form-area').classList.remove('hidden');
+
+      document.getElementById('booking-active-title').innerText = selectedConsultation.title;
+      document.getElementById('booking-active-meta').innerText = `Duration: ${selectedConsultation.duration} • Energy Exchange: $${selectedConsultation.price.toFixed(2)}`;
+
+      document.getElementById('booking-fields-wrap').classList.remove('hidden');
+      document.getElementById('booking-success-wrap').classList.add('hidden');
+
+      // Scroll to forms smoothly
+      document.getElementById('booking-stage-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleSessionBooking(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('book-name').value;
+      const email = document.getElementById('book-email').value;
+      const date = document.getElementById('book-date').value;
+      const time = document.getElementById('book-time').value;
+
+      if (!name || !email || !date || !time) return;
+
+      generateCelestialTone(523.25, 'triangle', 0.25);
+      
+      document.getElementById('booking-fields-wrap').classList.add('hidden');
+      document.getElementById('booking-success-wrap').classList.remove('hidden');
+
+      showToast("Celestial session successfully calculated & catalogued! Check your inbox. 💌");
+    }
+
+    function resetBookingForm() {
+      generateCelestialTone(293.66, 'sine', 0.12);
+      
+      selectedConsultation = null;
+      document.getElementById('booking-empty-state').classList.remove('hidden');
+      document.getElementById('booking-form-area').classList.add('hidden');
+
+      document.getElementById('book-name').value = '';
+      document.getElementById('book-email').value = '';
+      document.getElementById('book-date').value = '';
+      document.getElementById('book-time').value = '';
+    }
+
+    // ==========================================
+    // CELSTIAL APOTHECARY STORE SYSTEM
+    // ==========================================
+    function renderCategoryFilters() {
+      const container = document.getElementById('category-filter-list');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const categories = ['All', 'Crystals', 'Rituals', 'Tarot', 'Jewelry'];
+      categories.forEach(cat => {
+        const isSel = selectedCategory === cat;
+        const btn = document.createElement('button');
+        btn.onclick = () => selectShopCategory(cat);
+        btn.className = `w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between ${
+          isSel 
+            ? 'bg-purple-50 text-purple-800' 
+            : 'text-stone-600 hover:bg-stone-50'
+        }`;
+        btn.innerHTML = `
+          <span>${cat}</span>
+          ${isSel ? '<span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>' : ''}
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    function selectShopCategory(cat) {
+      generateCelestialTone(392.00, 'sine', 0.1);
+      selectedCategory = cat;
+      renderCategoryFilters();
+      renderShopProducts();
+    }
+
+    function renderShopProducts() {
+      const container = document.getElementById('shop-products-grid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const filtered = SHOP_PRODUCTS_DATA.filter(p => selectedCategory === 'All' || p.category === selectedCategory);
+      document.getElementById('product-count').innerText = filtered.length;
+
+      filtered.forEach(p => {
+        const isFav = wishlist.includes(p.id);
+        const card = document.createElement('div');
+        card.className = "group bg-white rounded-3xl p-5 border border-stone-200/60 hover:border-purple-200/80 transition-all duration-300 hover:shadow-md relative flex flex-col h-full justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 bg-stone-50 rounded-full text-purple-700 border border-purple-100/30">
+                ${p.label}
+              </span>
+              <button onclick="toggleWishlistItem('${p.id}')" class="p-1.5 rounded-full hover:bg-rose-50 text-stone-400 hover:text-rose-500 transition-colors">
+                <i data-lucide="heart" class="w-4 h-4 ${isFav ? 'fill-rose-400 text-rose-500' : ''}"></i>
+              </button>
+            </div>
+
+            <!-- SVG Background Canvas Block with Emoji Asset -->
+            <div onclick="openProductDetail('${p.id}')" class="w-full h-40 bg-celestial-cream/60 rounded-2xl flex items-center justify-center text-5xl shadow-2xs group-hover:scale-102 transition-transform duration-300 mb-4 relative overflow-hidden cursor-pointer">
+              <span class="z-10 select-none">${p.image}</span>
+              <!-- Shimmer backdrop highlight -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-purple-50/20 via-rose-50/20 to-amber-50/10 pointer-events-none z-0"></div>
+            </div>
+
+            <div class="flex justify-between items-start gap-2">
+              <h3 onclick="openProductDetail('${p.id}')" class="font-serif text-base text-stone-800 font-bold group-hover:text-purple-800 transition-colors line-clamp-1 cursor-pointer">
+                ${p.name}
+              </h3>
+              <span class="font-mono text-sm font-bold text-stone-800 shrink-0">
+                $${p.price.toFixed(2)}
+              </span>
+            </div>
+            
+            <p class="text-[11px] text-stone-500 font-light mt-1.5 leading-relaxed line-clamp-2">
+              ${p.desc}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between">
+            <span class="text-[10px] uppercase font-bold text-purple-600/80">
+              ${p.category}
+            </span>
+            <button onclick="addProductToBundle('${p.id}')" class="px-3.5 py-1.5 bg-stone-800 hover:bg-purple-700 text-white font-medium text-xs rounded-lg hover:shadow-xs transition-all flex items-center gap-1">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add to Bundle
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    // ==========================================
+    // WISHLIST FUNCTIONAL MECHANICS
+    // ==========================================
+    function toggleWishlistItem(id) {
+      const index = wishlist.indexOf(id);
+      if (index > -1) {
+        wishlist.splice(index, 1);
+        generateCelestialTone(293.66, 'sine', 0.1);
+        showToast("Item removed from your planet desires.");
+      } else {
+        wishlist.push(id);
+        generateCelestialTone(587.33, 'sine', 0.15); // high bell chime
+        showToast("Item mapped directly into your desires! 💖");
+      }
+      
+      updateWishlistInterface();
+      renderShopProducts();
+    }
+
+    function updateWishlistInterface() {
+      const counter = document.getElementById('wishlist-counter');
+      const heartIcon = document.getElementById('wishlist-icon');
+      
+      if (wishlist.length > 0) {
+        counter.classList.remove('scale-0');
+        counter.classList.add('scale-100');
+        counter.innerText = wishlist.length;
+        heartIcon.classList.add('fill-rose-400', 'text-rose-500');
+      } else {
+        counter.classList.remove('scale-100');
+        counter.classList.add('scale-0');
+        heartIcon.classList.remove('fill-rose-400', 'text-rose-500');
+      }
+    }
+
+    function viewWishlistItems() {
+      if (wishlist.length === 0) {
+        showToast("Wishlist coordinates currently empty. Tap heart symbols! 💖");
+        return;
+      }
+      generateCelestialTone(440, 'sine', 0.1);
+      switchTab('shop');
+      showToast(`Reviewing ${wishlist.length} artifact(s) matched to your desires!`);
+    }
+
+    // ==========================================
+    // SHOPPING CART CONTROLLERS
+    // ==========================================
+    function toggleCartDrawer(open) {
+      generateCelestialTone(493.88, 'sine', 0.12);
+      
+      const overlay = document.getElementById('cart-drawer-overlay');
+      const inner = document.getElementById('cart-drawer-inner');
+
+      if (open) {
+        overlay.classList.remove('pointer-events-none', 'opacity-0');
+        inner.classList.remove('translate-x-full');
+        renderCartItems();
+      } else {
+        overlay.classList.add('pointer-events-none', 'opacity-0');
+        inner.classList.add('translate-x-full');
+      }
+    }
+
+    function addProductToBundle(id) {
+      const product = SHOP_PRODUCTS_DATA.find(p => p.id === id);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      generateCelestialTone(523.25, 'triangle', 0.22); // Sweet chime play on bundle addition
+
+      updateCartCounters();
+      showToast(`Added ${product.name} to your sacred bundle! ✨`);
+    }
+
+    function updateCartCounters() {
+      const totalQty = cart.reduce((tot, item) => tot + item.qty, 0);
+      const counter = document.getElementById('cart-counter');
+      
+      if (totalQty > 0) {
+        counter.classList.remove('scale-0');
+        counter.classList.add('scale-100');
+        counter.innerText = totalQty;
+      } else {
+        counter.classList.remove('scale-100');
+        counter.classList.add('scale-0');
+      }
+    }
+
+    // Adjusting quantity parameters inside bundle
+    function adjustCartQuantity(id, change) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+
+      item.qty += change;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== id);
+        generateCelestialTone(293.66, 'sine', 0.15);
+        showToast("Item purged from bundle registry.");
+      } else {
+        generateCelestialTone(392.00, 'sine', 0.1);
+      }
+
+      updateCartCounters();
+      renderCartItems();
+    }
+
+    function removeProductFromCart(id) {
+      const item = cart.find(i => i.id === id);
+      cart = cart.filter(i => i.id !== id);
+      
+      generateCelestialTone(293.66, 'sine', 0.15);
+      
+      updateCartCounters();
+      renderCartItems();
+      if (item) showToast(`Purged ${item.name} from spatial bundle.`);
+    }
+
+    function renderCartItems() {
+      const listContainer = document.getElementById('cart-drawer-items-list');
+      const badgeCount = document.getElementById('cart-drawer-count');
+      const footerTotals = document.getElementById('cart-drawer-totals');
+
+      if (!listContainer) return;
+
+      const totalQty = cart.reduce((tot, item) => tot + item.qty, 0);
+      badgeCount.innerText = totalQty;
+
+      if (cart.length === 0) {
+        listContainer.innerHTML = `
+          <div class="text-center py-20 space-y-4 max-w-xs mx-auto">
+            <div class="text-5xl animate-bounce" style="animation-duration: 5s">🌌</div>
+            <h4 class="text-base font-serif text-stone-700">Your Bundle is Void</h4>
+            <p class="text-[11px] text-stone-400 font-light leading-relaxed">
+              Incorporate our small-batch candles or protective crystals to clear lingering spatial currents.
+            </p>
+            <button onclick="toggleCartDrawer(false); switchTab('shop')" class="px-4 py-2 bg-stone-800 hover:bg-purple-700 text-white text-xs font-semibold rounded-xl">
+              Browse Elements
+            </button>
+          </div>
+        `;
+        footerTotals.classList.add('hidden');
+      } else {
+        listContainer.innerHTML = '';
+        footerTotals.classList.remove('hidden');
+
+        cart.forEach(item => {
+          const itemEl = document.createElement('div');
+          itemEl.className = "flex items-center justify-between gap-4 bg-white p-3.5 rounded-2xl border border-stone-100 shadow-2xs";
+          itemEl.innerHTML = `
+            <div class="w-14 h-14 rounded-xl bg-celestial-cream flex items-center justify-center text-3xl shrink-0 border border-stone-100 relative overflow-hidden">
+              <span class="z-10">${item.image}</span>
+              <div class="absolute inset-0 bg-gradient-to-tr from-purple-50/10 to-amber-50/10"></div>
+            </div>
+
+            <div class="flex-grow space-y-0.5">
+              <span class="text-xs font-serif font-bold text-stone-800 block line-clamp-1">${item.name}</span>
+              <span class="text-[10px] text-purple-600 block">${item.category}</span>
+              <span class="text-xs font-mono font-bold text-stone-700 block text-[11px]">$${item.price.toFixed(2)}</span>
+            </div>
+
+            <div class="flex flex-col items-end justify-between gap-2.5">
+              <button onclick="removeProductFromCart('${item.id}')" class="text-stone-300 hover:text-rose-500 transition-colors" title="Purge Item">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+              
+              <div class="flex items-center gap-2 bg-stone-50 border border-stone-200/80 rounded-lg p-1">
+                <button onclick="adjustCartQuantity('${item.id}', -1)" class="p-0.5 text-stone-400 hover:text-stone-700 rounded hover:bg-white">
+                  <i data-lucide="minus" class="w-3 h-3"></i>
+                </button>
+                <span class="text-xs font-mono font-bold text-stone-800 px-1">${item.qty}</span>
+                <button onclick="adjustCartQuantity('${item.id}', 1)" class="p-0.5 text-stone-400 hover:text-stone-700 rounded hover:bg-white">
+                  <i data-lucide="plus" class="w-3 h-3"></i>
+                </button>
+              </div>
+            </div>
+          `;
+          listContainer.appendChild(itemEl);
+        });
+
+        // Compute Financial Values
+        const subtotal = cart.reduce((total, item) => total + (item.price * item.qty), 0);
+        const tax = subtotal * 0.08;
+        const totalVal = subtotal + tax;
+
+        document.getElementById('cart-val-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+        document.getElementById('cart-val-tax').innerText = `$${tax.toFixed(2)}`;
+        document.getElementById('cart-val-total').innerText = `$${totalVal.toFixed(2)}`;
+      }
+      lucide.createIcons();
+    }
+
+    function handleCartCheckout() {
+      // High-quality major triad arpeggio checkout dispatch sequence
+      generateCelestialTone(523.25, 'sine', 0.2); // C5
+      setTimeout(() => generateCelestialTone(659.25, 'sine', 0.2), 120); // E5
+      setTimeout(() => generateCelestialTone(783.99, 'sine', 0.2), 240); // G5
+      setTimeout(() => generateCelestialTone(1046.50, 'triangle', 0.35), 360); // C6 bell chime
+
+      cart = [];
+      updateCartCounters();
+      toggleCartDrawer(false);
+      showToast("Order Dispatched successfully across the layout stream! Check your inbox.");
+    }
+
+    // ==========================================
+    // OTHER FORMS HANDLERS
+    // ==========================================
+    function handleContactSubmission(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      
+      if (!name || !email) return;
+
+      generateCelestialTone(523.25, 'triangle', 0.2);
+
+      document.getElementById('contact-form').classList.add('hidden');
+      document.getElementById('contact-success-stage').classList.remove('hidden');
+      
+      showToast("Courier dispatch successfully initiated! 🕊️");
+    }
+
+    function resetContactForm() {
+      generateCelestialTone(293.66, 'sine', 0.12);
+      
+      document.getElementById('contact-form').classList.remove('hidden');
+      document.getElementById('contact-success-stage').classList.add('hidden');
+      
+      document.getElementById('contact-name').value = '';
+      document.getElementById('contact-email').value = '';
+      document.getElementById('contact-msg').value = '';
+    }
+
+    function handleEpistleSubscription(e) {
+      e.preventDefault();
+      const mail = document.getElementById('epistle-email').value;
+      if (!mail) return;
+
+      generateCelestialTone(523.25, 'sine', 0.2);
+      document.getElementById('epistle-email').value = '';
+      showToast("Epistle coordinates registered. Welcome to the Star Lodge! 💌");
+    }
+
+  </script>
+</body>
+</html>
