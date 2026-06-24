@@ -25,6 +25,17 @@ async function main() {
     await client.connect();
     console.log('✅ Connected to database successfully.');
 
+    console.log('Dropping existing tables to ensure clean recreation...');
+    await client.query(`
+      DROP TABLE IF EXISTS sub_crystal_products CASCADE;
+      DROP TABLE IF EXISTS shop_categories CASCADE;
+      DROP TABLE IF EXISTS faqs CASCADE;
+      DROP TABLE IF EXISTS testimonials CASCADE;
+      DROP TABLE IF EXISTS consultation_services CASCADE;
+      DROP TABLE IF EXISTS admin_credentials CASCADE;
+      DROP TABLE IF EXISTS site_settings CASCADE;
+    `);
+
     const schemaPath = path.resolve(__dirname, '../schema.sql');
     if (!fs.existsSync(schemaPath)) {
       throw new Error(`schema.sql not found at: ${schemaPath}`);

@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS testimonials (
     name VARCHAR(255) NOT NULL,
     text TEXT NOT NULL,
     sign VARCHAR(50) NOT NULL,
-    stars INTEGER DEFAULT 5,
+    stars NUMERIC(3, 2) DEFAULT 5.0,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -83,3 +83,10 @@ CREATE TABLE IF NOT EXISTS sub_crystal_products (
     solar_peak_cleansed TEXT,
     apothecary_placement TEXT
 );
+
+-- 7. Site Settings Table (Key-Value Store)
+CREATE TABLE IF NOT EXISTS site_settings (
+    key VARCHAR(255) PRIMARY KEY,
+    value TEXT NOT NULL
+);
+
