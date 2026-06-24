@@ -262,34 +262,34 @@ export interface ShopCategory {
 }
 
 export const SHOP_CATEGORIES: ShopCategory[] = [
-  { id: 'pyrite', name: 'Pyrite Collection', image: 'https://i.ibb.co/vxTV83G3/raw-pyrite.jpg', tagline: 'Stone of Wealth', desc: 'Attracts financial growth, blocks negative energies, and stimulates self-motivation.' },
-  { id: 'clear-quartz', name: 'Clear Quartz Collection', image: 'https://i.ibb.co/Kj3zjYS0/raw-crystal.jpg', tagline: 'Master Healer', desc: 'Amplifies energy, thoughts, intentions, and balances all auric blueprint levels.' },
-  { id: 'green-aventurine', name: 'Green Aventurine Collection', image: 'https://i.ibb.co/fzzZCLPY/Raw.jpg', tagline: 'Stone of Opportunity', desc: 'Attracts professional luck, wealth, prosperity, and balances heart energies.' },
-  { id: 'tiger-eye', name: 'Tiger Eye Collection', image: 'https://i.ibb.co/dwdvgYLZ/Raw.jpg', tagline: 'Stone of Courage', desc: 'Fosters physical courage, grounding, mental clarity, and protective shields.' },
-  { id: 'amethyst', name: 'Amethyst Collection', image: 'https://i.ibb.co/vnN0WkJ/Raw.jpg', tagline: 'Spiritual Shield', desc: 'Brings calming vibrations, emotional balance, stress relief, and deep sleep.' },
-  { id: 'selenite', name: 'Selenite Collection', image: 'https://i.ibb.co/FkTnGgPK/Raw.jpg', tagline: 'Auric Cleanser', desc: 'Possesses high-vibration pure energy used to cleanse and charge other crystals.' },
-  { id: 'citrine', name: 'Citrine Collection', image: 'https://i.ibb.co/fVVvrG9Y/IMG-8658.jpg', tagline: 'Merchant’s Stone', desc: 'Attracts financial abundance, success, positive energy, and joyful creation.' },
-  { id: 'howlite', name: 'Howlite Collection', image: 'https://i.ibb.co/GQJvk7PG/Raw.jpg', tagline: 'Stone of Calming', desc: 'Reduces overthinking, stress, anger, and supports quiet meditation.' },
-  { id: 'black-obsidian', name: 'Black Obsidian Collection', image: 'https://i.ibb.co/KjMjxDcN/raw.webp', tagline: 'Ultimate Shield', desc: 'Absorbs environmental negativity, blocks psychic drain, and grounds the self.' },
-  { id: 'smoky-quartz', name: 'Smoky Quartz Collection', image: 'https://i.ibb.co/cS3LVgvg/raw.jpg', tagline: 'Stress Disperser', desc: 'Releases stress, heavy emotional blockages, and toxic atmospheric charges.' },
-  { id: 'lapis-lazuli', name: 'Lapis Lazuli Collection', image: 'https://i.ibb.co/5WPzSsGY/raw.jpg', tagline: 'Stone of Wisdom', desc: 'Enhances communication, self-expression, intellect, and spiritual truth.' },
-  { id: 'moonstone', name: 'Moonstone Collection', image: 'https://i.ibb.co/1JrH9hrW/raw.jpg', tagline: 'Sacred Feminine', desc: 'Encourages inner growth, intuition, emotional healing, and new beginnings.' },
-  { id: 'tourmaline', name: 'Tourmaline Collection', image: 'https://i.ibb.co/FbJ0yTVk/raw.jpg', tagline: 'Grounding Armor', desc: 'Repels negative energetic frequencies, shields cells, and anchors root node.' },
-  { id: 'malachite', name: 'Malachite Collection', image: 'https://i.ibb.co/zWjN7LRs/raw.jpg', tagline: 'Stone of Transformation', desc: 'Supports rapid personal transformation, heart chakra release, and courage.' },
-  { id: 'jade', name: 'Jade Collection', image: 'https://i.ibb.co/MxNkSMnt/Shubhanjali-Green-Jade-Crystal-Tumble-Stone.jpg', tagline: 'Stone of Harmony', desc: 'Promotes abundance, balance, Vastu harmony, and physical well-being.' },
-  { id: 'turquoise', name: 'Turquoise Collection', image: 'https://i.ibb.co/RTXWGSLc/raw.jpg', tagline: 'Master Communicator', desc: 'Supports self-expression, emotional balance, and ancient protective shielding.' },
-  { id: 'carnelian', name: 'Carnelian Collection', image: 'https://i.ibb.co/Lht6gcvV/raw.jpg', tagline: 'Fire of Motivation', desc: 'Ignites creativity, personal power, motivation, action, and physical vitality.' },
-  { id: 'hematite', name: 'Hematite Collection', image: 'https://i.ibb.co/q3QSvmD6/Raw.jpg', tagline: 'Grounding Anchor', desc: 'Grounds wandering thoughts, focuses logical mind, and stabilizes anxiety.' },
-  { id: 'good-health-bracelet', name: 'Good Health Bracelet', image: 'https://i.ibb.co/ccNK42b8/good-health-main.png', tagline: 'Holistic Vitality', desc: 'Promotes physical energy, immune support, and holistic health balance. Made with natural crystal beads.', isSingleProduct: true },
-  { id: 'anxiety-bracelet', name: 'Anxiety Bracelet', image: 'https://i.ibb.co/Z64N4nJv/anxitey-main.png', tagline: 'Calm & Serene', desc: 'Infused with peaceful crystals to calm an overactive mind, ease stress, and ground emotions.', isSingleProduct: true },
-  { id: 'desired-job-bracelet', name: 'Desired Job Bracelet', image: 'https://i.ibb.co/VcVgS837/Desired-job-main.png', tagline: 'Career Manifestation', desc: 'Attracts professional opportunities, success, confidence, and clear career path alignment.', isSingleProduct: true },
-  { id: 'dhan-yog-bracelet', name: 'Dhan Yog Bracelet', image: 'https://i.ibb.co/tpM2mBJm/dhan-yog-main.png', tagline: 'Wealth Accumulation', desc: 'A powerful combination of crystals designed to attract financial abundance, prosperity, and wealth luck.', isSingleProduct: true },
+  { id: 'pyrite', name: 'Pyrite Collection', image: 'https://i.ibb.co/Xk39jK7d/raw-pyrite.webp', tagline: 'Stone of Wealth', desc: 'Attracts financial growth, blocks negative energies, and stimulates self-motivation.' },
+  { id: 'clear-quartz', name: 'Clear Quartz Collection', image: 'https://i.ibb.co/j9J2r5MJ/Clear-Quartz-Collection-raw-crystal.webp', tagline: 'Master Healer', desc: 'Amplifies energy, thoughts, intentions, and balances all auric blueprint levels.' },
+  { id: 'green-aventurine', name: 'Green Aventurine Collection', image: 'https://i.ibb.co/VYMjXwWt/Green-Aventurine-Collection-Raw.webp', tagline: 'Stone of Opportunity', desc: 'Attracts professional luck, wealth, prosperity, and balances heart energies.' },
+  { id: 'tiger-eye', name: 'Tiger Eye Collection', image: 'https://i.ibb.co/Xfm7xzWz/Tiger-Eye-Raw.webp', tagline: 'Stone of Courage', desc: 'Fosters physical courage, grounding, mental clarity, and protective shields.' },
+  { id: 'amethyst', name: 'Amethyst Collection', image: 'https://i.ibb.co/V8NvGq5/Amethyst-Collection-Raw.webp', tagline: 'Spiritual Shield', desc: 'Brings calming vibrations, emotional balance, stress relief, and deep sleep.' },
+  { id: 'selenite', name: 'Selenite Collection', image: 'https://i.ibb.co/nVt8g4P/Selenite-Collection-Raw.webp', tagline: 'Auric Cleanser', desc: 'Possesses high-vibration pure energy used to cleanse and charge other crystals.' },
+  { id: 'citrine', name: 'Citrine Collection', image: 'https://i.ibb.co/2YL8R6pb/Citrine-Collection-raw-crystal.webp', tagline: 'Merchant’s Stone', desc: 'Attracts financial abundance, success, positive energy, and joyful creation.' },
+  { id: 'howlite', name: 'Howlite Collection', image: 'https://i.ibb.co/nMyYGGMD/Howlite-Raw.webp', tagline: 'Stone of Calming', desc: 'Reduces overthinking, stress, anger, and supports quiet meditation.' },
+  { id: 'black-obsidian', name: 'Black Obsidian Collection', image: 'https://i.ibb.co/ZpvRfpGz/Black-Obsidian-raw.webp', tagline: 'Ultimate Shield', desc: 'Absorbs environmental negativity, blocks psychic drain, and grounds the self.' },
+  { id: 'smoky-quartz', name: 'Smoky Quartz Collection', image: 'https://i.ibb.co/Ld7rb5cd/Smoky-Quartz-raw.webp', tagline: 'Stress Disperser', desc: 'Releases stress, heavy emotional blockages, and toxic atmospheric charges.' },
+  { id: 'lapis-lazuli', name: 'Lapis Lazuli Collection', image: 'https://i.ibb.co/Z6XFhCpk/Lapis-Lazuli-raw.webp', tagline: 'Stone of Wisdom', desc: 'Enhances communication, self-expression, intellect, and spiritual truth.' },
+  { id: 'moonstone', name: 'Moonstone Collection', image: 'https://i.ibb.co/DHMWvVCy/Moonstone-raw.webp', tagline: 'Sacred Feminine', desc: 'Encourages inner growth, intuition, emotional healing, and new beginnings.' },
+  { id: 'tourmaline', name: 'Tourmaline Collection', image: 'https://i.ibb.co/Y4yDnX0K/Tourmaline-raw.webp', tagline: 'Grounding Armor', desc: 'Repels negative energetic frequencies, shields cells, and anchors root node.' },
+  { id: 'malachite', name: 'Malachite Collection', image: 'https://i.ibb.co/WW8GBVWR/Malachite-raw.webp', tagline: 'Stone of Transformation', desc: 'Supports rapid personal transformation, heart chakra release, and courage.' },
+  { id: 'jade', name: 'Jade Collection', image: 'https://i.ibb.co/Lz5k02rR/Jade-Crystal.webp', tagline: 'Stone of Harmony', desc: 'Promotes abundance, balance, Vastu harmony, and physical well-being.' },
+  { id: 'turquoise', name: 'Turquoise Collection', image: 'https://i.ibb.co/QvGw6nY8/Turquoise-raw.webp', tagline: 'Master Communicator', desc: 'Supports self-expression, emotional balance, and ancient protective shielding.' },
+  { id: 'carnelian', name: 'Carnelian Collection', image: 'https://i.ibb.co/mMQ6M3X/Carnelian-raw.webp', tagline: 'Fire of Motivation', desc: 'Ignites creativity, personal power, motivation, action, and physical vitality.' },
+  { id: 'hematite', name: 'Hematite Collection', image: 'https://i.ibb.co/m5mP7rtt/Hematite-Raw.webp', tagline: 'Grounding Anchor', desc: 'Grounds wandering thoughts, focuses logical mind, and stabilizes anxiety.' },
+  { id: 'good-health-bracelet', name: 'Good Health Bracelet', image: 'https://i.ibb.co/qMrWJL9Z/good-health-main.webp', tagline: 'Holistic Vitality', desc: 'Promotes physical energy, immune support, and holistic health balance. Made with natural crystal beads.', isSingleProduct: true },
+  { id: 'anxiety-bracelet', name: 'Anxiety Bracelet', image: 'https://i.ibb.co/PZvfBy0Y/anxitey-main.webp', tagline: 'Calm & Serene', desc: 'Infused with peaceful crystals to calm an overactive mind, ease stress, and ground emotions.', isSingleProduct: true },
+  { id: 'desired-job-bracelet', name: 'Desired Job Bracelet', image: 'https://i.ibb.co/PvDrXZgd/Desired-job-main.webp', tagline: 'Career Manifestation', desc: 'Attracts professional opportunities, success, confidence, and clear career path alignment.', isSingleProduct: true },
+  { id: 'dhan-yog-bracelet', name: 'Dhan Yog Bracelet', image: 'https://i.ibb.co/zTFrQrLn/dhan-yog-main.webp', tagline: 'Wealth Accumulation', desc: 'A powerful combination of crystals designed to attract financial abundance, prosperity, and wealth luck.', isSingleProduct: true },
   { id: 'self-confidence-bracelet', name: 'Self Confidence Bracelet', image: 'https://i.ibb.co/gFRQdvPD/self-cinfidence.png', tagline: 'Personal Empowerment', desc: 'Boosts self-esteem, inner strength, and courage to stand tall and speak your truth.', isSingleProduct: true },
-  { id: 'meditation-bracelet', name: 'Meditation Bracelet', image: 'https://i.ibb.co/RTtKXvHs/meditation-main.png', tagline: 'Deep Mindfulness', desc: 'Supports spiritual connection, quiet meditation, inner focus, and third eye awakening.', isSingleProduct: true },
-  { id: 'buri-nazar-bracelet', name: 'Buri Nazar Bracelet', image: 'https://i.ibb.co/k6xTtHtg/buri-nazar-MAIN.png', tagline: 'Evil Eye Protection', desc: 'Shields your aura from negative energy, jealousy, hexes, and the negative gaze of others.', isSingleProduct: true },
-  { id: 'inner-peace-bracelet', name: 'Inner Peace Bracelet', image: 'https://i.ibb.co/CsDMScV6/Inner-Peace-main.png', tagline: 'Somatic Tranquility', desc: 'Gently balances heart and mind to invite emotional healing, deep peace, and relief from daily friction.', isSingleProduct: true },
-  { id: 'seven-chakra-crystal', name: '7 Chakra Crystal Collection', image: 'https://i.ibb.co/zHhwykjQ/7-crystal-main.png', tagline: 'Universal Balance', desc: 'Bring balance, positivity, and harmony into your space and body with natural seven chakra crystals.' },
-  { id: 'rakhis', name: 'Rakhis', image: 'https://i.ibb.co/WNM15Gvb/7-chakra-chip-rakhi-main.png', tagline: 'Sacred Protection Threads', desc: 'Beautifully handcrafted crystal Rakhis infused with sacred energies to protect, balance, and bless your siblings.' }
+  { id: 'meditation-bracelet', name: 'Meditation Bracelet', image: 'https://i.ibb.co/JjJzXMqq/meditation-main.webp', tagline: 'Deep Mindfulness', desc: 'Supports spiritual connection, quiet meditation, inner focus, and third eye awakening.', isSingleProduct: true },
+  { id: 'buri-nazar-bracelet', name: 'Buri Nazar Bracelet', image: 'https://i.ibb.co/d4j1xrzF/buri-nazar-MAIN.webp', tagline: 'Evil Eye Protection', desc: 'Shields your aura from negative energy, jealousy, hexes, and the negative gaze of others.', isSingleProduct: true },
+  { id: 'inner-peace-bracelet', name: 'Inner Peace Bracelet', image: 'https://i.ibb.co/BKzW7zJS/Inner-Peace-main.webp', tagline: 'Somatic Tranquility', desc: 'Gently balances heart and mind to invite emotional healing, deep peace, and relief from daily friction.', isSingleProduct: true },
+  { id: 'seven-chakra-crystal', name: '7 Chakra Crystal Collection', image: 'https://i.ibb.co/4wDdQK64/7-crystal-main.webp', tagline: 'Universal Balance', desc: 'Bring balance, positivity, and harmony into your space and body with natural seven chakra crystals.' },
+  { id: 'rakhis', name: 'Rakhis', image: 'https://i.ibb.co/whxBdsRS/7-chakra-chip-rakhi-main.webp', tagline: 'Sacred Protection Threads', desc: 'Beautifully handcrafted crystal Rakhis infused with sacred energies to protect, balance, and bless your siblings.' }
 ];
 
 export interface SubCrystalProduct {
@@ -318,7 +318,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Raw Pyrite',
     basePrice: 5,
     pricingType: 'per-gram',
-    image: 'https://i.ibb.co/vxTV83G3/raw-pyrite.jpg',
+    image: 'https://i.ibb.co/Xk39jK7d/raw-pyrite.webp',
     desc: 'Known as the Stone of Wealth, Pyrite is believed to attract abundance, confidence, protection, and success while enhancing motivation and decision-making.',
     label: 'Best Seller',
     benefits: [
@@ -341,7 +341,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
       { label: 'Medium Wealth Tree (150 Beads)', price: 999 },
       { label: 'Large Abundance Tree (300 Beads)', price: 2000 }
     ],
-    image: 'https://i.ibb.co/GfjzcRkK/pyrite-tree.jpg',
+    image: 'https://i.ibb.co/0pnj8Gm3/pyrite-tree.webp',
     desc: 'A beautiful prosperity crystal tree believed to attract wealth, growth, business opportunities, and positive energy into your home or workplace.',
     label: 'Highly Requested',
     benefits: [
@@ -359,7 +359,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Pyrite Tortoise',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/p617z5hH/p-turtoise.jpg',
+    image: 'https://i.ibb.co/nqmXdbMV/pyrite-turtoise.webp',
     desc: 'Combines the prosperity energy of Pyrite with the stability and longevity symbolism of the tortoise, making it ideal for financial growth and protection.',
     label: 'Feng Shui Specimen',
     benefits: [
@@ -377,7 +377,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Pyrite Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/MDbGfyZQ/p-bracelet.jpg',
+    image: 'https://i.ibb.co/SDqVsxgP/pryite-bracelet.webp',
     desc: 'Worn to boost confidence, attract abundance, increase willpower, and protect against negative energies.',
     label: 'Daily Talisman',
     benefits: [
@@ -395,7 +395,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Pyrite Ganesh',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/4nNsB9DN/p-ganesh.jpg',
+    image: 'https://i.ibb.co/d433fb60/pyrite-ganesh.webp',
     desc: 'Lord Ganesha symbolizes wisdom and obstacle removal, while Pyrite enhances prosperity and success.',
     label: 'Vedic Protection',
     benefits: [
@@ -413,7 +413,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Pyrite Anklet',
     basePrice: 799,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/B5hPPvLx/p-anket.png',
+    image: 'https://i.ibb.co/C5FxmNsC/pyrite-anket.webp',
     desc: 'Designed to keep you grounded, confident, and connected to abundance throughout the day.',
     label: 'Grounding Talisman',
     benefits: [
@@ -433,7 +433,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Clear Quartz Crystal',
     basePrice: 499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/Kj3zjYS0/raw-crystal.jpg',
+    image: 'https://i.ibb.co/j9J2r5MJ/Clear-Quartz-Collection-raw-crystal.webp',
     desc: 'Known as the Master Healer, Clear Quartz amplifies energy, intentions, focus, and spiritual growth. Used for energy cleansing and amplifying positive vibrations.',
     label: 'Essential',
     benefits: [
@@ -451,7 +451,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Clear Quartz Tower',
     basePrice: 499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/wrr1ZdSm/tower.jpg',
+    image: 'https://i.ibb.co/YzHWw3W/Clear-Quartz-Collection-tower.webp',
     desc: 'A gorgeous focused tower carving. Focuses energy upward to cleanse spatial grids and establish solid meditation frequencies.',
     label: 'Highly Sacred',
     benefits: [
@@ -469,7 +469,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Clear Quartz Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/W4RqKgkV/barcelet.jpg',
+    image: 'https://i.ibb.co/b5dBtWqm/Clear-Quartz-Collection-barcelet.webp',
     desc: 'Worn daily to improve clarity, concentration, balance, and energy amplification in your physical field.',
     label: 'Aura Balancer',
     benefits: [
@@ -489,7 +489,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Green Aventurine Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/RpbgbTjx/bracelet.png',
+    image: 'https://i.ibb.co/4gfpg5tf/Green-Aventurine-Collection-bracelet.webp',
     desc: 'Known as the Stone of Opportunity, believed to attract luck, prosperity, and emotional healing. Programmed for career growth.',
     label: 'Lucky Charm',
     benefits: [
@@ -507,7 +507,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Green Aventurine Ganesh',
     basePrice: 1299,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/NgVRJGS2/ganesh.jpg',
+    image: 'https://i.ibb.co/hx2qgGsQ/Green-Aventurine-Collection-ganesh.webp',
     desc: 'An auspicious Ganesha carving in Green Aventurine. Brings blessings, abundance, positivity, and removes professional blocks.',
     label: 'Sacred Carving',
     benefits: [
@@ -529,7 +529,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
       { label: 'Small Prosperity Tree', price: 999 },
       { label: 'Large Abundance Tree', price: 1699 }
     ],
-    image: 'https://i.ibb.co/9H0mB7w6/tree.jpg',
+    image: 'https://i.ibb.co/MkN66JCz/Green-Aventurine-Collection-tree.webp',
     desc: 'Placed in rooms to attract prosperity, harmony, Vastu balance, and positive growth in personal and professional lives.',
     label: 'Home Harmonizer',
     benefits: [
@@ -547,7 +547,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Green Aventurine Raw Stone',
     basePrice: 499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/fzzZCLPY/Raw.jpg',
+    image: 'https://i.ibb.co/VYMjXwWt/Green-Aventurine-Collection-Raw.webp',
     desc: 'Rough ethically mined Aventurine specimen. Supports emotional healing, optimism, heart chakra balance, and ground connection.',
     label: 'Raw specimen',
     benefits: [
@@ -565,7 +565,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Green Aventurine Anklet',
     basePrice: 799,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/ZRBT7nxQ/anklet.png',
+    image: 'https://i.ibb.co/d0djQh12/Green-Aventurine-Collection-anklet.webp',
     desc: 'Worn on the ankle to keep you connected to positivity, luck, and emotional well-being throughout the day.',
     label: 'Path Finder',
     benefits: [
@@ -585,7 +585,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Tiger Eye Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/ZpCRqZZd/bracelet.jpg',
+    image: 'https://i.ibb.co/66D2FpF/Tiger-Eye-bracelet.webp',
     desc: 'Enhances confidence, courage, focus, and decision-making abilities. A powerhouse for eliminating self-doubt.',
     label: 'Courage Talisman',
     benefits: [
@@ -607,7 +607,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
       { label: 'Small Courage Tree', price: 699 },
       { label: 'Large Abundance Tree', price: 1699 }
     ],
-    image: 'https://i.ibb.co/1Gr7sNcx/tree.jpg',
+    image: 'https://i.ibb.co/YB8tLJys/Tiger-Eye-tree.webp',
     desc: 'Used to attract stability, protection, and success. Excellent for setting solid boundaries at work or home.',
     label: 'Workspace Shield',
     benefits: [
@@ -625,7 +625,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Tiger Eye Raw Stone',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/dwdvgYLZ/Raw.jpg',
+    image: 'https://i.ibb.co/Xfm7xzWz/Tiger-Eye-Raw.webp',
     desc: 'Rough Tiger Eye chunk. Helps increase personal strength, motivation, and physical grounding energy.',
     label: 'Raw Power',
     benefits: [
@@ -645,7 +645,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Amethyst Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/Z6k6s6gG/braclet.webp',
+    image: 'https://i.ibb.co/XZYKLq5F/Amethyst-Collection-tree.webp',
     desc: 'Promotes calmness, intuition, stress relief, and spiritual growth. The absolute peace bracelet.',
     label: 'Peace Talisman',
     benefits: [
@@ -667,7 +667,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
       { label: 'Small Meditation Tree', price: 699 },
       { label: 'Large Zen Harmony Tree', price: 1699 }
     ],
-    image: 'https://i.ibb.co/m5cT7GYY/tree.jpg',
+    image: 'https://i.ibb.co/V8NvGq5/Amethyst-Collection-Raw.webp',
     desc: 'Creates a peaceful environment and supports meditation, stress relief, and emotional balance.',
     label: 'Zen Centerpiece',
     benefits: [
@@ -685,7 +685,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Amethyst Raw Stone',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/vnN0WkJ/Raw.jpg',
+    image: 'https://i.ibb.co/TqHp0Mqp/Amethyst-Collection-anklet.webp',
     desc: 'Rough Uruguayan Amethyst piece. Helps reduce stress, improve sleep quality, and strengthen intuition.',
     label: 'Stress Buster',
     benefits: [
@@ -703,7 +703,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Amethyst Anklet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/p6K0dNVv/anklet.jpg',
+    image: 'https://i.ibb.co/35nz9Z9R/Amethyst-Collection-braclet.webp',
     desc: 'Provides calming energy, emotional stability, and spiritual protection for daily movement.',
     label: 'Shielded Path',
     benefits: [
@@ -727,7 +727,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
       { label: 'Small Charging Plate (8cm)', price: 1199 },
       { label: 'Large Charging Plate (15cm)', price: 1799 }
     ],
-    image: 'https://i.ibb.co/3yb5D24G/Charger.png',
+    image: 'https://i.ibb.co/tpdZp4Dx/Selenite-Collection-Charger.webp',
     desc: 'A plate carved of pure Selenite. Used to cleanse, purify, and recharge your other gemstone bracelets and tumbles.',
     label: 'Charging Plate',
     benefits: [
@@ -745,7 +745,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Selenite Raw Stone',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/FkTnGgPK/Raw.jpg',
+    image: 'https://i.ibb.co/nVt8g4P/Selenite-Collection-Raw.webp',
     desc: 'Known for its powerful cleansing and high-vibrational energy. Instantly shifts sluggish spatial energy.',
     label: 'Liquid Light',
     benefits: [
@@ -763,7 +763,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Selenite Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/1YFKS6YB/Bracelet.jpg',
+    image: 'https://i.ibb.co/hJVMdYFx/Selenite-Collection-Bracelet.webp',
     desc: 'Supports mental clarity, calmness, and spiritual connection. A continuous auric light grid.',
     label: 'Aura Light Grid',
     benefits: [
@@ -783,7 +783,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Citrine Tree',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/RktfycZP/tree.jpg',
+    image: 'https://i.ibb.co/YF1myds1/Citrine-Collection-tree.webp',
     desc: 'Attracts abundance, positivity, success, and joyful energy. The ultimate home office merchant tree.',
     label: 'Wealth Magnet',
     benefits: [
@@ -801,7 +801,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Citrine Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/XrPvFLz3/bracelet.jpg',
+    image: 'https://i.ibb.co/2YL8R6pb/Citrine-Collection-raw-crystal.webp',
     desc: 'Believed to boost confidence, creativity, and manifestation of wealth. Keeps you optimistic.',
     label: 'Manifestation Key',
     benefits: [
@@ -819,7 +819,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Citrine Raw Stone',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/fVVvrG9Y/IMG-8658.jpg',
+    image: 'https://i.ibb.co/JRbP5nVG/Citrine-Collection-bracelet.webp',
     desc: 'Rough Citrine piece. Encourages happiness, motivation, and constant financial prosperity.',
     label: 'Joy Specimen',
     benefits: [
@@ -877,7 +877,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Black Obsidian Raw Stone',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/KjMjxDcN/raw.webp',
+    image: 'https://i.ibb.co/G4ZPMDzX/Black-Obsidian-bracelet.webp',
     desc: 'A powerful protection stone that absorbs environmental negativity and emotional blockages.',
     label: 'Aura Shield',
     benefits: [
@@ -895,7 +895,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Black Obsidian Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/MdbFy67/bracelet.jpg',
+    image: 'https://i.ibb.co/ZpvRfpGz/Black-Obsidian-raw.webp',
     desc: 'Provides grounding, deep protection, and energetic shielding from toxic peers.',
     label: 'Shield Talisman',
     benefits: [
@@ -913,7 +913,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Black Obsidian Locket',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/0jVBVbM1/locket.jpg',
+    image: 'https://i.ibb.co/MxYc0RNN/Black-Obsidian-locket.webp',
     desc: 'Keeps protective, grounding energy close to the heart chakra throughout the day.',
     label: 'Talisman Locket',
     benefits: [
@@ -933,7 +933,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Smoky Quartz Raw Stone',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/cS3LVgvg/raw.jpg',
+    image: 'https://i.ibb.co/35wXqmZD/Smoky-Quartz-bracelite.webp',
     desc: 'Helps release negativity, deep stress, unwanted energies, and anxiety. A cosmic detoxifier.',
     label: 'Energy Detox',
     benefits: [
@@ -951,7 +951,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Smoky Quartz Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/wfZ1jKT/bracelite.jpg',
+    image: 'https://i.ibb.co/Ld7rb5cd/Smoky-Quartz-raw.webp',
     desc: 'Promotes grounding, emotional balance, and protection against constant mental fatigue.',
     label: 'Grounded Focus',
     benefits: [
@@ -971,7 +971,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Lapis Lazuli Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/gMTL9w28/bracelet.jpg',
+    image: 'https://i.ibb.co/FkjkG9D9/Lapis-Lazuli-bracelet.webp',
     desc: 'Enhances wisdom, communication, confidence, and self-expression. The stone of truth.',
     label: 'Truth Talisman',
     benefits: [
@@ -989,7 +989,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Lapis Lazuli Tree',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/ns7yKkyr/tree.jpg',
+    image: 'https://i.ibb.co/Z6XFhCpk/Lapis-Lazuli-raw.webp',
     desc: 'Supports intellectual growth, wisdom, and spiritual awareness in home spaces.',
     label: 'Intellect Anchor',
     benefits: [
@@ -1007,7 +1007,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Lapis Lazuli Raw Stone',
     basePrice: 699,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/5WPzSsGY/raw.jpg',
+    image: 'https://i.ibb.co/B249zW4z/Lapis-Lazuli-tree.webp',
     desc: 'Associated with truth, deep intuition, mental clarity, and memory power.',
     label: 'Wisdom Specimen',
     benefits: [
@@ -1139,7 +1139,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Malachite Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/pvQps2bL/bracelet.jpg',
+    image: 'https://i.ibb.co/60CgfFjw/Malachite-tree.webp',
     desc: 'Encourages transformation, confidence, and emotional healing. The stone of growth.',
     label: 'Growth Talisman',
     benefits: [
@@ -1157,7 +1157,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Malachite Raw Stone',
     basePrice: 699,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/zWjN7LRs/raw.jpg',
+    image: 'https://i.ibb.co/WW8GBVWR/Malachite-raw.webp',
     desc: 'Known as a stone of growth, change, and protection. Striated green beauty.',
     label: 'Raw specimen',
     benefits: [
@@ -1175,7 +1175,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Malachite Tree',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/cP6GMGk/tree.jpg',
+    image: 'https://i.ibb.co/Q3pMrS8G/b-Malachite-Bracelet.webp',
     desc: 'Brings transformation, abundance, and positive change. A gorgeous green balancing tree.',
     label: 'Prosperity Tree',
     benefits: [
@@ -1195,7 +1195,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Jade Tree',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/gLFhd9RX/Jade-tree.jpg',
+    image: 'https://i.ibb.co/XrmxF4P6/jade-bracelet.webp',
     desc: 'Symbolizes prosperity, harmony, Vastu balance, and good fortune inside home spaces.',
     label: 'Good Fortune',
     benefits: [
@@ -1213,7 +1213,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Jade Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/CTqgWnC/jade-bracelet.jpg',
+    image: 'https://i.ibb.co/PGgyxKcv/Jade-tree.webp',
     desc: 'Promotes abundance, balance, and emotional well-being. A constant fortune talisman.',
     label: 'Fortune Bracelet',
     benefits: [
@@ -1289,7 +1289,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Carnelian Tree',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/Cppx3gCp/tree.png',
+    image: 'https://i.ibb.co/WvchjrR1/Carnelian-tree.webp',
     desc: 'Represents motivation, courage, creativity, and success. A fiery tree of action.',
     label: 'Action Tree',
     benefits: [
@@ -1307,7 +1307,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Carnelian Raw Stone',
     basePrice: 699,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/Lht6gcvV/raw.jpg',
+    image: 'https://i.ibb.co/mMQ6M3X/Carnelian-raw.webp',
     desc: 'Rough Carnelian block. Boosts confidence, vitality, and personal manifestation power.',
     label: 'Vital Specimen',
     benefits: [
@@ -1325,7 +1325,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Carnelian Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/G3VVFNGm/bracelet.jpg',
+    image: 'https://i.ibb.co/gKJS3WF/Carnelian-bracelet.webp',
     desc: 'Encourages action, determination, and enthusiasm throughout the busy day.',
     label: 'Vital Bracelet',
     benefits: [
@@ -1345,7 +1345,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Hematite Tree',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/zp2S8mR/rename.jpg',
+    image: 'https://i.ibb.co/MDv9S14s/Hematite-rename.webp',
     desc: 'Promotes grounding, focus, and stability inside shared room spaces.',
     label: 'Grounding Tree',
     benefits: [
@@ -1363,7 +1363,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Hematite Bracelet',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/9Hq9KzfQ/bracelet.jpg',
+    image: 'https://i.ibb.co/WLtPH0V/Hematite-bracelet.webp',
     desc: 'Supports confidence, mental clarity, and protection against overthinking.',
     label: 'Logic Bracelet',
     benefits: [
@@ -1381,7 +1381,7 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Hematite Raw Stone',
     basePrice: 699,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/q3QSvmD6/Raw.jpg',
+    image: 'https://i.ibb.co/m5mP7rtt/Hematite-Raw.webp',
     desc: 'Raw Hematite specimen. Helps maintain balance and physical grounding energy.',
     label: 'Anchor Specimen',
     benefits: [
@@ -1399,8 +1399,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Good Health Bracelet',
     basePrice: 1499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/ccNK42b8/good-health-main.png',
-    detailImage: 'https://i.ibb.co/SD45v2r3/Good-health-bracelet.jpg',
+    image: 'https://i.ibb.co/qMrWJL9Z/good-health-main.webp',
+    detailImage: 'https://i.ibb.co/9kG2X0Q0/Good-health-bracelet-inside.webp',
     desc: 'Designed to support physical wellness, boost immunity, and promote overall body harmony. Made with natural crystal beads.',
     label: 'Wellness Anchor',
     benefits: [
@@ -1418,8 +1418,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Anxiety Bracelet',
     basePrice: 1499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/Z64N4nJv/anxitey-main.png',
-    detailImage: 'https://i.ibb.co/wr3TVv0r/Anxiety-bracelet.jpg',
+    image: 'https://i.ibb.co/PZvfBy0Y/anxitey-main.webp',
+    detailImage: 'https://i.ibb.co/YFm5Tqxc/Anxiety-bracelet-inside.webp',
     desc: 'Infused with peaceful crystals to calm an overactive mind, ease stress, and ground emotions.',
     label: 'Calming Anchor',
     benefits: [
@@ -1437,8 +1437,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Desired Job Bracelet',
     basePrice: 1499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/VcVgS837/Desired-job-main.png',
-    detailImage: 'https://i.ibb.co/ccSSjkVM/Desired-job.png',
+    image: 'https://i.ibb.co/PvDrXZgd/Desired-job-main.webp',
+    detailImage: 'https://i.ibb.co/tMtmqsnG/Desired-job-inside.webp',
     desc: 'Attracts professional opportunities, success, confidence, and clear career path alignment.',
     label: 'Success Anchor',
     benefits: [
@@ -1456,8 +1456,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Dhan Yog Bracelet',
     basePrice: 1499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/tpM2mBJm/dhan-yog-main.png',
-    detailImage: 'https://i.ibb.co/b5wkGcQ5/Dhan-yog.jpg',
+    image: 'https://i.ibb.co/zTFrQrLn/dhan-yog-main.webp',
+    detailImage: 'https://i.ibb.co/Q3rSzMt0/Dhan-yog-inside.webp',
     desc: 'A powerful combination of crystals designed to attract financial abundance, prosperity, and wealth luck.',
     label: 'Wealth Anchor',
     benefits: [
@@ -1475,8 +1475,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Self Confidence Bracelet',
     basePrice: 1499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/gFRQdvPD/self-cinfidence.png',
-    detailImage: 'https://i.ibb.co/fd7v4gfH/Self-confidence.png',
+    image: 'https://i.ibb.co/QvJ0vsB9/self-cinfidence-main.webp',
+    detailImage: 'https://i.ibb.co/5hQTqhjQ/Self-confidence-Inside.webp',
     desc: 'Boosts self-esteem, inner strength, and courage to stand tall and speak your truth.',
     label: 'Power Anchor',
     benefits: [
@@ -1494,8 +1494,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Meditation Bracelet',
     basePrice: 1499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/RTtKXvHs/meditation-main.png',
-    detailImage: 'https://i.ibb.co/s95tKb8k/Meditation.png',
+    image: 'https://i.ibb.co/JjJzXMqq/meditation-main.webp',
+    detailImage: 'https://i.ibb.co/Rpk0bjL6/Meditation-bracelet-Inside.webp',
     desc: 'Supports spiritual connection, quiet meditation, inner focus, and third eye awakening.',
     label: 'Mindfulness Anchor',
     benefits: [
@@ -1513,8 +1513,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Buri Nazar Bracelet',
     basePrice: 1499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/k6xTtHtg/buri-nazar-MAIN.png',
-    detailImage: 'https://i.ibb.co/nMTJs7Dy/burinazar.png',
+    image: 'https://i.ibb.co/d4j1xrzF/buri-nazar-MAIN.webp',
+    detailImage: 'https://i.ibb.co/qSHCNFS/burinazar-inside.webp',
     desc: 'Shields your aura from negative energy, jealousy, hexes, and the negative gaze of others.',
     label: 'Protection Shield',
     benefits: [
@@ -1532,8 +1532,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Inner Peace Bracelet',
     basePrice: 1499,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/CsDMScV6/Inner-Peace-main.png',
-    detailImage: 'https://i.ibb.co/TDchMFN8/Inner-peace.png',
+    image: 'https://i.ibb.co/BKzW7zJS/Inner-Peace-main.webp',
+    detailImage: 'https://i.ibb.co/XZr4rcVQ/Inner-peace-inside.webp',
     desc: 'Gently balances heart and mind to invite emotional healing, deep peace, and relief from daily friction.',
     label: 'Tranquility Anchor',
     benefits: [
@@ -1551,8 +1551,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: '7 Chakra Crystal Tree 🌈',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/6cGBMkpC/7-tree-main.png',
-    detailImage: 'https://i.ibb.co/27vqqfJk/7-chakra-tree.jpg',
+    image: 'https://i.ibb.co/sdyPwJtK/7-tree-main.webp',
+    detailImage: 'https://i.ibb.co/xK8KFx9D/7-chakra-tree-inside.webp',
     desc: 'Bring balance, positivity, and harmony into your space with this beautiful 7 Chakra Crystal Tree. Made with natural chakra crystals, it is designed to support energy alignment, emotional well-being, and spiritual growth. Perfect for your home, office, meditation corner, or as a thoughtful gift.',
     label: 'Spatial Balance',
     benefits: [
@@ -1570,8 +1570,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: '7 Chakra Bracelet 🌈',
     basePrice: 999,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/BHhhQW4F/7-bracelet-main.png',
-    detailImage: 'https://i.ibb.co/7x2x0TnP/7-chakra-bracelet.jpg',
+    image: 'https://i.ibb.co/vxfrLjzp/7-bracelet-main.webp',
+    detailImage: 'https://i.ibb.co/RTg9yrh3/7-chakra-bracelet-Inside.webp',
     desc: 'Balance your mind, body, and spirit with our natural 7 Chakra Bracelet. Made with carefully selected chakra crystals, this bracelet is designed to support energy alignment, inner harmony, and overall well-being.',
     label: 'Aura Harmony',
     benefits: [
@@ -1590,8 +1590,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: '7 Chakra Crystals',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/zHhwykjQ/7-crystal-main.png',
-    detailImage: 'https://i.ibb.co/Q7B5zrhv/7-chakra-crystals.jpg',
+    image: 'https://i.ibb.co/4wDdQK64/7-crystal-main.webp',
+    detailImage: 'https://i.ibb.co/4gCpHd8h/7-chakra-crystals-main.webp',
     desc: '7 Chakra Crystals are a powerful combination of natural stones associated with the body’s seven energy centers. They are used to promote balance, harmony, positivity, and spiritual well-being.',
     label: 'Healing Stones',
     benefits: [
@@ -1610,8 +1610,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: '7 Chakra Chip Rakhi',
     basePrice: 1199,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/WNM15Gvb/7-chakra-chip-rakhi-main.png',
-    detailImage: 'https://i.ibb.co/R4bDLfFX/7-charka-chip-rakhi.jpg',
+    image: 'https://i.ibb.co/whxBdsRS/7-chakra-chip-rakhi-main.webp',
+    detailImage: 'https://i.ibb.co/ztBQTzC/7-charka-chip-rakhi-inside.webp',
     desc: 'Handcrafted with seven chakra crystal chips to bring balance, positive energy, and emotional harmony to your sibling\'s life.',
     label: 'Energy Alignment',
     benefits: [
@@ -1629,8 +1629,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: '7 Chakra Rakhi',
     basePrice: 1199,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/0j8wQp0T/7-chakra.png',
-    detailImage: 'https://i.ibb.co/3mKY47gP/7-chakra-Rakhi.jpg',
+    image: 'https://i.ibb.co/twXXPHSJ/7-chakra-main.webp',
+    detailImage: 'https://i.ibb.co/93qmpPDC/7-chakra-Rakhi-inside.webp',
     desc: 'Elegant 7 Chakra crystal bead Rakhi designed to bring peace, spiritual growth, and absolute energy balance.',
     label: 'Spiritual Harmony',
     benefits: [
@@ -1648,8 +1648,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Pyrite Rakhi',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/xSfqC9d6/pyrite-rakhi-main.png',
-    detailImage: 'https://i.ibb.co/bM4xpw2Y/Pyrite-rakhi.jpg',
+    image: 'https://i.ibb.co/6RyKsx5S/pyrite-rakhi-main.webp',
+    detailImage: 'https://i.ibb.co/zwxKq9y/Pyrite-rakhi-inside.webp',
     desc: 'Infused with natural Pyrite beads to attract financial prosperity, career success, and absolute protective shields.',
     label: 'Wealth & Success',
     benefits: [
@@ -1667,8 +1667,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Mahakal Rakhi',
     basePrice: 1199,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/b5RzfPN6/mahakal-rakhi-main.png',
-    detailImage: 'https://i.ibb.co/qLKLcSPY/Mahakal-rakhi.jpg',
+    image: 'https://i.ibb.co/Pv8Qk3H3/mahakal-rakhi-main.webp',
+    detailImage: 'https://i.ibb.co/zT9F5Xt6/Mahakal-rakhi-inside.webp',
     desc: 'A powerful Rakhi combining Rudraksha and protective crystals, representing the blessing and ultimate protection of Lord Shiva (Mahakal).',
     label: 'Divine Protection',
     benefits: [
@@ -1686,8 +1686,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Money Magnet Rakhi',
     basePrice: 1199,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/kVKf8zcF/money-magnet-main.png',
-    detailImage: 'https://i.ibb.co/QvHhPCWS/Money-magnet-rakhi.jpg',
+    image: 'https://i.ibb.co/996wpG11/money-magnet-main.webp',
+    detailImage: 'https://i.ibb.co/LXR2tWMx/Money-magnet-rakhi-inside.webp',
     desc: 'Combines green aventurine, pyrite, and citrine to make a powerful money magnet thread that invites prosperity and luck.',
     label: 'Abundance Magnet',
     benefits: [
@@ -1705,8 +1705,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Gomti Chakra Rakhi',
     basePrice: 599,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/qYjQWTZT/gomti-chakra.png',
-    detailImage: 'https://i.ibb.co/Y7X2hGxB/Gomti-chakra-rakhi.jpg',
+    image: 'https://i.ibb.co/HLPnqhmG/gomti-chakra-main.webp',
+    detailImage: 'https://i.ibb.co/bRW4VThN/Gomti-chakra-rakhi-inside.webp',
     desc: 'Features a sacred Gomti Chakra stone to attract the blessings of Goddess Lakshmi, good fortune, and Vastu protection.',
     label: 'Goddess Lakshmi Blessings',
     benefits: [
@@ -1724,8 +1724,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Good Luck Rakhi',
     basePrice: 1199,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/7tzJ1Byp/good-luck-main.png',
-    detailImage: 'https://i.ibb.co/JRskbfL5/Good-luck-opal-rakhi.jpg',
+    image: 'https://i.ibb.co/Gv1HfqLh/good-luck-main.webp',
+    detailImage: 'https://i.ibb.co/d9q6bfr/Good-luck-opal-rakhi-inside.webp',
     desc: 'Crafted with Opalite and lucky green crystals to bring good fortune, career growth, and emotional calmness.',
     label: 'Fortune & Grace',
     benefits: [
@@ -1743,8 +1743,8 @@ export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
     name: 'Evil Eye Rakhi',
     basePrice: 1199,
     pricingType: 'fixed',
-    image: 'https://i.ibb.co/RTwWrnDZ/Evil-eye-main.png',
-    detailImage: 'https://i.ibb.co/sds37XQW/Evil-Eye-rakhi.jpg',
+    image: 'https://i.ibb.co/WNbSBKhT/Evil-eye-main.webp',
+    detailImage: 'https://i.ibb.co/hTNF5Px/Evil-Eye-rakhi-inside.webp',
     desc: 'A classic protective Rakhi featuring a premium Evil Eye talisman and matching crystal beads to shield against negative gaze and envy.',
     label: 'Aura Shield',
     benefits: [
