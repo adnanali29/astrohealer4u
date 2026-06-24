@@ -7,6 +7,7 @@ import CartDrawer from "@/components/CartDrawer";
 import ToastContainer from "@/components/ToastContainer";
 import AudioButton from "@/components/AudioButton";
 import BookingModal from "@/components/BookingModal";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "astrohealer4U — Only i know what you are hiding 💫",
@@ -67,6 +68,7 @@ export default function RootLayout({
             <CartDrawer />
             <ToastContainer />
             <BookingModal />
+            <WhatsAppButton />
           </div>
         </AppProvider>
       </body>
