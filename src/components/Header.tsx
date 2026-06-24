@@ -20,8 +20,12 @@ export default function Header() {
             }}
             className="flex items-center gap-2 sm:gap-3 cursor-pointer group"
           >
-            <div className="relative w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-purple-100 via-rose-100 to-amber-100 flex items-center justify-center border border-white/60 shadow-sm overflow-hidden transition-transform duration-500 group-hover:rotate-180">
-              <span className="text-xs sm:text-lg animate-pulse">✦</span>
+            <div className="relative w-8 h-8 sm:w-11 sm:h-11 rounded-full overflow-hidden transition-transform duration-500 group-hover:scale-105 shrink-0 flex items-center justify-center">
+              <img
+                src="https://i.ibb.co/Q3pL0qpQ/Untitled-design.webp"
+                alt="astrohealer4U Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="text-left">
               <span className="font-serif text-sm sm:text-lg tracking-widest uppercase font-bold text-stone-850 block leading-tight">astrohealer4U</span>
@@ -123,8 +127,12 @@ export default function Header() {
         <div className="md:hidden border-t border-stone-200/50 bg-[#FAF9F5]/95 backdrop-blur-md px-4 py-4 space-y-3 shadow-lg transition-all duration-300">
           {/* Mobile Branding Panel */}
           <div className="flex flex-col items-center justify-center py-4 border-b border-stone-200/50 mb-3 text-center">
-            <div className="relative w-12 h-12 rounded-full bg-gradient-to-tr from-purple-100 via-rose-100 to-amber-100 flex items-center justify-center border border-white/60 shadow-sm overflow-hidden mb-2">
-              <span className="text-xl animate-pulse">✦</span>
+            <div className="relative w-12 h-12 rounded-full overflow-hidden mb-2">
+              <img
+                src="https://i.ibb.co/Q3pL0qpQ/Untitled-design.webp"
+                alt="astrohealer4U Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className="font-serif text-base tracking-widest uppercase font-bold text-stone-850 block leading-tight">astrohealer4U</span>
             <span className="text-[10px] tracking-wide text-purple-600 block font-semibold mt-1">Only i know what you are hiding 💫</span>

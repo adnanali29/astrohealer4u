@@ -11,13 +11,22 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Brand & Tagline */}
           <div className="text-center md:text-left space-y-3">
-            <div>
-              <span className="font-serif text-lg tracking-widest uppercase font-bold text-white block">
-                astrohealer4U
-              </span>
-              <p className="text-xs text-stone-500 font-light mt-0.5">
-                Only i know what you are hiding 💫
-              </p>
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
+                <img
+                  src="https://i.ibb.co/Q3pL0qpQ/Untitled-design.webp"
+                  alt="astrohealer4U Logo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="text-left">
+                <span className="font-serif text-lg tracking-widest uppercase font-bold text-white block leading-tight">
+                  astrohealer4U
+                </span>
+                <p className="text-xs text-stone-500 font-light mt-0.5">
+                  Only i know what you are hiding 💫
+                </p>
+              </div>
             </div>
             {/* Social Icons */}
             <div className="flex justify-center md:justify-start gap-4">
