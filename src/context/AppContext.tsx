@@ -125,221 +125,264 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [adminEmail, setAdminEmail] = useState('1');
   const [adminPassword, setAdminPassword] = useState('1');
 
-  // Load from localStorage on mount safely
+  // Load from database on mount safely
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedHeroTitle = localStorage.getItem('heroTitle');
-      if (storedHeroTitle) setHeroTitle(storedHeroTitle);
-
-      const storedHeroSub = localStorage.getItem('heroSub');
-      if (storedHeroSub) setHeroSub(storedHeroSub);
-
-      const storedHeroStats = localStorage.getItem('heroStats');
-      if (storedHeroStats) {
-        try { setHeroStats(JSON.parse(storedHeroStats)); } catch (e) {}
+    const loadData = async () => {
+      try {
+        const res = await fetch('/api/db');
+        const data = await res.json();
+        if (data.success) {
+          setHeroTitle(data.heroTitle);
+          setHeroSub(data.heroSub);
+          setHeroStats(data.heroStats);
+          setServices(data.services);
+          setDisplayedServices(data.displayedServices);
+          setTestimonials(data.testimonials);
+          setFaqs(data.faqs);
+          setOfficeAddress(data.officeAddress);
+          setContactEmail(data.contactEmail);
+          setContactPhone(data.contactPhone);
+          setShopCategories(data.shopCategories);
+          setShopSubProducts(data.shopSubProducts);
+          setAdminEmail(data.adminEmail);
+          setAdminPassword(data.adminPassword);
+        }
+      } catch (err) {
+        console.error('Failed to load database config, falling back:', err);
       }
-
-      const storedServices = localStorage.getItem('services');
-      if (storedServices) {
-        try { setServices(JSON.parse(storedServices)); } catch (e) {}
-      } else {
-        setServices(SERVICES);
-      }
-
-      const storedDispServices = localStorage.getItem('displayedServices');
-      if (storedDispServices) {
-        try { setDisplayedServices(JSON.parse(storedDispServices)); } catch (e) {}
-      }
-
-      const storedTestimonials = localStorage.getItem('testimonials');
-      if (storedTestimonials) {
-        try { setTestimonials(JSON.parse(storedTestimonials)); } catch (e) {}
-      } else {
-        setTestimonials(TESTIMONIALS_DEFAULT);
-      }
-
-      const storedFaqs = localStorage.getItem('faqs');
-      if (storedFaqs) {
-        try { setFaqs(JSON.parse(storedFaqs)); } catch (e) {}
-      } else {
-        setFaqs(FAQ_ITEMS_DEFAULT);
-      }
-
-      const storedAddress = localStorage.getItem('officeAddress');
-      if (storedAddress) setOfficeAddress(storedAddress);
-
-      const storedEmail = localStorage.getItem('contactEmail');
-      if (storedEmail) setContactEmail(storedEmail);
-
-      const storedPhone = localStorage.getItem('contactPhone');
-      if (storedPhone) setContactPhone(storedPhone);
-
-      const storedShopCats = localStorage.getItem('shopCategories');
-      if (storedShopCats) {
-        try { setShopCategories(JSON.parse(storedShopCats)); } catch (e) {}
-      } else {
-        setShopCategories(SHOP_CATEGORIES);
-      }
-
-      const storedShopProds = localStorage.getItem('shopSubProducts');
-      if (storedShopProds) {
-        try { setShopSubProducts(JSON.parse(storedShopProds)); } catch (e) {}
-      } else {
-        setShopSubProducts(CRYSTAL_SUB_PRODUCTS);
-      }
-
-      const storedAdminEmail = localStorage.getItem('adminEmail');
-      if (storedAdminEmail) setAdminEmail(storedAdminEmail);
-
-      const storedAdminPassword = localStorage.getItem('adminPassword');
-      if (storedAdminPassword) setAdminPassword(storedAdminPassword);
-    }
+    };
+    loadData();
   }, []);
 
-  const updateHero = useCallback((title: string, sub: string, stats: typeof heroStats) => {
+  const updateHero = useCallback(async (title: string, sub: string, stats: typeof heroStats) => {
     setHeroTitle(title);
     setHeroSub(sub);
     setHeroStats(stats);
-    localStorage.setItem('heroTitle', title);
-    localStorage.setItem('heroSub', sub);
-    localStorage.setItem('heroStats', JSON.stringify(stats));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'updateHero', data: { title, sub, stats } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const updateDisplayedServices = useCallback((ids: string[]) => {
+  const updateDisplayedServices = useCallback(async (ids: string[]) => {
     setDisplayedServices(ids);
-    localStorage.setItem('displayedServices', JSON.stringify(ids));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'updateDisplayedServices', data: { ids } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const addTestimonial = useCallback((t: TestimonialItem) => {
-    setTestimonials(prev => {
-      const next = [t, ...prev];
-      localStorage.setItem('testimonials', JSON.stringify(next));
-      return next;
-    });
+  const addTestimonial = useCallback(async (t: TestimonialItem) => {
+    setTestimonials(prev => [t, ...prev]);
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'addTestimonial', data: t }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const addFaq = useCallback((f: FaqItem) => {
-    setFaqs(prev => {
-      const next = [...prev, f];
-      localStorage.setItem('faqs', JSON.stringify(next));
-      return next;
-    });
+  const addFaq = useCallback(async (f: FaqItem) => {
+    setFaqs(prev => [...prev, f]);
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'addFaq', data: f }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const editFaq = useCallback((index: number, f: FaqItem) => {
-    setFaqs(prev => {
-      const next = prev.map((item, idx) => idx === index ? f : item);
-      localStorage.setItem('faqs', JSON.stringify(next));
-      return next;
-    });
+  const editFaq = useCallback(async (index: number, f: FaqItem) => {
+    setFaqs(prev => prev.map((item, idx) => idx === index ? f : item));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'editFaq', data: { index, ...f } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const deleteFaq = useCallback((index: number) => {
-    setFaqs(prev => {
-      const next = prev.filter((_, idx) => idx !== index);
-      localStorage.setItem('faqs', JSON.stringify(next));
-      return next;
-    });
+  const deleteFaq = useCallback(async (index: number) => {
+    setFaqs(prev => prev.filter((_, idx) => idx !== index));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'deleteFaq', data: { index } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const addService = useCallback((s: ConsultationService) => {
-    setServices(prev => {
-      const next = [...prev, s];
-      localStorage.setItem('services', JSON.stringify(next));
-      return next;
-    });
+  const addService = useCallback(async (s: ConsultationService) => {
+    setServices(prev => [...prev, s]);
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'addService', data: s }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const editService = useCallback((id: string, updatedFields: Partial<ConsultationService>) => {
-    setServices(prev => {
-      const next = prev.map(s => s.id === id ? { ...s, ...updatedFields } : s);
-      localStorage.setItem('services', JSON.stringify(next));
-      return next;
-    });
+  const editService = useCallback(async (id: string, updatedFields: Partial<ConsultationService>) => {
+    setServices(prev => prev.map(s => s.id === id ? { ...s, ...updatedFields } : s));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'editService', data: { id, fields: updatedFields } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const deleteService = useCallback((id: string) => {
-    setServices(prev => {
-      const next = prev.filter(s => s.id !== id);
-      localStorage.setItem('services', JSON.stringify(next));
-      return next;
-    });
-    setDisplayedServices(prev => {
-      const next = prev.filter(item => item !== id);
-      localStorage.setItem('displayedServices', JSON.stringify(next));
-      return next;
-    });
+  const deleteService = useCallback(async (id: string) => {
+    setServices(prev => prev.filter(s => s.id !== id));
+    setDisplayedServices(prev => prev.filter(item => item !== id));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'deleteService', data: { id } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const updateContactInfo = useCallback((address: string, email: string, phone: string) => {
+  const updateContactInfo = useCallback(async (address: string, email: string, phone: string) => {
     setOfficeAddress(address);
     setContactEmail(email);
     setContactPhone(phone);
-    localStorage.setItem('officeAddress', address);
-    localStorage.setItem('contactEmail', email);
-    localStorage.setItem('contactPhone', phone);
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'updateContactInfo', data: { address, email, phone } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
   // Shop CRUD
-  const addShopCategory = useCallback((cat: ShopCategory) => {
-    setShopCategories(prev => {
-      const next = [...prev, cat];
-      localStorage.setItem('shopCategories', JSON.stringify(next));
-      return next;
-    });
+  const addShopCategory = useCallback(async (cat: ShopCategory) => {
+    setShopCategories(prev => [...prev, cat]);
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'addShopCategory', data: cat }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const editShopCategory = useCallback((id: string, fields: Partial<ShopCategory>) => {
-    setShopCategories(prev => {
-      const next = prev.map(c => c.id === id ? { ...c, ...fields } : c);
-      localStorage.setItem('shopCategories', JSON.stringify(next));
-      return next;
-    });
+  const editShopCategory = useCallback(async (id: string, fields: Partial<ShopCategory>) => {
+    setShopCategories(prev => prev.map(c => c.id === id ? { ...c, ...fields } : c));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'editShopCategory', data: { id, fields } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const deleteShopCategory = useCallback((id: string) => {
-    setShopCategories(prev => {
-      const next = prev.filter(c => c.id !== id);
-      localStorage.setItem('shopCategories', JSON.stringify(next));
-      return next;
-    });
-    setShopSubProducts(prev => {
-      const next = prev.filter(p => p.categoryId !== id);
-      localStorage.setItem('shopSubProducts', JSON.stringify(next));
-      return next;
-    });
+  const deleteShopCategory = useCallback(async (id: string) => {
+    setShopCategories(prev => prev.filter(c => c.id !== id));
+    setShopSubProducts(prev => prev.filter(p => p.categoryId !== id));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'deleteShopCategory', data: { id } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const addShopSubProduct = useCallback((prod: SubCrystalProduct) => {
-    setShopSubProducts(prev => {
-      const next = [...prev, prod];
-      localStorage.setItem('shopSubProducts', JSON.stringify(next));
-      return next;
-    });
+  const addShopSubProduct = useCallback(async (prod: SubCrystalProduct) => {
+    setShopSubProducts(prev => [...prev, prod]);
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'addShopSubProduct', data: prod }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const editShopSubProduct = useCallback((id: string, fields: Partial<SubCrystalProduct>) => {
-    setShopSubProducts(prev => {
-      const next = prev.map(p => p.id === id ? { ...p, ...fields } : p);
-      localStorage.setItem('shopSubProducts', JSON.stringify(next));
-      return next;
-    });
+  const editShopSubProduct = useCallback(async (id: string, fields: Partial<SubCrystalProduct>) => {
+    setShopSubProducts(prev => prev.map(p => p.id === id ? { ...p, ...fields } : p));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'editShopSubProduct', data: { id, fields } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const deleteShopSubProduct = useCallback((id: string) => {
-    setShopSubProducts(prev => {
-      const next = prev.filter(p => p.id !== id);
-      localStorage.setItem('shopSubProducts', JSON.stringify(next));
-      return next;
-    });
+  const deleteShopSubProduct = useCallback(async (id: string) => {
+    setShopSubProducts(prev => prev.filter(p => p.id !== id));
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'deleteShopSubProduct', data: { id } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  const updateAdminCredentials = useCallback((email: string, password: string) => {
+  const updateAdminCredentials = useCallback(async (email: string, password: string) => {
     setAdminEmail(email);
     setAdminPassword(password);
-    localStorage.setItem('adminEmail', email);
-    localStorage.setItem('adminPassword', password);
+    try {
+      await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'updateAdminCredentials', data: { email, password } }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
+
 
   useEffect(() => {
     if (booking) {
