@@ -128,9 +128,28 @@ export default function AdminTab() {
   const [catImage, setCatImage] = useState('');
   const [catTagline, setCatTagline] = useState('');
   const [catIsSingle, setCatIsSingle] = useState(false);
+  const [catPrice, setCatPrice] = useState('');
+  const [catPricingType, setCatPricingType] = useState<'fixed' | 'per-gram' | 'per-kg'>('fixed');
+  const [catBenefits, setCatBenefits] = useState('');
+  const [catBigDesc, setCatBigDesc] = useState('');
+  const [catResonance, setCatResonance] = useState('');
+  const [catNode, setCatNode] = useState('');
+  const [catSolar, setCatSolar] = useState('');
+  const [catApothecary, setCatApothecary] = useState('');
+
   // Category editing
   const [editingCatId, setEditingCatId] = useState<string | null>(null);
-  const [editCatFields, setEditCatFields] = useState<Partial<ShopCategory>>({});
+  const [editCatFields, setEditCatFields] = useState<Partial<ShopCategory & {
+    price?: number;
+    pricingType?: string;
+    benefits?: string;
+    bigDesc?: string;
+    resonance?: string;
+    node?: string;
+    solarPeakCleansed?: string;
+    apothecaryPlacement?: string;
+  }>>({});
+
 
   // Shop: Sub-Product form states
   const [prodCategoryId, setProdCategoryId] = useState('');
@@ -327,8 +346,9 @@ export default function AdminTab() {
     const slug = catDesignation.trim()
       ? catDesignation.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
       : catName.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const newCatId = slug + '-' + Date.now();
     const newCat: ShopCategory = {
-      id: slug + '-' + Date.now(),
+      id: newCatId,
       name: catName.trim(),
       image: catImage.trim(),
       tagline: catTagline.trim() || catDesignation.trim() || 'Sacred Crystal',
@@ -336,14 +356,95 @@ export default function AdminTab() {
       isSingleProduct: catIsSingle,
     };
     addShopCategory(newCat);
+
+    if (catIsSingle) {
+      const benefits = catBenefits.trim()
+        ? catBenefits.split('\n').map(l => l.trim()).filter(Boolean)
+        : ['Premium quality crystal, cleansed and programmed'];
+      const newProd: SubCrystalProduct = {
+        id: 'sub-' + newCatId,
+        categoryId: newCatId,
+        name: catName.trim(),
+        image: catImage.trim(),
+        desc: catBigDesc.trim() || catDesc.trim(),
+        basePrice: parseFloat(catPrice) || 0,
+        pricingType: catPricingType,
+        label: 'Best Seller',
+        benefits,
+        resonance: catResonance.trim() || '432Hz Universal Resonance',
+        node: catNode.trim() || 'Crown Chakra',
+        solarPeakCleansed: catSolar.trim() || undefined,
+        apothecaryPlacement: catApothecary.trim() || undefined,
+      };
+      addShopSubProduct(newProd);
+    }
+
     playTone(659.25, 'triangle', 0.12);
     showToast('New category added to the Apothecary! ✨');
     setCatDesignation(''); setCatName(''); setCatDesc(''); setCatImage(''); setCatTagline(''); setCatIsSingle(false);
+    setCatPrice(''); setCatPricingType('fixed'); setCatBenefits(''); setCatBigDesc('');
+    setCatResonance(''); setCatNode(''); setCatSolar(''); setCatApothecary('');
   };
 
   const handleSaveEditShopCategory = (id: string) => {
     if (!editCatFields.name?.trim()) { showToast('Name required.'); return; }
-    editShopCategory(id, editCatFields);
+    
+    // Split editCatFields into Category fields and Product fields
+    const catFields = {
+      name: editCatFields.name,
+      tagline: editCatFields.tagline,
+      image: editCatFields.image,
+      desc: editCatFields.desc,
+      isSingleProduct: editCatFields.isSingleProduct,
+    };
+    editShopCategory(id, catFields);
+
+    const isSingleNow = editCatFields.isSingleProduct;
+    if (isSingleNow) {
+      const existingSub = shopSubProducts.find(p => p.categoryId === id);
+      const benefits = typeof editCatFields.benefits === 'string'
+        ? editCatFields.benefits.split('\n').map((l: string) => l.trim()).filter(Boolean)
+        : undefined;
+
+      const subFields: Partial<SubCrystalProduct> = {
+        name: editCatFields.name,
+        image: editCatFields.image,
+        desc: editCatFields.bigDesc !== undefined ? editCatFields.bigDesc : editCatFields.desc,
+        basePrice: editCatFields.price,
+        pricingType: editCatFields.pricingType as any,
+        benefits,
+        resonance: editCatFields.resonance,
+        node: editCatFields.node,
+        solarPeakCleansed: editCatFields.solarPeakCleansed,
+        apothecaryPlacement: editCatFields.apothecaryPlacement,
+      };
+
+      // Remove undefined keys
+      Object.keys(subFields).forEach(key => (subFields as any)[key] === undefined && delete (subFields as any)[key]);
+
+      if (existingSub) {
+        editShopSubProduct(existingSub.id, subFields);
+      } else {
+        // Create new sub-product if it didn't exist before
+        const newProd: SubCrystalProduct = {
+          id: 'sub-' + id,
+          categoryId: id,
+          name: editCatFields.name || '',
+          image: editCatFields.image || '',
+          desc: editCatFields.bigDesc || editCatFields.desc || '',
+          basePrice: editCatFields.price || 0,
+          pricingType: (editCatFields.pricingType as any) || 'fixed',
+          label: 'Best Seller',
+          benefits: benefits || ['Premium quality crystal, cleansed and programmed'],
+          resonance: editCatFields.resonance || '432Hz Universal Resonance',
+          node: editCatFields.node || 'Crown Chakra',
+          solarPeakCleansed: editCatFields.solarPeakCleansed,
+          apothecaryPlacement: editCatFields.apothecaryPlacement,
+        };
+        addShopSubProduct(newProd);
+      }
+    }
+
     playTone(587.33, 'sine', 0.08);
     showToast('Category updated.');
     setEditingCatId(null); setEditCatFields({});
@@ -1306,18 +1407,73 @@ export default function AdminTab() {
                         <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Description *</label>
                         <textarea value={catDesc} onChange={e => setCatDesc(e.target.value)} rows={2} required placeholder="Brief category description..." className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-stone-50/50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
                       </div>
-                      <div className="flex items-center gap-3 p-3 border border-stone-100 rounded-xl bg-stone-50/30">
-                        <input
-                          type="checkbox"
-                          id="cat-single-product"
-                          checked={catIsSingle}
-                          onChange={e => setCatIsSingle(e.target.checked)}
-                          className="w-4 h-4 accent-purple-700 cursor-pointer"
-                        />
-                        <label htmlFor="cat-single-product" className="text-xs font-semibold text-stone-700 cursor-pointer select-none">
-                          Single Product (no sub-categories) — shows <span className="bg-stone-900 text-white px-1.5 py-0.5 rounded text-[10px] font-bold">Buy Now</span> directly on shop grid
-                        </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Product Category Type</label>
+                          <select
+                            value={catIsSingle ? 'single' : 'multiple'}
+                            onChange={e => setCatIsSingle(e.target.value === 'single')}
+                            className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-stone-50/50 text-xs focus:ring-2 focus:ring-purple-200 outline-none font-semibold text-stone-700"
+                          >
+                            <option value="multiple">Multiple Products Category (Branch product with sub-products)</option>
+                            <option value="single">Single Product (No sub-products; direct Buy Now)</option>
+                          </select>
+                        </div>
                       </div>
+
+                      {catIsSingle && (
+                        <div className="p-4 border border-purple-100 rounded-2xl bg-purple-50/20 space-y-4">
+                          <h4 className="font-serif font-bold text-stone-800 text-xs tracking-wider border-b border-purple-100 pb-2">Single Product Configurations</h4>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Base Price *</label>
+                              <input type="number" step="any" value={catPrice} onChange={e => setCatPrice(e.target.value)} required placeholder="e.g. 2999" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Pricing Type</label>
+                              <select value={catPricingType} onChange={e => setCatPricingType(e.target.value as any)} className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:ring-2 focus:ring-purple-200 outline-none">
+                                <option value="fixed">Fixed Price</option>
+                                <option value="per-gram">Per Gram</option>
+                                <option value="per-kg">Per KG</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Chakra Alignment Benefits (one per line)</label>
+                              <textarea value={catBenefits} onChange={e => setCatBenefits(e.target.value)} rows={3} placeholder="e.g. Attracts financial abundance&#10;Protects from negative energy" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Metaphysical Spec Parameters (Detail Description)</label>
+                              <textarea value={catBigDesc} onChange={e => setCatBigDesc(e.target.value)} rows={3} placeholder="Provide rich scientific or metaphysical parameters..." className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Resonance Node</label>
+                              <input type="text" value={catResonance} onChange={e => setCatResonance(e.target.value)} placeholder="e.g. 188Hz Solar plexus" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Chakra Node</label>
+                              <input type="text" value={catNode} onChange={e => setCatNode(e.target.value)} placeholder="e.g. Solar Plexus Chakra" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Solar Peak Cleansed & Programmed</label>
+                              <input type="text" value={catSolar} onChange={e => setCatSolar(e.target.value)} placeholder="e.g. 4 Hours Solar Exposure" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-wider">Apothecary Placement Instructions</label>
+                              <input type="text" value={catApothecary} onChange={e => setCatApothecary(e.target.value)} placeholder="e.g. Place in the South-East wealth corner" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
                       <button type="submit" className="px-6 py-2.5 bg-stone-900 text-white rounded-xl text-xs font-bold hover:bg-stone-800 transition-colors shadow-sm uppercase tracking-wider">+ Add Category</button>
                     </form>
                   </div>
@@ -1335,16 +1491,71 @@ export default function AdminTab() {
                               </div>
                               <div><label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Image URL</label><input value={editCatFields.image ?? cat.image} onChange={e => setEditCatFields(f => ({ ...f, image: e.target.value }))} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" /></div>
                               <div><label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Description</label><textarea value={editCatFields.desc ?? cat.desc} onChange={e => setEditCatFields(f => ({ ...f, desc: e.target.value }))} rows={2} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" /></div>
-                              <div className="flex items-center gap-2 p-2.5 border border-stone-100 rounded-xl bg-stone-50/30">
-                                <input
-                                  type="checkbox"
-                                  id={`edit-single-${cat.id}`}
-                                  checked={!!(editCatFields.isSingleProduct ?? cat.isSingleProduct)}
-                                  onChange={e => setEditCatFields(f => ({ ...f, isSingleProduct: e.target.checked }))}
-                                  className="w-4 h-4 accent-purple-700 cursor-pointer"
-                                />
-                                <label htmlFor={`edit-single-${cat.id}`} className="text-[10px] font-semibold text-stone-700 cursor-pointer select-none">Single Product — Buy Now CTA</label>
+                              <div className="space-y-1">
+                                <label className="block text-[10px] font-bold text-stone-400 uppercase">Product Category Type</label>
+                                <select
+                                  value={(editCatFields.isSingleProduct ?? cat.isSingleProduct) ? 'single' : 'multiple'}
+                                  onChange={e => setEditCatFields(f => ({ ...f, isSingleProduct: e.target.value === 'single' }))}
+                                  className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none"
+                                >
+                                  <option value="multiple">Multiple Products Category (Branch product with sub-products)</option>
+                                  <option value="single">Single Product (No sub-products; direct Buy Now)</option>
+                                </select>
                               </div>
+
+                              {(editCatFields.isSingleProduct ?? cat.isSingleProduct) && (
+                                <div className="p-3 border border-purple-100 rounded-xl bg-purple-50/10 space-y-3">
+                                  <p className="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Edit Single Product Details</p>
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Base Price</label>
+                                      <input type="number" step="any" value={editCatFields.price ?? ''} onChange={e => setEditCatFields(f => ({ ...f, price: parseFloat(e.target.value) || 0 }))} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                                    </div>
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Pricing Type</label>
+                                      <select value={editCatFields.pricingType ?? 'fixed'} onChange={e => setEditCatFields(f => ({ ...f, pricingType: e.target.value }))} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none">
+                                        <option value="fixed">Fixed Price</option>
+                                        <option value="per-gram">Per Gram</option>
+                                        <option value="per-kg">Per KG</option>
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Chakra Alignment Benefits (one per line)</label>
+                                      <textarea value={editCatFields.benefits ?? ''} onChange={e => setEditCatFields(f => ({ ...f, benefits: e.target.value }))} rows={3} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                                    </div>
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Metaphysical Spec Parameters (Detail Description)</label>
+                                      <textarea value={editCatFields.bigDesc ?? ''} onChange={e => setEditCatFields(f => ({ ...f, bigDesc: e.target.value }))} rows={3} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                                    </div>
+                                  </div>
+
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Resonance Node</label>
+                                      <input type="text" value={editCatFields.resonance ?? ''} onChange={e => setEditCatFields(f => ({ ...f, resonance: e.target.value }))} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                                    </div>
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Chakra Node</label>
+                                      <input type="text" value={editCatFields.node ?? ''} onChange={e => setEditCatFields(f => ({ ...f, node: e.target.value }))} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                                    </div>
+                                  </div>
+
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Solar Peak Cleansed & Programmed</label>
+                                      <input type="text" value={editCatFields.solarPeakCleansed ?? ''} onChange={e => setEditCatFields(f => ({ ...f, solarPeakCleansed: e.target.value }))} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                                    </div>
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1">Apothecary Placement Instructions</label>
+                                      <input type="text" value={editCatFields.apothecaryPlacement ?? ''} onChange={e => setEditCatFields(f => ({ ...f, apothecaryPlacement: e.target.value }))} className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs focus:ring-2 focus:ring-purple-200 outline-none" />
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+
                               <div className="flex gap-2">
                                 <button onClick={() => handleSaveEditShopCategory(cat.id)} className="px-4 py-2 bg-stone-900 text-white rounded-xl text-[10px] font-bold hover:bg-stone-800 uppercase">Save</button>
                                 <button onClick={() => { setEditingCatId(null); setEditCatFields({}); }} className="px-4 py-2 border rounded-xl text-[10px] font-bold text-stone-500 hover:bg-stone-50 uppercase">Cancel</button>
@@ -1367,7 +1578,25 @@ export default function AdminTab() {
                                 </div>
                               </div>
                               <div className="flex gap-2 flex-shrink-0">
-                                <button onClick={() => { setEditingCatId(cat.id); setEditCatFields({ name: cat.name, tagline: cat.tagline, image: cat.image, desc: cat.desc, isSingleProduct: cat.isSingleProduct }); }} className="px-3 py-1.5 bg-purple-50 text-purple-700 rounded-lg text-[10px] font-bold hover:bg-purple-100 uppercase">Edit</button>
+                                <button onClick={() => {
+                                  setEditingCatId(cat.id);
+                                  const associatedProd = shopSubProducts.find(p => p.categoryId === cat.id);
+                                  setEditCatFields({
+                                    name: cat.name,
+                                    tagline: cat.tagline,
+                                    image: cat.image,
+                                    desc: cat.desc,
+                                    isSingleProduct: cat.isSingleProduct,
+                                    price: associatedProd?.basePrice ?? 0,
+                                    pricingType: associatedProd?.pricingType ?? 'fixed',
+                                    benefits: associatedProd?.benefits ? associatedProd.benefits.join('\n') : '',
+                                    bigDesc: associatedProd?.desc ?? cat.desc,
+                                    resonance: associatedProd?.resonance ?? '',
+                                    node: associatedProd?.node ?? '',
+                                    solarPeakCleansed: associatedProd?.solarPeakCleansed ?? '',
+                                    apothecaryPlacement: associatedProd?.apothecaryPlacement ?? '',
+                                  });
+                                }} className="px-3 py-1.5 bg-purple-50 text-purple-700 rounded-lg text-[10px] font-bold hover:bg-purple-100 uppercase">Edit</button>
                                 <button onClick={() => { if (window.confirm('Delete ' + cat.name + ' and all its products?')) { deleteShopCategory(cat.id); showToast('Category deleted.'); } }} className="px-3 py-1.5 bg-rose-50 text-rose-600 rounded-lg text-[10px] font-bold hover:bg-rose-100 uppercase">Del</button>
                               </div>
                             </div>
