@@ -3,7 +3,7 @@
 import { useApp } from '@/context/AppContext';
 
 export default function Footer() {
-  const { switchTab } = useApp();
+  const { switchTab, audioEnabled, toggleAudio } = useApp();
 
   return (
     <footer className="bg-stone-900 text-stone-450 py-12 border-t border-stone-850 relative z-10 font-sans">
@@ -27,33 +27,6 @@ export default function Footer() {
                   Only i know what you are hiding 💫
                 </p>
               </div>
-            </div>
-            {/* Social Icons */}
-            <div className="flex justify-center md:justify-start gap-4">
-              <a
-                href="https://www.instagram.com/reel/DS2MZr7Eq_M/?igsh=MWw4Z2ZiczZueGZwaA=="
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-stone-400 hover:text-rose-400 transition-colors"
-                aria-label="Instagram"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
-              <a
-                href="https://www.facebook.com/share/r/1JCB4e5FpX/?mibextid=wwXIfr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-stone-400 hover:text-blue-500 transition-colors"
-                aria-label="Facebook"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
-              </a>
             </div>
           </div>
 
@@ -80,10 +53,45 @@ export default function Footer() {
             <p className="text-xs text-stone-500 font-light mt-1">
               © 2026 astrohealer4U. All rights reserved.
             </p>
+            {/* Music Toggle */}
+            <button
+              onClick={toggleAudio}
+              className="mt-2 text-stone-450 hover:text-amber-400 flex items-center gap-1.5 transition-colors border border-stone-800 hover:border-amber-400/30 px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider bg-stone-950/20"
+            >
+              <span>🎵</span>
+              <span>Celestial Music: {audioEnabled ? 'On' : 'Off'}</span>
+            </button>
           </div>
 
-          {/* Developed By */}
-          <div className="text-xs text-stone-500 text-center md:text-right">
+          {/* Developed By & Socials */}
+          <div className="flex flex-col items-center md:items-end gap-3 text-xs text-stone-500 text-center md:text-right">
+            {/* Social Icons */}
+            <div className="flex gap-4">
+              <a
+                href="https://www.instagram.com/reel/DS2MZr7Eq_M/?igsh=MWw4Z2ZiczZueGZwaA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-400 hover:text-rose-400 transition-colors"
+                aria-label="Instagram"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/share/r/1JCB4e5FpX/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-400 hover:text-blue-500 transition-colors"
+                aria-label="Facebook"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+            </div>
             <a
               href="https://www.pixelwebpages.com"
               target="_blank"

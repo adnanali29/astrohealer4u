@@ -66,7 +66,6 @@ export default function RootLayout({
             {/* Global Overlays */}
             <CartDrawer />
             <ToastContainer />
-            <AudioButton />
             <BookingModal />
           </div>
         </AppProvider>
