@@ -5,6 +5,8 @@ import { useApp } from '@/context/AppContext';
 
 interface FormData {
   fullName: string;
+  email: string;
+  phone: string;
   dob: string;
   tob: string;
   pob: string;
@@ -16,7 +18,7 @@ const WA_NUMBER = '919041544404';
 
 export default function BookingModal() {
   const { booking, closeBooking, selectedMode, setSelectedMode, isFormVisible, contactPhone } = useApp();
-  const [form, setForm] = useState<FormData>({ fullName: '', dob: '', tob: '', pob: '', apptDate: '', apptTime: '' });
+  const [form, setForm] = useState<FormData>({ fullName: '', email: '', phone: '', dob: '', tob: '', pob: '', apptDate: '', apptTime: '' });
 
   if (!booking) return null;
 
@@ -58,6 +60,8 @@ ${selectedMode === 'Chat' ? '💬' : selectedMode === 'Call' ? '📞' : '📹'} 
 ━━━━━━━━━━━━━━━━━━
 
 👤 *Full Name:* ${form.fullName}
+📧 *Email:* ${form.email}
+📞 *Phone:* ${form.phone}
 🎂 *Date of Birth:* ${formatDate(form.dob)}
 ⏰ *Time of Birth:* ${formatTime(form.tob)}
 📍 *Place of Birth:* ${form.pob}
@@ -184,6 +188,30 @@ Please confirm my booking. Thank you! 🙏`;
               required
             />
           </FormField>
+
+          {/* Email + Phone */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <FormField label="Email Address" required>
+              <input
+                type="email"
+                placeholder="e.g. rahul@example.com"
+                value={form.email}
+                onChange={f('email')}
+                className={INPUT}
+                required
+              />
+            </FormField>
+            <FormField label="Phone Number" required>
+              <input
+                type="tel"
+                placeholder="e.g. +91 98765 43210"
+                value={form.phone}
+                onChange={f('phone')}
+                className={INPUT}
+                required
+              />
+            </FormField>
+          </div>
 
           {/* DOB + TOB */}
           <div className="grid grid-cols-2 gap-3">
