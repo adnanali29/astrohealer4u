@@ -9,11 +9,11 @@ import AudioButton from "@/components/AudioButton";
 import BookingModal from "@/components/BookingModal";
 
 export const metadata: Metadata = {
-  title: "astroheal4U — Only i know what you are hiding 💫",
+  title: "astrohealer4U — Only i know what you are hiding 💫",
   description: "Accurate and trusted astrology, chart analysis, and personal guidance. Book 1-on-1 consultations and unlock your cosmic blueprint.",
-  keywords: "astrology, horoscope, birth chart, tarot, crystal, celestial, zodiac, astroheal4u",
+  keywords: "astrology, horoscope, birth chart, tarot, crystal, celestial, zodiac, astrohealer4u",
   openGraph: {
-    title: "astroheal4U — Only i know what you are hiding 💫",
+    title: "astrohealer4U — Only i know what you are hiding 💫",
     description: "Accurate and trusted astrology guidance. Only i know what you are hiding.",
     type: "website",
   },

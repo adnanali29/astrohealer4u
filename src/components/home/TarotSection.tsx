@@ -87,7 +87,7 @@ export default function TarotSection() {
                   className="absolute inset-0 bg-gradient-to-tr from-stone-800 to-stone-950 p-4 rounded-2xl flex flex-col items-center justify-between text-amber-200 border-4 border-amber-100/20"
                   style={{ backfaceVisibility: 'hidden' }}
                 >
-                  <span className="text-xs tracking-widest text-amber-300 font-serif font-semibold">ASTROHEAL4U ORACLE</span>
+                  <span className="text-xs tracking-widest text-amber-300 font-serif font-semibold">ASTROHEALER4U ORACLE</span>
                   <div className="w-16 h-16 rounded-full border-2 border-dashed border-amber-200/40 flex items-center justify-center">
                     <span className="text-2xl animate-spin" style={{ animationDuration: '20s', display: 'inline-block' }}>{card.icon}</span>
                   </div>

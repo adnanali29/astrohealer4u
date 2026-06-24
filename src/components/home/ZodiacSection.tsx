@@ -103,7 +103,7 @@ export default function ZodiacSection() {
             </div>
 
             <div className="space-y-4 bg-[#FAF9F5]/60 p-5 rounded-2xl border border-stone-100">
-              <span className="text-xs uppercase tracking-wider text-rose-600 font-bold block">astroheal4U Sign Parameters</span>
+              <span className="text-xs uppercase tracking-wider text-rose-600 font-bold block">astrohealer4U Sign Parameters</span>
               <div className="space-y-3">
                 {[
                   { label: 'Love Vibration:', value: selectedZodiac.love },

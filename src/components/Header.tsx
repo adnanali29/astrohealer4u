@@ -24,8 +24,8 @@ export default function Header() {
               <span className="text-lg animate-pulse">✦</span>
             </div>
             <div className="text-left">
-              <span className="font-serif text-lg tracking-widest uppercase font-bold text-stone-850 block leading-tight">astroheal4U</span>
-              <span className="text-[10px] tracking-wide text-purple-600 block font-semibold">Only i know what you are hiding 💫</span>
+              <span className="font-serif text-base sm:text-lg tracking-widest uppercase font-bold text-stone-850 block leading-tight">astrohealer4U</span>
+              <span className="text-[10px] tracking-wide text-purple-600 hidden sm:block font-semibold">Only i know what you are hiding 💫</span>
             </div>
           </button>
 
@@ -120,7 +120,16 @@ export default function Header() {
 
       {/* Mobile Menu Panel */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-stone-200/50 bg-[#FAF9F5]/95 backdrop-blur-md px-4 py-4 space-y-1.5 shadow-lg transition-all duration-300">
+        <div className="md:hidden border-t border-stone-200/50 bg-[#FAF9F5]/95 backdrop-blur-md px-4 py-4 space-y-3 shadow-lg transition-all duration-300">
+          {/* Mobile Branding Panel */}
+          <div className="flex flex-col items-center justify-center py-4 border-b border-stone-200/50 mb-3 text-center">
+            <div className="relative w-12 h-12 rounded-full bg-gradient-to-tr from-purple-100 via-rose-100 to-amber-100 flex items-center justify-center border border-white/60 shadow-sm overflow-hidden mb-2">
+              <span className="text-xl animate-pulse">✦</span>
+            </div>
+            <span className="font-serif text-base tracking-widest uppercase font-bold text-stone-850 block leading-tight">astrohealer4U</span>
+            <span className="text-[10px] tracking-wide text-purple-600 block font-semibold mt-1">Only i know what you are hiding 💫</span>
+          </div>
+
           {[
             { id: 'home', label: 'Home' },
             { id: 'consultation', label: 'Consultations' },

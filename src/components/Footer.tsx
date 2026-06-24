@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Brand & Tagline */}
           <div className="text-center md:text-left space-y-1">
             <span className="font-serif text-lg tracking-widest uppercase font-bold text-white block">
-              astroheal4U
+              astrohealer4U
             </span>
             <p className="text-xs text-stone-500 font-light">
               Only i know what you are hiding 💫
@@ -40,7 +40,7 @@ export default function Footer() {
               ))}
             </div>
             <p className="text-xs text-stone-500 font-light mt-1">
-              © 2026 astroheal4U. All rights reserved.
+              © 2026 astrohealer4U. All rights reserved.
             </p>
           </div>
 

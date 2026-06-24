@@ -64,7 +64,7 @@ export default function ContactTab() {
                 <div className="w-16 h-16 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mx-auto text-2xl">✦</div>
                 <h3 className="text-xl font-serif text-stone-800">Dispatch Propagated</h3>
                 <p className="text-sm text-stone-500 font-light leading-relaxed">
-                  Your message has been launched successfully. Our astroheal4U team will review it shortly.
+                  Your message has been launched successfully. Our astrohealer4U team will review it shortly.
                 </p>
                 <button onClick={reset} className="text-xs font-semibold text-purple-700 hover:underline">
                   Send another dispatch
