@@ -54,13 +54,34 @@ export default function Footer() {
               © 2026 astrohealer4U. All rights reserved.
             </p>
             {/* Music Toggle */}
-            <button
-              onClick={toggleAudio}
-              className="mt-2 text-stone-450 hover:text-amber-400 flex items-center gap-1.5 transition-colors border border-stone-800 hover:border-amber-400/30 px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider bg-stone-950/20"
-            >
-              <span>🎵</span>
-              <span>Celestial Music: {audioEnabled ? 'On' : 'Off'}</span>
-            </button>
+            <div className="mt-3 flex items-center gap-2 bg-stone-950 border border-stone-800 rounded-full px-3 py-1 shadow-inner select-none">
+              <span className="text-[10px] text-stone-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                <span>🎵</span> Celestial Music
+              </span>
+              <div className="w-[1px] h-3 bg-stone-800" />
+              <div className="flex items-center gap-0.5">
+                <button
+                  onClick={() => { if (!audioEnabled) toggleAudio(); }}
+                  className={`px-2 py-0.5 text-[9px] font-black tracking-wider rounded-full transition-all duration-200 ${
+                    audioEnabled
+                      ? 'bg-amber-400 text-black shadow-sm font-black'
+                      : 'text-stone-500 hover:text-stone-300'
+                  }`}
+                >
+                  ON
+                </button>
+                <button
+                  onClick={() => { if (audioEnabled) toggleAudio(); }}
+                  className={`px-2 py-0.5 text-[9px] font-black tracking-wider rounded-full transition-all duration-200 ${
+                    !audioEnabled
+                      ? 'bg-stone-800 text-stone-250 border border-stone-750 font-black'
+                      : 'text-stone-500 hover:text-stone-300'
+                  }`}
+                >
+                  OFF
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Developed By & Socials */}
