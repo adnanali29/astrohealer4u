@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { ShopProduct, SHOP_PRODUCTS_DATA, ConsultationService, SERVICES, FAQ_ITEMS_DEFAULT, TESTIMONIALS_DEFAULT, TestimonialItem, FaqItem, ShopCategory, SubCrystalProduct, SHOP_CATEGORIES, CRYSTAL_SUB_PRODUCTS } from '@/lib/data';
 import { generateCelestialTone } from '@/lib/audio';
 
@@ -91,8 +92,17 @@ interface Toast {
 const AppContext = createContext<AppContextType | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [activeTab, setActiveTab] = useState('home');
   const [audioEnabled, setAudioEnabled] = useState(true);
+
+  // Sync activeTab with URL path
+  useEffect(() => {
+    const tab = pathname === '/' ? 'home' : pathname.slice(1);
+    setActiveTab(tab);
+  }, [pathname]);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
@@ -409,8 +419,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const switchTab = useCallback((tab: string) => {
     generateCelestialTone(440, 'sine', 0.1, audioEnabled);
     setActiveTab(tab);
+    const path = tab === 'home' ? '/' : `/${tab}`;
+    router.push(path);
     if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [audioEnabled]);
+  }, [audioEnabled, router]);
 
   const toggleAudio = useCallback(() => {
     setAudioEnabled(prev => {

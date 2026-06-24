@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import CartDrawer from "@/components/CartDrawer";
+import ToastContainer from "@/components/ToastContainer";
+import AudioButton from "@/components/AudioButton";
+import BookingModal from "@/components/BookingModal";
 
 export const metadata: Metadata = {
   title: "astroheal4U — Only i know what you are hiding 💫",
@@ -30,7 +36,39 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col font-sans text-stone-900 bg-[#FAF9F5] selection:bg-purple-100 selection:text-purple-900 transition-all duration-300">
         <AppProvider>
-          {children}
+          <div className="min-h-screen flex flex-col font-sans text-stone-900 bg-[#FAF9F5] relative overflow-x-hidden">
+            {/* Celestial backdrop gradients */}
+            <div className="absolute inset-x-0 top-0 h-[600px] overflow-hidden pointer-events-none z-0">
+              <div
+                className="absolute -top-32 left-[10%] w-[500px] h-[500px] rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(233,227,248,0.6) 0%, rgba(250,249,245,0) 70%)',
+                  animation: 'pulseGlow 12s infinite ease-in-out',
+                }}
+              />
+              <div
+                className="absolute top-[10%] -right-48 w-[600px] h-[600px] rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(251,232,235,0.6) 0%, rgba(250,249,245,0) 70%)',
+                  animation: 'pulseGlow 16s infinite ease-in-out',
+                }}
+              />
+            </div>
+
+            <Header />
+
+            <main className="flex-grow relative z-10">
+              {children}
+            </main>
+
+            <Footer />
+
+            {/* Global Overlays */}
+            <CartDrawer />
+            <ToastContainer />
+            <AudioButton />
+            <BookingModal />
+          </div>
         </AppProvider>
       </body>
     </html>
