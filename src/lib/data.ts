@@ -289,7 +289,10 @@ export const SHOP_CATEGORIES: ShopCategory[] = [
   { id: 'buri-nazar-bracelet', name: 'Buri Nazar Bracelet', image: 'https://i.ibb.co/d4j1xrzF/buri-nazar-MAIN.webp', tagline: 'Evil Eye Protection', desc: 'Shields your aura from negative energy, jealousy, hexes, and the negative gaze of others.', isSingleProduct: true },
   { id: 'inner-peace-bracelet', name: 'Inner Peace Bracelet', image: 'https://i.ibb.co/BKzW7zJS/Inner-Peace-main.webp', tagline: 'Somatic Tranquility', desc: 'Gently balances heart and mind to invite emotional healing, deep peace, and relief from daily friction.', isSingleProduct: true },
   { id: 'seven-chakra-crystal', name: '7 Chakra Crystal Collection', image: 'https://i.ibb.co/4wDdQK64/7-crystal-main.webp', tagline: 'Universal Balance', desc: 'Bring balance, positivity, and harmony into your space and body with natural seven chakra crystals.' },
-  { id: 'rakhis', name: 'Rakhis', image: 'https://i.ibb.co/whxBdsRS/7-chakra-chip-rakhi-main.webp', tagline: 'Sacred Protection Threads', desc: 'Beautifully handcrafted crystal Rakhis infused with sacred energies to protect, balance, and bless your siblings.' }
+  { id: 'rakhis', name: 'Rakhis', image: 'https://i.ibb.co/whxBdsRS/7-chakra-chip-rakhi-main.webp', tagline: 'Sacred Protection Threads', desc: 'Beautifully handcrafted crystal Rakhis infused with sacred energies to protect, balance, and bless your siblings.' },
+  { id: 'rose-quartz', name: 'Rose Quartz Collection', image: 'https://i.ibb.co/Gf9NMD4T/Rose-quartz.webp', tagline: 'Unconditional Love', desc: 'Bring the energy of love, peace, and harmony into your home. Attracts unconditional love, strengthens relationships, promotes self-love, and creates a calm, positive atmosphere.' },
+  { id: 'silver-rakhi', name: 'Silver Rakhi', image: 'https://i.ibb.co/4nsdc54W/IMG-0653.webp', tagline: 'Timeless Protection & Love', desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings.' },
+  { id: 'hangings-collection', name: 'Hangings Collection', image: 'https://i.ibb.co/JWP6NDJM/Hanging-1.webp', tagline: 'Aura Harmonizing Hangings', desc: 'Handcrafted sacred crystal wall and door hangings designed to radiate positive aura, dispel negative vibrations, and bring spiritual balance to your living space.' }
 ];
 
 export interface SubCrystalProduct {
@@ -311,6 +314,352 @@ export interface SubCrystalProduct {
 }
 
 export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
+  // ─── ROSE QUARTZ COLLECTION ────────────────────────────────────────────────
+  {
+    id: 'rq-tree',
+    categoryId: 'rose-quartz',
+    name: 'Rose Quartz Crystal Tree 🌸',
+    basePrice: 999,
+    pricingType: 'size-based',
+    sizes: [
+      { label: 'Small Crystal Tree (50 Beads)', price: 999 },
+      { label: 'Medium Crystal Tree (150 Beads)', price: 1799 },
+      { label: 'Large Crystal Tree (300 Beads)', price: 2499 }
+    ],
+    image: 'https://i.ibb.co/LzgdQxgg/Tree-Rose.webp',
+    desc: 'Bring the energy of love, peace, and harmony into your home with our handcrafted Rose Quartz Crystal Tree. Made with natural Rose Quartz crystals, this beautiful tree is believed to attract unconditional love, strengthen relationships, promote self-love, and create a calm, positive atmosphere.\n\nPerfect for your home, office, meditation space, or as a thoughtful gift, the Rose Quartz Tree also enhances the beauty of your décor while symbolizing growth, abundance, and emotional healing.',
+    label: 'Handcrafted Tree',
+    benefits: [
+      '💗 Attracts love and strengthens relationships',
+      '🌸 Encourages self-love and emotional healing',
+      '🕊️ Brings peace, harmony, and positive vibrations',
+      '🧘 Reduces stress and promotes inner calm',
+      '🏡 Ideal for home, office, or meditation spaces',
+      '🎁 A meaningful gift for loved ones'
+    ],
+    resonance: '528Hz Solfeggio Love Frequency',
+    node: 'Heart Chakra & Anahata Alignment'
+  },
+  {
+    id: 'rq-swan',
+    categoryId: 'rose-quartz',
+    name: 'Rose Quartz Swan 🦢💗',
+    basePrice: 1299,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/twdgk4FH/Swan.webp',
+    desc: 'Gracefully handcrafted from natural Rose Quartz, the Rose Quartz Swan is a symbol of unconditional love, harmony, beauty, and emotional healing. Swans represent loyalty, lasting relationships, and elegance, while Rose Quartz radiates gentle, loving energy that nurtures the heart and promotes inner peace.\n\nThis beautiful crystal décor piece is perfect for your home, office, bedroom, or meditation space. It also makes a thoughtful gift for anniversaries, weddings, birthdays, or anyone seeking love and emotional balance.',
+    label: 'Sacred Symbol',
+    benefits: [
+      '💗 Attracts love and strengthens relationships',
+      '🌸 Encourages self-love and emotional healing',
+      '🕊️ Promotes peace, harmony, and compassion',
+      '✨ Symbolizes loyalty, grace, and lifelong love',
+      '🏡 Enhances the positive energy of your living space',
+      '🎁 A meaningful gift for loved ones and special occasions'
+    ],
+    resonance: '639Hz Relationship Harmony Resonance',
+    node: 'Heart Chakra Gateway'
+  },
+  {
+    id: 'rq-raw',
+    categoryId: 'rose-quartz',
+    name: 'Rose Quartz Raw ✨',
+    basePrice: 499,
+    pricingType: 'per-gram',
+    image: 'https://i.ibb.co/HpfbqM5w/Screenshot-2026-07-24-at-12-41-21-PM.png',
+    desc: 'Manifest love, emotional healing, and positive energy with our Rose Quartz Manifestation Collection, available in Heart, Coin, and Raw forms. Each shape carries the gentle, nurturing energy of natural Rose Quartz while offering its own unique symbolism for your manifestation journey.\n\nIn its natural, untouched form, Rose Quartz radiates pure and powerful energy. It is perfect for meditation, home décor, crystal grids, or creating a peaceful and loving environment.',
+    label: 'Pure Manifestation',
+    benefits: [
+      '💕 Attracts love and strengthens relationships',
+      '🌸 Encourages self-love and emotional healing',
+      '🕊️ Promotes peace, harmony, and emotional balance',
+      '✨ Supports manifestation and positive intentions',
+      '🏡 Fills your space with gentle, loving energy',
+      '🎁 A meaningful gift for yourself or someone special'
+    ],
+    resonance: '432Hz Natural Healing Frequency',
+    node: 'Heart Chakra & Root Grounding'
+  },
+  {
+    id: 'rq-bracelet',
+    categoryId: 'rose-quartz',
+    name: 'Rose Quartz Bracelet 💗',
+    basePrice: 999,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/CKL495VL/Screenshot-2026-07-24-at-12-38-53-PM.png',
+    desc: 'Wrap yourself in the gentle energy of love with our Natural Rose Quartz Bracelet. Known as the Stone of Unconditional Love, Rose Quartz is believed to open the heart chakra, encourage self-love, strengthen relationships, and promote emotional healing. Its soothing vibrations help create a sense of peace, compassion, and emotional balance.\n\nComfortable for everyday wear, this bracelet is perfect for anyone looking to invite more love, positivity, and harmony into their life.',
+    label: 'Daily Talisman',
+    benefits: [
+      '💕 Attracts love and strengthens relationships',
+      '🌸 Encourages self-love and emotional healing',
+      '🕊️ Promotes peace, compassion, and emotional balance',
+      '💖 Helps release stress and negative emotions',
+      '✨ Supports heart chakra healing and positive energy'
+    ],
+    resonance: '528Hz Heart Opening Frequency',
+    node: 'Heart Chakra Meridian'
+  },
+
+  // ─── SILVER RAKHI ──────────────────────────────────────────────────────────
+  {
+    id: 'sr-1',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/4nsdc54W/IMG-0653.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-2',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/9Rx6HrB/IMG-0654.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-3',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/yBy5MCfD/IMG-0655.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-4',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/n8fMXPTG/IMG-0656.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-5',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/FL5XT1yh/IMG-0657.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-6',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/1tndM01Q/IMG-0658.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-7',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/BJ6ZK6T/IMG-0659.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-8',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/rKD9x21n/IMG-0660.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-9',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/TF9vzyq/IMG-0661.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-10',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/DSkBb29/IMG-0662.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+  {
+    id: 'sr-11',
+    categoryId: 'silver-rakhi',
+    name: 'Silver Rakhi ✨',
+    basePrice: 799,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/BVRmNLp3/IMG-0680.webp',
+    desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings. Its classic design makes it a meaningful keepsake that your brother can cherish long after Raksha Bandhan.\n\nPerfect for brothers of all ages, this Silver Rakhi combines traditional sentiment with modern elegance, making your celebration even more special.',
+    label: 'Pure Silver 925',
+    benefits: [
+      '✨ Premium-quality silver craftsmanship',
+      '🪢 Elegant and comfortable design',
+      '❤️ Symbolizes love, protection, and blessings',
+      '🎁 A timeless keepsake for your brother',
+      '🌿 Suitable for everyday wear or as a cherished memory',
+      '🎉 Ideal for celebrating Raksha Bandhan with elegance'
+    ],
+    resonance: 'Sacred Silver Protection Vibration',
+    node: 'Anahata & Raksha Shield'
+  },
+
+  // ─── HANGINGS COLLECTION ───────────────────────────────────────────────────
+  {
+    id: 'hanging-1',
+    categoryId: 'hangings-collection',
+    name: 'Celestial Crystal Wall Hanging 🌿',
+    basePrice: 1199,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/JWP6NDJM/Hanging-1.webp',
+    desc: 'Handcrafted sacred crystal wall and door hangings designed to radiate positive aura, dispel negative vibrations, and bring spiritual balance to your living space.',
+    label: 'Aura Harmonizer',
+    benefits: [
+      '✨ Cleanses negative environmental energy',
+      '🏡 Enhances home Vastu and ambiance',
+      '🧘 Promotes meditation focus and calm',
+      '🎁 Ideal gift for housewarming and auspicious events'
+    ],
+    resonance: '432Hz Environmental Harmony Resonance',
+    node: 'Space Cleansing & Vastu Node'
+  },
+  {
+    id: 'hanging-2',
+    categoryId: 'hangings-collection',
+    name: 'Aura Shield Crystal Hanging ✨',
+    basePrice: 1199,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/cSXMDcSp/Hanging-2.webp',
+    desc: 'Beautifully woven crystal hanging piece to invite harmony, prosperity, and pristine cosmic energy into any room or entryway.',
+    label: 'Sacred Protection',
+    benefits: [
+      '✨ Radiates positive vibrations throughout the room',
+      '🌸 Shields against stagnant or low-frequency energy',
+      '🕊️ Balances auric flow in living areas',
+      '🎁 Premium decorative piece for sacred corners'
+    ],
+    resonance: '528Hz Positive Aura Calibration',
+    node: 'Auric Shield & Harmony Node'
+  },
+
   // ─── PYRITE (c1-c6) ────────────────────────────────────────────────────────
   {
     id: 'py-1',

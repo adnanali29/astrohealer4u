@@ -187,7 +187,7 @@ Please confirm my order. Thank you! 🙏`;
               <span className="text-xs uppercase tracking-widest text-purple-600 font-bold block">Blessed Relics & Minerals</span>
               <h1 className="text-3xl sm:text-4xl font-serif text-stone-900 leading-tight">The Celestial Apothecary</h1>
               <p className="text-stone-500 font-light text-sm leading-relaxed">
-                Explore our catalog of 18 sacred mineral collections. Cleansed with Himalayan salts and charged during auspicious astrological transits to harmonize your space.
+                Explore our catalog of {shopCategories.length} sacred mineral collections. Cleansed with Himalayan salts and charged during auspicious astrological transits to harmonize your space.
               </p>
             </div>
 
