@@ -292,7 +292,8 @@ export const SHOP_CATEGORIES: ShopCategory[] = [
   { id: 'rakhis', name: 'Rakhis', image: 'https://i.ibb.co/whxBdsRS/7-chakra-chip-rakhi-main.webp', tagline: 'Sacred Protection Threads', desc: 'Beautifully handcrafted crystal Rakhis infused with sacred energies to protect, balance, and bless your siblings.' },
   { id: 'rose-quartz', name: 'Rose Quartz Collection', image: 'https://i.ibb.co/Gf9NMD4T/Rose-quartz.webp', tagline: 'Unconditional Love', desc: 'Bring the energy of love, peace, and harmony into your home. Attracts unconditional love, strengthens relationships, promotes self-love, and creates a calm, positive atmosphere.' },
   { id: 'silver-rakhi', name: 'Silver Rakhi', image: 'https://i.ibb.co/4nsdc54W/IMG-0653.webp', tagline: 'Timeless Protection & Love', desc: 'Celebrate the bond of love and protection with our elegant Silver Rakhi. Crafted with premium-quality silver, this timeless Rakhi symbolizes purity, strength, prosperity, and the everlasting bond between siblings.' },
-  { id: 'hangings-collection', name: 'Hangings Collection', image: 'https://i.ibb.co/JWP6NDJM/Hanging-1.webp', tagline: 'Aura Harmonizing Hangings', desc: 'Handcrafted sacred crystal wall and door hangings designed to radiate positive aura, dispel negative vibrations, and bring spiritual balance to your living space.' }
+  { id: 'hangings-collection', name: 'Hangings Collection', image: 'https://i.ibb.co/JWP6NDJM/Hanging-1.webp', tagline: 'Aura Harmonizing Hangings', desc: 'Handcrafted sacred crystal wall and door hangings designed to radiate positive aura, dispel negative vibrations, and bring spiritual balance to your living space.' },
+  { id: 'rudraksha-collection', name: 'Rudraksha Collection', image: 'https://i.ibb.co/s9mf9BLM/5-rufrash.jpg', tagline: 'Sacred Shiva Beads', desc: 'Personally energized Rudraksha beads chanted with 108 Maha Mrityunjaya Mantras. Wear on a Sawan Monday or place in your mandir for peace, protection, and a deeper connection with Lord Shiva.' }
 ];
 
 export interface SubCrystalProduct {
@@ -314,6 +315,48 @@ export interface SubCrystalProduct {
 }
 
 export const CRYSTAL_SUB_PRODUCTS: SubCrystalProduct[] = [
+  // ─── RUDRAKSHA COLLECTION ──────────────────────────────────────────────────
+  {
+    id: 'rudraksha-5-mukhi',
+    categoryId: 'rudraksha-collection',
+    name: '5 Mukhi Rudraksha ✨',
+    basePrice: 2100,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/s9mf9BLM/5-rufrash.jpg',
+    desc: 'Wear an energized 5 Mukhi Rudraksha on a Sawan Monday or keep it in your mandir/pooja place with devotion.\n\nEach Rudraksha is personally energized with 108 chants of the Maha Mrityunjaya Mantra before being sent to you.\n\nThis is not just a Rudraksha—its value lies in the sacred prayers, intention, and spiritual energization performed for it. Many people experience a greater sense of peace, protection, positivity, and a deeper connection with Lord Shiva through this practice. Individual experiences may vary.',
+    label: 'Shiva Blessed',
+    benefits: [
+      '🕉️ Energized with 108 Maha Mrityunjaya Mantra chants',
+      '🌿 Wear on Sawan Monday for maximum spiritual benefit',
+      '🛕 Keep in mandir or pooja place with devotion',
+      '☮️ Experience greater peace, protection & positivity',
+      '🔱 Deepens connection with Lord Shiva',
+      '✨ Personally energized with sacred intention & prayer'
+    ],
+    resonance: '108-Chant Maha Mrityunjaya Activation',
+    node: 'Sahasrara Crown & Ajna Third Eye Chakra'
+  },
+  {
+    id: 'rudraksha-7-mukhi',
+    categoryId: 'rudraksha-collection',
+    name: '7 Mukhi Rudraksha ✨',
+    basePrice: 2100,
+    pricingType: 'fixed',
+    image: 'https://i.ibb.co/C51pP6t2/7-rudraksh-mukhi.jpg',
+    desc: 'Wear an energized 7 Mukhi Rudraksha on a Sawan Monday or keep it in your mandir/pooja place with devotion.\n\nEach Rudraksha is personally energized with 108 chants of the Maha Mrityunjaya Mantra before being sent to you.\n\nThis is not just a Rudraksha—its value lies in the sacred prayers, intention, and spiritual energization performed for it. Many people experience a greater sense of peace, protection, positivity, and a deeper connection with Lord Shiva through this practice. Individual experiences may vary.',
+    label: 'Shiva Blessed',
+    benefits: [
+      '🕉️ Energized with 108 Maha Mrityunjaya Mantra chants',
+      '🌿 Wear on Sawan Monday for maximum spiritual benefit',
+      '🛕 Keep in mandir or pooja place with devotion',
+      '☮️ Experience greater peace, protection & positivity',
+      '🔱 Deepens connection with Lord Shiva',
+      '✨ Personally energized with sacred intention & prayer'
+    ],
+    resonance: '108-Chant Maha Mrityunjaya Activation',
+    node: 'Manipura Solar Plexus & Lakshmi Abundance Node'
+  },
+
   // ─── ROSE QUARTZ COLLECTION ────────────────────────────────────────────────
   {
     id: 'rq-tree',
