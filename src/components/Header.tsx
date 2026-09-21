@@ -9,6 +9,42 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 bg-[#FAF9F5]/90 backdrop-blur-md border-b border-stone-200/50">
+      {/* ── Top Announcement Carousel Banner (Throughout all pages) ────────── */}
+      <div className="bg-gradient-to-r from-red-700 via-rose-700 to-red-800 text-white py-2 px-3 flex items-center overflow-hidden border-b border-red-600/50 shadow-md font-sans relative z-50">
+        {/* Left Badge Tag */}
+        <div className="shrink-0 z-10 pr-2 sm:pr-3 bg-gradient-to-r from-red-700 via-rose-700 to-transparent flex items-center">
+          <span className="bg-black/30 border border-white/20 text-white text-[9px] sm:text-[10px] md:text-xs font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider flex items-center gap-1 sm:gap-1.5 shadow-inner">
+            <span>🎂</span> BIRTHDAY SALE
+          </span>
+        </div>
+
+        {/* Continuously Scrolling Text Carousel */}
+        <div className="flex-1 overflow-hidden whitespace-nowrap">
+          <div className="inline-flex animate-ticker items-center text-[11px] sm:text-xs md:text-sm font-semibold tracking-wide">
+            {[...Array(6)].map((_, i) => (
+              <span key={i} className="inline-flex items-center gap-4 sm:gap-6 px-3 sm:px-4">
+                <span className="text-amber-200 font-bold">Birthday Sale is live — Flat 30% off on consultation</span>
+                <span className="text-rose-200 text-[10px]">✦</span>
+                <span className="text-white font-medium">Limited-Time Birthday Offer 🔮</span>
+                <span className="text-rose-200 text-[10px]">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Right CTA Button - Lands on Consultation Page */}
+        <div className="shrink-0 z-10 pl-2 sm:pl-3 bg-gradient-to-l from-red-800 via-rose-700 to-transparent">
+          <button
+            onClick={() => {
+              switchTab('consultation');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="bg-white hover:bg-amber-50 text-red-800 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full shadow-sm transition-all block whitespace-nowrap active:scale-95 cursor-pointer"
+          >
+            Claim 30% OFF
+          </button>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
 

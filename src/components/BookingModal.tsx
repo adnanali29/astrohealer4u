@@ -22,15 +22,17 @@ export default function BookingModal() {
 
   if (!booking) return null;
 
+  const isChartService = booking.id === 's1' || booking.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART');
+
   const rawNum = contactPhone.replace(/\D/g, '');
   const waNum = rawNum.length === 10 ? `91${rawNum}` : rawNum;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const price = selectedMode === 'Chat' 
-      ? booking.chatPrice 
+      ? (isChartService ? (booking.chatPrice ?? 3100) : 1469) 
       : selectedMode === 'Call' 
-        ? booking.callPrice 
+        ? (isChartService ? (booking.callPrice ?? 5100) : 2169) 
         : booking.videoPrice;
     const duration = selectedMode === 'Chat' 
       ? booking.chatDur 
@@ -123,21 +125,35 @@ Please confirm my booking. Thank you! 🙏`;
             <label className="block text-xs font-semibold text-stone-600 uppercase tracking-wide">
               Select Consultation Mode <span className="text-rose-500 font-bold">*</span>
             </label>
-            <div className={`grid gap-3 ${booking.videoPrice ? 'grid-cols-3' : 'grid-cols-2'}`}>
+            <div className={`grid gap-3 ${booking.videoPrice ? 'grid-cols-3' : 'grid-cols-2'} pt-2`}>
               {/* Chat Option */}
               {booking.chatPrice !== null && (
                 <button
                   type="button"
                   onClick={() => setSelectedMode('Chat')}
-                  className={`flex flex-col items-center justify-center py-3 px-4 rounded-xl border-2 transition-all ${
+                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl border-2 transition-all ${
                     selectedMode === 'Chat'
                       ? 'border-[#54B435] bg-green-50/50 text-stone-850 ring-2 ring-green-100'
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
+                  {!isChartService && (
+                    <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-sm uppercase tracking-wider z-10">
+                      30% OFF
+                    </span>
+                  )}
                   <span className="text-lg">💬</span>
-                  <span className="text-xs font-bold mt-1 text-stone-805">Chat ({booking.chatDur})</span>
-                  <span className="text-sm font-bold text-[#54B435] mt-1">₹{booking.chatPrice}</span>
+                  <span className="text-xs font-bold mt-1 text-stone-800">Chat ({booking.chatDur || '30 min'})</span>
+                  <div className="flex items-center gap-1.5 mt-1">
+                    {isChartService ? (
+                      <span className="text-sm font-bold text-[#54B435]">₹{booking.chatPrice?.toLocaleString('en-IN')}</span>
+                    ) : (
+                      <>
+                        <span className="text-xs font-medium text-stone-400 line-through">₹2,100</span>
+                        <span className="text-sm font-bold text-[#54B435]">₹1,469</span>
+                      </>
+                    )}
+                  </div>
                 </button>
               )}
 
@@ -146,15 +162,29 @@ Please confirm my booking. Thank you! 🙏`;
                 <button
                   type="button"
                   onClick={() => setSelectedMode('Call')}
-                  className={`flex flex-col items-center justify-center py-3 px-4 rounded-xl border-2 transition-all ${
+                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl border-2 transition-all ${
                     selectedMode === 'Call'
                       ? 'border-[#54B435] bg-green-50/50 text-stone-850 ring-2 ring-green-100'
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
+                  {!isChartService && (
+                    <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-sm uppercase tracking-wider z-10">
+                      30% OFF
+                    </span>
+                  )}
                   <span className="text-lg">📞</span>
-                  <span className="text-xs font-bold mt-1 text-stone-805">Call ({booking.callDur})</span>
-                  <span className="text-sm font-bold text-[#54B435] mt-1">₹{booking.callPrice}</span>
+                  <span className="text-xs font-bold mt-1 text-stone-800">Call ({booking.callDur || '45 min'})</span>
+                  <div className="flex items-center gap-1.5 mt-1">
+                    {isChartService ? (
+                      <span className="text-sm font-bold text-[#54B435]">₹{booking.callPrice?.toLocaleString('en-IN')}</span>
+                    ) : (
+                      <>
+                        <span className="text-xs font-medium text-stone-400 line-through">₹3,100</span>
+                        <span className="text-sm font-bold text-[#54B435]">₹2,169</span>
+                      </>
+                    )}
+                  </div>
                 </button>
               )}
 
@@ -163,15 +193,29 @@ Please confirm my booking. Thank you! 🙏`;
                 <button
                   type="button"
                   onClick={() => setSelectedMode('Video Call')}
-                  className={`flex flex-col items-center justify-center py-3 px-4 rounded-xl border-2 transition-all ${
+                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl border-2 transition-all ${
                     selectedMode === 'Video Call'
                       ? 'border-[#54B435] bg-green-50/50 text-stone-850 ring-2 ring-green-100'
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
+                  {!isChartService && (
+                    <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-sm uppercase tracking-wider z-10">
+                      30% OFF
+                    </span>
+                  )}
                   <span className="text-lg">📹</span>
-                  <span className="text-xs font-bold mt-1 text-stone-805">Video ({booking.videoDur})</span>
-                  <span className="text-sm font-bold text-[#54B435] mt-1">₹{booking.videoPrice}</span>
+                  <span className="text-xs font-bold mt-1 text-stone-800">Video ({booking.videoDur || '45 min'})</span>
+                  <div className="flex items-center gap-1.5 mt-1">
+                    {isChartService ? (
+                      <span className="text-sm font-bold text-[#54B435]">₹{booking.videoPrice?.toLocaleString('en-IN')}</span>
+                    ) : (
+                      <>
+                        <span className="text-xs font-medium text-stone-400 line-through">₹{booking.videoPrice ? Math.round(booking.videoPrice / 0.7) : '5,000'}</span>
+                        <span className="text-sm font-bold text-[#54B435]">₹{booking.videoPrice}</span>
+                      </>
+                    )}
+                  </div>
                 </button>
               )}
             </div>

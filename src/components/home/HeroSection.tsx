@@ -159,16 +159,30 @@ export default function HeroSection() {
             <div className="absolute inset-6 rounded-full border border-rose-200/40" style={{ animation: 'spin 30s linear infinite reverse' }} />
             <div className="absolute inset-16 rounded-full border border-amber-200/25" />
 
-            <button
-              onClick={() => playTone(587.33, 'triangle', 0.8)}
-              className="relative w-44 h-44 sm:w-56 sm:h-56 rounded-full bg-gradient-to-tr from-purple-100 via-rose-50 to-amber-100 p-4 shadow-xl flex flex-col items-center justify-center border border-white/60 hover:scale-105 transition-transform duration-300 cursor-pointer group"
-              title="Tap for Solar Vibrations"
+            <div
+              onClick={() => {
+                switchTab('consultation');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-gradient-to-tr from-purple-100 via-rose-50 to-amber-100 p-4 shadow-xl flex flex-col items-center justify-center border border-white/60 hover:scale-105 transition-transform duration-300 cursor-pointer group text-center"
+              title="Click to view 30% OFF consultations"
             >
               <div className="absolute inset-3 rounded-full border border-amber-300/30 group-hover:scale-110 transition-transform" />
-              <span className="text-4xl sm:text-5xl text-amber-500 animate-pulse mb-1.5">☀️</span>
-              <span className="text-[9px] tracking-[0.25em] font-serif uppercase text-stone-500 font-bold block">VIBRATIONAL</span>
-              <span className="text-[11px] text-purple-700 italic font-sans font-semibold mt-0.5">HEARTBEAT</span>
-            </button>
+              <span className="text-2xl sm:text-3xl text-amber-500 animate-pulse mb-1">☀️</span>
+              <span className="text-[10px] sm:text-xs font-extrabold text-rose-600 uppercase tracking-widest block leading-none">FLAT</span>
+              <span className="text-xl sm:text-2xl font-serif font-black text-stone-900 leading-tight block my-0.5">30% OFF</span>
+              <span className="text-[10px] sm:text-xs font-semibold text-stone-600 uppercase tracking-wide block leading-none">on consultation</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  switchTab('consultation');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="mt-2 bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white text-[9px] sm:text-[10px] font-bold px-3 py-1 rounded-full shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer uppercase tracking-wider"
+              >
+                Book Now
+              </button>
+            </div>
 
             <div className="absolute top-6 right-12 w-9 h-9 rounded-full bg-purple-200/80 flex items-center justify-center text-xs animate-bounce" style={{ animationDelay: '0.1s' }}>♈</div>
             <div className="absolute bottom-8 left-8 w-11 h-11 rounded-full bg-rose-200/80 flex items-center justify-center text-sm animate-bounce" style={{ animationDelay: '0.4s' }}>♎</div>

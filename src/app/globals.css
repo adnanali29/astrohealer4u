@@ -63,6 +63,21 @@
   animation: fade-in-up 0.3s ease-out forwards;
 }
 
+@keyframes ticker {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 28s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
 /* ============================================
    3D CARD FLIP HELPERS
    ============================================ */

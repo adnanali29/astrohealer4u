@@ -22,7 +22,7 @@ export default function ConsultationTab() {
   return (
     <section className="min-h-screen bg-gradient-to-b from-[#F7F5FF] to-[#FFF5F7] pb-24">
 
-      {/* ── Header ───────────────────────────────────────────────────────── */}
+      {/* ── Header / Hero Section (Image 1 style) ────────────────────────── */}
       <div className="bg-gradient-to-r from-purple-700 via-violet-700 to-indigo-700 text-white py-14 px-4 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-4 left-[10%] text-6xl">🌙</div>
@@ -31,23 +31,26 @@ export default function ConsultationTab() {
           <div className="absolute bottom-6 right-[30%] text-5xl">🪐</div>
         </div>
         <div className="relative max-w-2xl mx-auto space-y-3 font-sans">
-          <div className="inline-flex items-center gap-2 bg-white/15 border border-white/25 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-2">
-            ✦ Jyotish Consultation Services
+          <div className="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-300/40 text-amber-200 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-1">
+            ✨ Limited Time Offer
           </div>
-          <h1 className="text-3xl md:text-4xl font-serif font-bold leading-tight">
-            Talk to an Expert Astrologer
+          <h1 className="text-3xl md:text-5xl font-serif font-extrabold leading-tight text-white tracking-wide">
+            Birthday Sale is LIVE!
           </h1>
-          <p className="text-purple-200 text-sm font-light leading-relaxed">
-            Personalized guidance via Chat or Call. Book instantly via WhatsApp.
+          <p className="text-amber-300 text-base md:text-xl font-bold tracking-wide">
+            30% OFF on All Astrology Consultations 🔮
+          </p>
+          <p className="text-purple-100 text-xs md:text-sm font-light leading-relaxed max-w-lg mx-auto">
+            Discover what the stars have in store — limited-time birthday offer.
           </p>
           <a
             href={`https://wa.me/${waNum}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-lg transition-colors mt-2"
+            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs md:text-sm font-bold px-6 py-2.5 rounded-full shadow-lg transition-transform hover:scale-105 mt-2"
           >
             <WhatsAppIcon className="w-4 h-4 fill-white" />
-            {contactPhone}
+            Book on WhatsApp ({contactPhone})
           </a>
         </div>
       </div>
@@ -148,12 +151,12 @@ function ServiceCard({
         </div>
       )}
 
-      {/* Verified checkmark on top right */}
-      <div className="absolute top-3.5 right-3.5 text-[#54B435]" title="Verified">
-        <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-        </svg>
-      </div>
+      {/* 30% OFF tag on top right (replacing tick icon) */}
+      {service.id !== 's1' && !service.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART') && (
+        <div className="absolute top-3.5 right-3.5 z-10 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-sm uppercase tracking-wider">
+          30% OFF
+        </div>
+      )}
 
       {/* Left Column */}
       <div className="flex flex-col items-center shrink-0 w-24 sm:w-28 pt-4">
