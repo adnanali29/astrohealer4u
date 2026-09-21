@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { SubCrystalProduct, ShopCategory } from '@/lib/data';
+import FadedAstrologyBg from '@/components/FadedAstrologyBg';
 
 const GRAM_OPTIONS = [
   { value: '30', label: '30 grams — ₹150' },
@@ -177,16 +178,17 @@ Please confirm my order. Thank you! 🙏`;
   };
 
   return (
-    <section className="py-12 md:py-20 px-4 min-h-[85vh] bg-[#FAF9F5]">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 md:py-20 px-4 min-h-[85vh] bg-[#0a0818] text-white relative overflow-hidden">
+      <FadedAstrologyBg opacity={0.16} />
+      <div className="max-w-7xl mx-auto relative z-10">
 
         {/* ── STATE 0: 18 Main Category Cards Grid ───────────────────────────── */}
         {viewState === 0 && (
           <div className="space-y-12">
             <div className="text-center space-y-4 max-w-2xl mx-auto">
-              <span className="text-xs uppercase tracking-widest text-purple-600 font-bold block">Blessed Relics & Minerals</span>
-              <h1 className="text-3xl sm:text-4xl font-serif text-stone-900 leading-tight">The Celestial Apothecary</h1>
-              <p className="text-stone-500 font-light text-sm leading-relaxed">
+              <span className="text-xs uppercase tracking-widest text-amber-300 font-bold block">✦ Blessed Relics & Minerals</span>
+              <h1 className="text-3xl sm:text-4xl font-serif text-white font-bold leading-tight">The Celestial Apothecary</h1>
+              <p className="text-purple-200/80 font-light text-sm leading-relaxed">
                 Explore our catalog of {shopCategories.length} sacred mineral collections. Cleansed with Himalayan salts and charged during auspicious astrological transits to harmonize your space.
               </p>
             </div>
@@ -196,7 +198,7 @@ Please confirm my order. Thank you! 🙏`;
               {shopCategories.map(category => (
                 <div
                   key={category.id}
-                  className="bg-white rounded-3xl border border-stone-200/50 shadow-sm overflow-hidden hover:shadow-md hover:border-purple-200/60 transition-all duration-300 flex flex-col justify-between"
+                  className="bg-white text-stone-900 rounded-3xl border border-stone-100 shadow-xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
                     {/* Top Gradient Image Sphere */}
@@ -259,14 +261,14 @@ Please confirm my order. Thank you! 🙏`;
         {/* ── STATE 1: Sub-Products Grid ──────────────────────────────────────── */}
         {viewState === 1 && selectedCategory && (
           <div className="space-y-10">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-stone-200/50 pb-5">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-purple-900/40 pb-5">
               <div className="text-center sm:text-left">
-                <span className="text-[10px] uppercase tracking-widest text-purple-600 font-bold block">{selectedCategory.tagline}</span>
-                <h1 className="text-2xl sm:text-3xl font-serif text-stone-900">{selectedCategory.name}</h1>
+                <span className="text-[10px] uppercase tracking-widest text-amber-300 font-bold block">✦ {selectedCategory.tagline}</span>
+                <h1 className="text-2xl sm:text-3xl font-serif font-bold text-white">{selectedCategory.name}</h1>
               </div>
               <button
                 onClick={handleBackToCategory}
-                className="px-4 py-2 border border-stone-200/80 bg-white hover:bg-stone-50 text-stone-700 text-xs font-bold rounded-xl transition-all"
+                className="px-4 py-2 border border-purple-500/40 bg-purple-950/60 hover:bg-purple-900 text-amber-200 text-xs font-bold rounded-xl transition-all shadow-md"
               >
                 ← Back to Catalog
               </button>
@@ -274,7 +276,7 @@ Please confirm my order. Thank you! 🙏`;
 
             {/* Subcategories list */}
             {filteredProducts.length === 0 ? (
-              <div className="text-center py-12 text-stone-400 font-light text-sm">
+              <div className="text-center py-12 text-purple-200/60 font-light text-sm">
                 No specimens currently synced under this category node.
               </div>
             ) : (
@@ -284,7 +286,7 @@ Please confirm my order. Thank you! 🙏`;
                   return (
                     <div
                       key={product.id}
-                      className="group bg-white rounded-3xl p-5 border border-stone-200/60 hover:border-purple-200/80 transition-all duration-300 hover:shadow-md flex flex-col justify-between"
+                      className="group bg-white text-stone-900 rounded-3xl p-5 border border-stone-100 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between"
                     >
                       <div>
                         <div className="flex justify-between items-center mb-3">
@@ -381,17 +383,17 @@ Please confirm my order. Thank you! 🙏`;
         {viewState === 2 && selectedProduct && (
           <div className="max-w-4xl mx-auto space-y-8">
             {/* Nav */}
-            <div className="flex justify-between items-center border-b border-stone-200/50 pb-4">
-              <div className="flex items-center gap-2 text-xs text-stone-500">
-                <button onClick={handleBackToGrid} className="hover:text-purple-700 font-medium transition-colors">
+            <div className="flex justify-between items-center border-b border-purple-900/40 pb-4">
+              <div className="flex items-center gap-2 text-xs text-purple-200/80">
+                <button onClick={handleBackToGrid} className="hover:text-amber-300 font-medium transition-colors">
                   {!!(shopCategories.find(c => c.id === selectedProduct?.categoryId)?.isSingleProduct || selectedProduct.categoryId.endsWith('-bracelet')) ? 'Catalog' : 'Specimens'}
                 </button>
                 <span>›</span>
-                <span className="text-purple-900 font-semibold">{selectedProduct.name}</span>
+                <span className="text-amber-300 font-semibold">{selectedProduct.name}</span>
               </div>
               <button
                 onClick={handleBackToGrid}
-                className="px-4 py-2 border border-stone-200/80 bg-white hover:bg-stone-50 text-stone-700 text-xs font-bold rounded-xl transition-all"
+                className="px-4 py-2 border border-purple-500/40 bg-purple-950/60 hover:bg-purple-900 text-amber-200 text-xs font-bold rounded-xl transition-all shadow-md"
               >
                 {!!(shopCategories.find(c => c.id === selectedProduct?.categoryId)?.isSingleProduct || selectedProduct.categoryId.endsWith('-bracelet')) ? '← Back to Catalog' : '← Back to Grid'}
               </button>

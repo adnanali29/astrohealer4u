@@ -116,7 +116,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Admin dynamic states
   const [heroTitle, setHeroTitle] = useState('Unveil Your Cosmic Blueprint');
   const [heroSub, setHeroSub] = useState('We align physical objects, cosmic transits, and customized daily astrological calendars to guide your spatial and spiritual energy toward harmonic tranquility.');
-  const [heroStats, setHeroStats] = useState({ charts: '12,500+', clientPraise: '4.96 ★', spiritualEthics: '100%' });
+  const [heroStats, setHeroStats] = useState({ charts: '12,500+', clientPraise: '4.96', spiritualEthics: '100%' });
   const [services, setServices] = useState<ConsultationService[]>(SERVICES);
   const [displayedServices, setDisplayedServices] = useState<string[]>(['s2', 's1', 's3']);
   const [testimonials, setTestimonials] = useState<TestimonialItem[]>(TESTIMONIALS_DEFAULT);

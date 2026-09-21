@@ -2,10 +2,9 @@
 
 import { useApp } from '@/context/AppContext';
 import { SERVICES, ConsultationService } from '@/lib/data';
+import FadedAstrologyBg from '@/components/FadedAstrologyBg';
 
 type ServiceType = ConsultationService;
-
-const WA_NUMBER = '919041544404';
 
 // ─── Main Component ────────────────────────────────────────────────────────────
 export default function ConsultationTab() {
@@ -20,34 +19,29 @@ export default function ConsultationTab() {
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-[#F7F5FF] to-[#FFF5F7] pb-24">
+    <section className="min-h-screen bg-[#0a0818] text-white relative overflow-hidden">
+      <FadedAstrologyBg opacity={0.16} />
 
-      {/* ── Header / Hero Section (Image 1 style) ────────────────────────── */}
-      <div className="bg-gradient-to-r from-purple-700 via-violet-700 to-indigo-700 text-white py-14 px-4 text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-4 left-[10%] text-6xl">🌙</div>
-          <div className="absolute top-6 right-[15%] text-5xl">⭐</div>
-          <div className="absolute bottom-4 left-[25%] text-4xl">✨</div>
-          <div className="absolute bottom-6 right-[30%] text-5xl">🪐</div>
+      {/* ── Seamless Header Content (No boxed hero block, single unified theme) ─── */}
+      <div className="pt-12 pb-6 px-4 text-center relative z-10 font-sans max-w-3xl mx-auto space-y-3">
+        <div className="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-300/40 text-amber-300 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-1 shadow-md">
+          ✨ Limited Time Birthday Offer
         </div>
-        <div className="relative max-w-2xl mx-auto space-y-3 font-sans">
-          <div className="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-300/40 text-amber-200 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-1">
-            ✨ Limited Time Offer
-          </div>
-          <h1 className="text-3xl md:text-5xl font-serif font-extrabold leading-tight text-white tracking-wide">
-            Birthday Sale is LIVE!
-          </h1>
-          <p className="text-amber-300 text-base md:text-xl font-bold tracking-wide">
-            30% OFF on All Astrology Consultations 🔮
-          </p>
-          <p className="text-purple-100 text-xs md:text-sm font-light leading-relaxed max-w-lg mx-auto">
-            Discover what the stars have in store — limited-time birthday offer.
-          </p>
+        <h1 className="text-3xl sm:text-5xl font-serif font-extrabold leading-tight text-white tracking-wide">
+          Birthday Sale is LIVE!
+        </h1>
+        <p className="text-amber-300 text-base sm:text-xl font-bold tracking-wide">
+          30% OFF on All Astrology Consultations 🔮
+        </p>
+        <p className="text-purple-200/90 text-xs sm:text-sm font-light leading-relaxed max-w-lg mx-auto">
+          Discover what the stars have in store — personalized guidance via Chat, Call or Video.
+        </p>
+        <div className="pt-2">
           <a
             href={`https://wa.me/${waNum}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs md:text-sm font-bold px-6 py-2.5 rounded-full shadow-lg transition-transform hover:scale-105 mt-2"
+            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs sm:text-sm font-bold px-7 py-3 rounded-full shadow-xl transition-all hover:scale-105 active:scale-95"
           >
             <WhatsAppIcon className="w-4 h-4 fill-white" />
             Book on WhatsApp ({contactPhone})
@@ -55,8 +49,8 @@ export default function ConsultationTab() {
         </div>
       </div>
 
-      {/* ── Cards Grid ───────────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* ── Cards Grid (Crisp White Cards on Dark Cosmic BG) ───────────────── */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 lg:grid-cols-2 gap-7 relative z-10">
         {services.map(service => (
           <ServiceCard
             key={service.id}
@@ -68,66 +62,81 @@ export default function ConsultationTab() {
         ))}
       </div>
 
-      {/* ── Trust Section ─────────────────────────────────────────────────── */}
-      <div className="bg-[#FAF9F5]/80 border-t border-b border-stone-200/60 py-16 px-6 mt-8">
+      {/* ── Trust Section (Why Choose Us — Clean bottom section, no extra space below) ── */}
+      <div className="py-20 px-6 text-white relative z-10">
         <div className="max-w-5xl mx-auto text-center space-y-12">
           <div className="space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold font-serif uppercase tracking-wider text-stone-900">
+            <span className="text-xs uppercase tracking-widest text-amber-300 font-bold block">✦ Divine Alignment & Trust</span>
+            <h2 className="text-3xl md:text-4xl font-bold font-serif uppercase tracking-wider text-white">
               Why Choose Us?
             </h2>
-            <div className="w-16 h-1 bg-[#54B435] mx-auto rounded-full" />
+            <div className="w-20 h-1 bg-gradient-to-r from-amber-400 via-purple-500 to-rose-400 mx-auto rounded-full" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center">
             {/* Point 1 */}
-            <div className="bg-white p-6 rounded-2xl border border-stone-200/40 shadow-sm flex flex-col items-center justify-center space-y-3 transition-transform hover:-translate-y-1">
+            <div className="bg-white text-stone-900 p-6 rounded-2xl border border-stone-200 shadow-xl hover:-translate-y-1.5 hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center space-y-3">
               <span className="text-4xl">🔒</span>
-              <h4 className="text-sm font-bold text-stone-800 font-serif leading-snug">
+              <h4 className="text-sm font-bold text-stone-900 font-serif leading-snug">
                 100% Confidential & Private
               </h4>
+              <p className="text-[11px] text-stone-500 font-light leading-relaxed">
+                Your birth details and personal discussions remain strictly private.
+              </p>
             </div>
 
             {/* Point 2 */}
-            <div className="bg-white p-6 rounded-2xl border border-stone-200/40 shadow-sm flex flex-col items-center justify-center space-y-3 transition-transform hover:-translate-y-1">
+            <div className="bg-white text-stone-900 p-6 rounded-2xl border border-stone-200 shadow-xl hover:-translate-y-1.5 hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center space-y-3">
               <span className="text-4xl">🎯</span>
-              <h4 className="text-sm font-bold text-stone-800 font-serif leading-snug">
+              <h4 className="text-sm font-bold text-stone-900 font-serif leading-snug">
                 Accurate & Trusted Guidance
               </h4>
+              <p className="text-[11px] text-stone-500 font-light leading-relaxed">
+                Empirical Vedic analysis backed by molecular chemistry principles.
+              </p>
             </div>
 
             {/* Point 3 */}
-            <div className="bg-white p-6 rounded-2xl border border-stone-200/40 shadow-sm flex flex-col items-center justify-center space-y-3 transition-transform hover:-translate-y-1">
+            <div className="bg-white text-stone-900 p-6 rounded-2xl border border-stone-200 shadow-xl hover:-translate-y-1.5 hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center space-y-3">
               <span className="text-4xl">✨</span>
-              <h4 className="text-sm font-bold text-stone-800 font-serif leading-snug">
+              <h4 className="text-sm font-bold text-stone-900 font-serif leading-snug">
                 Personalized Remedies
               </h4>
+              <p className="text-[11px] text-stone-500 font-light leading-relaxed">
+                Custom crystal grids & practical remedies tailored to your planetary chart.
+              </p>
             </div>
 
             {/* Point 4 */}
-            <div className="bg-white p-6 rounded-2xl border border-stone-200/40 shadow-sm flex flex-col items-center justify-center space-y-3 transition-transform hover:-translate-y-1">
+            <div className="bg-white text-stone-900 p-6 rounded-2xl border border-stone-200 shadow-xl hover:-translate-y-1.5 hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center space-y-3">
               <span className="text-4xl">⏰</span>
-              <h4 className="text-sm font-bold text-stone-800 font-serif leading-snug">
+              <h4 className="text-sm font-bold text-stone-900 font-serif leading-snug">
                 Timely Support
               </h4>
+              <p className="text-[11px] text-stone-500 font-light leading-relaxed">
+                Instant WhatsApp consultation booking with direct response.
+              </p>
             </div>
 
             {/* Point 5 */}
-            <div className="bg-white p-6 rounded-2xl border border-stone-200/40 shadow-sm flex flex-col items-center justify-center space-y-3 transition-transform hover:-translate-y-1 col-span-1 sm:col-span-2 md:col-span-1">
+            <div className="bg-white text-stone-900 p-6 rounded-2xl border border-stone-200 shadow-xl hover:-translate-y-1.5 hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center space-y-3 col-span-1 sm:col-span-2 md:col-span-1">
               <span className="text-4xl">🤝</span>
-              <h4 className="text-sm font-bold text-stone-800 font-serif leading-snug">
+              <h4 className="text-sm font-bold text-stone-900 font-serif leading-snug">
                 Results You Can Trust
               </h4>
+              <p className="text-[11px] text-stone-500 font-light leading-relaxed">
+                Over 12,500+ satisfied clients across 30+ countries.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-
     </section>
   );
 }
 
-// ─── Service Card ──────────────────────────────────────────────────────────────
+// ─── Service Card (Crisp White Card) ──────────────────────────────────────────
 function ServiceCard({
   service,
   onBook,
@@ -142,18 +151,18 @@ function ServiceCard({
   const { isCombo } = service as { isCombo?: boolean };
 
   return (
-    <div className={`relative bg-[#FFF6F4] rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border-2 ${isSelected ? 'border-[#54B435] ring-2 ring-green-100' : 'border-[#FFEBE7]'} p-4 flex flex-row gap-4`}>
+    <div className={`relative bg-white text-stone-900 rounded-[24px] overflow-hidden shadow-xl hover:shadow-2xl hover:scale-[1.01] transition-all duration-300 border-2 ${isSelected ? 'border-[#54B435] ring-4 ring-green-400/30' : 'border-stone-100'} p-5 sm:p-6 flex flex-row gap-5 z-10`}>
 
       {/* Badge / Ribbon */}
       {service.badge && (
-        <div className="absolute top-0 left-0 z-10 bg-[#54B435] text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-2xl rounded-tl-[22px]">
+        <div className="absolute top-0 left-0 z-10 bg-[#54B435] text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3.5 rounded-br-2xl rounded-tl-[22px] shadow-sm">
           {service.badge}
         </div>
       )}
 
-      {/* 30% OFF tag on top right (replacing tick icon) */}
+      {/* 30% OFF tag on top right */}
       {service.id !== 's1' && !service.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART') && (
-        <div className="absolute top-3.5 right-3.5 z-10 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-sm uppercase tracking-wider">
+        <div className="absolute top-3.5 right-3.5 z-10 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full shadow-sm uppercase tracking-wider">
           30% OFF
         </div>
       )}
@@ -161,30 +170,30 @@ function ServiceCard({
       {/* Left Column */}
       <div className="flex flex-col items-center shrink-0 w-24 sm:w-28 pt-4">
         {/* Service Icon in a circle */}
-        <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-gradient-to-br ${service.bg} flex items-center justify-center text-4xl border-2 border-white shadow-md`}>
+        <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-gradient-to-br ${service.bg} flex items-center justify-center text-4xl border-2 border-stone-100 shadow-md`}>
           {service.icon}
         </div>
 
         {/* Online Badge */}
-        <div className="mt-2.5 bg-[#EDF7ED] text-[#2E7D32] text-[10px] sm:text-xs font-semibold px-4 py-0.5 rounded-full">
+        <div className="mt-3 bg-[#EDF7ED] text-[#2E7D32] text-[10px] sm:text-xs font-bold px-4 py-0.5 rounded-full border border-green-200/50">
           Online
         </div>
 
         {/* Reviews */}
         <div className="mt-2 text-[10px] text-stone-500 font-medium whitespace-nowrap">
-          Reviews : <span className="font-bold text-rose-800">{service.reviews.toLocaleString('en-IN')}</span>
+          Reviews : <span className="font-bold text-rose-700">{service.reviews.toLocaleString('en-IN')}</span>
         </div>
 
         {/* Stars */}
         <div className="flex gap-0.5 mt-1.5">
           {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i} className="text-sm text-amber-400">★</span>
+            <span key={i} className="text-sm text-amber-400 select-none">★</span>
           ))}
         </div>
       </div>
 
       {/* Right Column */}
-      <div className="flex-1 flex flex-col justify-between pt-4">
+      <div className="flex-1 flex flex-col justify-between pt-3">
         <div className="pr-4">
           {/* Service Name */}
           <h3 className="text-base sm:text-lg font-bold text-stone-900 leading-tight uppercase font-serif tracking-wide">
@@ -192,13 +201,13 @@ function ServiceCard({
           </h3>
 
           {/* Details (Languages & Exp) */}
-          <div className="text-xs text-stone-600 mt-2 space-y-0.5 font-light">
+          <div className="text-xs text-stone-600 mt-2 space-y-0.5 font-medium">
             <p>{service.languages}</p>
             <p>Exp : {service.experience}</p>
           </div>
 
           {/* Description */}
-          <p className="text-[11px] sm:text-xs text-stone-500 mt-3 leading-relaxed font-light line-clamp-3" title={service.desc}>
+          <p className="text-[11px] sm:text-xs text-stone-500 mt-2.5 leading-relaxed font-light line-clamp-3" title={service.desc}>
             {service.desc}
           </p>
         </div>
@@ -207,17 +216,15 @@ function ServiceCard({
         <div className="flex justify-end mt-4">
           <button
             onClick={isCombo ? onCombo : () => onBook(service)}
-            className="border-2 border-[#54B435] text-[#54B435] hover:bg-[#54B435] hover:text-white active:scale-[0.98] font-bold text-xs sm:text-sm py-2 px-6 rounded-full transition-all duration-200 shadow-sm"
+            className="bg-[#54B435] hover:bg-[#479e2c] text-white active:scale-[0.98] font-bold text-xs sm:text-sm py-2.5 px-6 rounded-full transition-all duration-200 shadow-md hover:shadow-lg"
           >
-            {isCombo ? 'Enquire' : 'Book now'}
+            {isCombo ? 'Enquire Now' : 'Book now'}
           </button>
         </div>
       </div>
     </div>
   );
 }
-
-
 
 // ─── WhatsApp Icon ─────────────────────────────────────────────────────────────
 function WhatsAppIcon({ className }: { className?: string }) {

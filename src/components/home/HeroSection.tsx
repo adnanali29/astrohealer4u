@@ -1,196 +1,146 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
 import { useApp } from '@/context/AppContext';
 
 export default function HeroSection() {
-  const { switchTab, playTone, heroTitle, heroSub, heroStats } = useApp();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = canvas.width = canvas.offsetWidth;
-    let height = canvas.height = canvas.offsetHeight;
-    let animFrameId: number;
-    let mouseX: number | null = null;
-
-    const handleResize = () => {
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-    };
-
-    window.addEventListener('resize', handleResize);
-    canvas.addEventListener('mousemove', handleMouseMove);
-
-    const starsArray = Array.from({ length: 65 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      size: Math.random() * 1.5 + 0.4,
-      speed: Math.random() * 0.05 + 0.01,
-      opacity: Math.random() * 0.7 + 0.2,
-      pulseSpeed: Math.random() * 0.02 + 0.005,
-      glow: Math.random() > 0.8,
-      pulseOffset: Math.random() * Math.PI * 2,
-    }));
-
-    let time = 0;
-
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-      time += 0.016;
-
-      starsArray.forEach(star => {
-        let currentOpacity = star.opacity + Math.sin(time * star.pulseSpeed * 60 + star.pulseOffset) * 0.25;
-        currentOpacity = Math.max(0.05, Math.min(1, currentOpacity));
-
-        if (mouseX !== null) {
-          const dist = Math.abs(star.x - mouseX);
-          if (dist < 100) {
-            star.y -= (1 - dist / 100) * 0.6;
-          }
-        }
-        star.y -= star.speed;
-        if (star.y < 0) {
-          star.y = height;
-          star.x = Math.random() * width;
-        }
-
-        ctx.save();
-        ctx.globalAlpha = currentOpacity;
-        if (star.glow) {
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = 'rgba(196, 181, 253, 0.8)';
-        }
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fillStyle = star.glow ? '#c4b5fd' : '#a8a29e';
-        ctx.fill();
-        ctx.restore();
-      });
-
-      animFrameId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animFrameId);
-      window.removeEventListener('resize', handleResize);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
+  const { switchTab, heroStats } = useApp();
 
   return (
-    <div className="relative py-12 md:py-24 px-4 overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-auto opacity-70 z-0" />
+    <section className="relative w-full min-h-[90vh] lg:min-h-screen flex items-center justify-center bg-stone-950 text-white font-sans overflow-hidden">
+      {/* Full-bleed Bezel-to-Bezel Background Image */}
+      <div 
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat pointer-events-none z-0 scale-105 transition-transform duration-1000"
+        style={{ backgroundImage: `url('/hero-bg.webp')` }}
+      />
 
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
-        <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 bg-purple-50 border border-purple-100 px-4 py-1.5 rounded-full text-purple-700 text-xs font-bold uppercase tracking-widest shadow-sm animate-bounce" style={{ animationDuration: '3s' }}>
-            <span>✦</span>
-            Only i know what you are hiding 💫
-          </div>
+      {/* Dark Gradient Overlay for High Contrast & Legibility */}
+      <div className="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/85 to-stone-950/70 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/60 z-0" />
 
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-stone-800 leading-tight">
-            {heroTitle.includes('Cosmic Blueprint') ? (
-              <>
-                {heroTitle.split('Cosmic Blueprint')[0]}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-rose-500 to-amber-600 italic font-bold">
-                  Cosmic Blueprint
-                </span>
-                {heroTitle.split('Cosmic Blueprint')[1]}
-              </>
-            ) : (
-              heroTitle
-            )}
-          </h1>
-
-          <p className="text-stone-700 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-semibold">
-            {heroSub}
-          </p>
-
-          <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-2">
-            <button
-              onClick={() => switchTab('consultation')}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-stone-800 to-stone-900 hover:from-purple-900 hover:to-indigo-950 text-white font-bold text-xs sm:text-sm tracking-widest uppercase rounded-full shadow-md hover:shadow-xl transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
-            >
-              Begin Soul Reading
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
-            <button
-              onClick={() => switchTab('shop')}
-              className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-stone-50 text-stone-700 border border-stone-200/80 font-bold text-xs sm:text-sm tracking-widest uppercase rounded-full shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2"
-            >
-              <span className="text-purple-600">🛍</span>
-              Browse Apothecary
-            </button>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 pt-10 border-t border-stone-200/50 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
-            <div>
-              <span className="block text-2xl sm:text-3xl font-serif font-bold text-purple-800 leading-none">{heroStats.charts}</span>
-              <span className="text-[10px] text-stone-500 tracking-wider uppercase font-bold block mt-1">Charts Calibrated</span>
+      {/* Hero Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column: Bright High-Contrast Content (Image 2 Content) */}
+          <div className="lg:col-span-7 space-y-7 text-left">
+            
+            {/* Top Badge Pill */}
+            <div className="inline-flex items-center gap-2 bg-purple-500/20 border border-purple-400/40 text-purple-300 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg backdrop-blur-md">
+              <span className="text-amber-300">✦</span> ONLY I KNOW WHAT YOU ARE HIDING 💫
             </div>
-            <div className="border-x border-stone-200/60 px-4">
-              <span className="block text-2xl sm:text-3xl font-serif font-bold text-rose-600 leading-none">{heroStats.clientPraise}</span>
-              <span className="text-[10px] text-stone-500 tracking-wider uppercase font-bold block mt-1">Client Praise</span>
-            </div>
-            <div>
-              <span className="block text-2xl sm:text-3xl font-serif font-bold text-amber-600 leading-none">{heroStats.spiritualEthics}</span>
-              <span className="text-[10px] text-stone-500 tracking-wider uppercase font-bold block mt-1">Spiritual Ethics</span>
-            </div>
-          </div>
-        </div>
 
-        {/* Orbital Graphic */}
-        <div className="lg:col-span-5 flex justify-center">
-          <div className="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full border-2 border-dashed border-purple-200/30 animate-spin" style={{ animationDuration: '45s' }} />
-            <div className="absolute inset-6 rounded-full border border-rose-200/40" style={{ animation: 'spin 30s linear infinite reverse' }} />
-            <div className="absolute inset-16 rounded-full border border-amber-200/25" />
+            {/* Main Headline with Bright Vibrant Gradients */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.1] tracking-tight">
+              Unveil Your{' '}
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 font-serif font-bold">
+                Cosmic
+              </span>{' '}
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-amber-400 to-orange-400 font-serif font-bold">
+                Blueprint
+              </span>
+            </h1>
 
-            <div
-              onClick={() => {
-                switchTab('consultation');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-gradient-to-tr from-purple-100 via-rose-50 to-amber-100 p-4 shadow-xl flex flex-col items-center justify-center border border-white/60 hover:scale-105 transition-transform duration-300 cursor-pointer group text-center"
-              title="Click to view 30% OFF consultations"
-            >
-              <div className="absolute inset-3 rounded-full border border-amber-300/30 group-hover:scale-110 transition-transform" />
-              <span className="text-2xl sm:text-3xl text-amber-500 animate-pulse mb-1">☀️</span>
-              <span className="text-[10px] sm:text-xs font-extrabold text-rose-600 uppercase tracking-widest block leading-none">FLAT</span>
-              <span className="text-xl sm:text-2xl font-serif font-black text-stone-900 leading-tight block my-0.5">30% OFF</span>
-              <span className="text-[10px] sm:text-xs font-semibold text-stone-600 uppercase tracking-wide block leading-none">on consultation</span>
+            {/* Description Subtitle in Bright Legible Text */}
+            <p className="text-stone-200 text-base sm:text-lg leading-relaxed font-light font-sans max-w-xl">
+              We align physical objects, cosmic transits, and customized daily astrological calendars to guide your spatial and spiritual energy toward harmonic tranquility.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
+                onClick={() => {
                   switchTab('consultation');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="mt-2 bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white text-[9px] sm:text-[10px] font-bold px-3 py-1 rounded-full shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer uppercase tracking-wider"
+                className="px-8 py-4 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-lg shadow-amber-400/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
               >
-                Book Now
+                <span>BEGIN SOUL READING</span>
+                <span className="text-lg">➔</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  switchTab('shop');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-full backdrop-blur-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span className="text-amber-300">🛍</span>
+                BROWSE APOTHECARY
               </button>
             </div>
 
-            <div className="absolute top-6 right-12 w-9 h-9 rounded-full bg-purple-200/80 flex items-center justify-center text-xs animate-bounce" style={{ animationDelay: '0.1s' }}>♈</div>
-            <div className="absolute bottom-8 left-8 w-11 h-11 rounded-full bg-rose-200/80 flex items-center justify-center text-sm animate-bounce" style={{ animationDelay: '0.4s' }}>♎</div>
-            <div className="absolute top-1/2 left-0 w-8 h-8 rounded-full bg-teal-100/80 flex items-center justify-center text-xs">♊</div>
-            <div className="absolute bottom-1/2 right-0 w-7 h-7 rounded-full bg-amber-100/80 flex items-center justify-center text-xs">☉</div>
+            {/* Stats Row in Bright Vibrant Colors */}
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-8 border-t border-white/15 max-w-xl w-full">
+              <div>
+                <span className="block text-xl sm:text-3xl font-serif font-extrabold text-purple-400 leading-none whitespace-nowrap">
+                  {heroStats?.charts || '12,500+'}
+                </span>
+                <span className="text-[10px] text-stone-300 uppercase tracking-widest font-bold block mt-1.5 whitespace-nowrap">
+                  CHARTS CALIBRATED
+                </span>
+              </div>
+              <div className="border-x border-white/15 px-3 sm:px-6">
+                <div className="inline-flex items-center gap-1.5 text-xl sm:text-3xl font-serif font-extrabold text-rose-400 leading-none whitespace-nowrap">
+                  <span>
+                    {(heroStats?.clientPraise || '4.96').replace(/[★⭐*]/g, '').trim() || '4.96'}
+                  </span>
+                  <span className="text-rose-400 text-lg sm:text-2xl leading-none">★</span>
+                </div>
+                <span className="text-[10px] text-stone-300 uppercase tracking-widest font-bold block mt-1.5 whitespace-nowrap">
+                  CLIENT PRAISE
+                </span>
+              </div>
+              <div>
+                <span className="block text-xl sm:text-3xl font-serif font-extrabold text-amber-400 leading-none whitespace-nowrap">
+                  {heroStats?.spiritualEthics || '100%'}
+                </span>
+                <span className="text-[10px] text-stone-300 uppercase tracking-widest font-bold block mt-1.5 whitespace-nowrap">
+                  SPIRITUAL ETHICS
+                </span>
+              </div>
+            </div>
+
           </div>
+
+          {/* Right Column: Single Golden Oval Arch Frame with Garima Hero Image */}
+          <div className="lg:col-span-5 flex justify-center items-center relative">
+            
+            {/* Background Glow Halo */}
+            <div className="absolute w-80 h-96 rounded-full bg-gradient-to-tr from-amber-500/25 via-purple-600/25 to-rose-500/25 blur-3xl pointer-events-none" />
+
+            {/* Decorative Golden Starburst Vector */}
+            <div className="absolute -top-6 -right-6 text-amber-300 text-4xl animate-spin" style={{ animationDuration: '30s' }}>
+              ✦
+            </div>
+
+            {/* Single Golden Oval Arch Frame (Garima hero image) */}
+            <div className="relative z-10 flex items-center justify-center">
+              
+              <div className="relative w-64 sm:w-80 h-[380px] sm:h-[460px] rounded-[180px] p-2.5 bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 shadow-[0_0_60px_rgba(245,158,11,0.4)] transition-transform hover:scale-[1.02] duration-500 group">
+                <div className="w-full h-full rounded-[170px] overflow-hidden relative bg-stone-900 border-2 border-amber-200">
+                  <img
+                    src="/garima-hero.webp"
+                    alt="Garima Verma - Founder & Astro-Alchemist"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  />
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/10 to-transparent pointer-events-none" />
+                  
+                  {/* Floating Badge inside frame */}
+                  <div className="absolute bottom-5 inset-x-4 bg-black/75 backdrop-blur-md border border-white/20 p-3 rounded-2xl text-center">
+                    <span className="block font-serif text-sm font-bold text-white tracking-wide">Garima Verma</span>
+                    <span className="text-[9px] uppercase tracking-widest text-amber-300 font-extrabold block mt-0.5">FOUNDER & ASTRO-ALCHEMIST</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
       </div>
-    </div>
+    </section>
   );
 }
