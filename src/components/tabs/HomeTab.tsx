@@ -68,13 +68,15 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-10">
             {teaserSessions.map((s, i) => {
+              const isChart = s.id === 's1' || s.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART');
               const isMiddle = i === 1;
+
               return (
                 <div 
                   key={i} 
-                  className={`bg-white rounded-3xl border transition-all duration-300 flex flex-col justify-between relative ${
+                  className={`bg-white rounded-3xl border transition-all duration-300 flex flex-col justify-between items-center text-center relative ${
                     isMiddle 
                       ? 'p-8 border-purple-300/80 shadow-2xl md:scale-105 z-10 bg-gradient-to-b from-white to-purple-50/20 md:-translate-y-2' 
                       : 'p-6 border-stone-200/50 hover:shadow-lg hover:border-purple-200 shadow-sm'
@@ -86,34 +88,52 @@ export default function HomePage() {
                     </div>
                   )}
 
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-2xl">{s.icon}</div>
-                      {isMiddle && (
-                        <span className="text-[10px] text-purple-700 font-bold uppercase tracking-wider bg-purple-100/40 px-2.5 py-0.5 rounded-full">Recommended</span>
-                      )}
+                  {!isChart && (
+                    <div className="absolute -top-3.5 right-4 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold px-3 py-1 rounded-full shadow-md uppercase tracking-wider z-10">
+                      30% OFF
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-stone-800 leading-snug">{s.title}</h4>
-                    <p className="text-xs text-stone-500 font-light leading-relaxed">{s.desc}</p>
+                  )}
+
+                  <div className="space-y-4 flex flex-col items-center w-full">
+                    <div className="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center text-3xl mx-auto shadow-inner">{s.icon}</div>
+                    {isMiddle && (
+                      <span className="text-[10px] text-purple-700 font-bold uppercase tracking-wider bg-purple-100/40 px-3 py-0.5 rounded-full inline-block">Recommended</span>
+                    )}
+                    <h4 className="font-serif text-lg font-bold text-stone-800 leading-snug text-center">{s.title}</h4>
+                    <p className="text-xs text-stone-500 font-light leading-relaxed text-center max-w-xs">{s.desc}</p>
                   </div>
 
                   {/* Dynamic Pricing Columns */}
                   {(() => {
                     const priceCols = [s.chatPrice, s.callPrice, s.videoPrice].filter(p => p !== null && p !== undefined).length;
                     return (
-                      <div className={`pt-5 mt-5 border-t border-stone-100 grid gap-2 ${
+                      <div className={`pt-5 mt-5 border-t border-stone-100 grid gap-2 w-full ${
                         priceCols === 3 ? 'grid-cols-3' : priceCols === 2 ? 'grid-cols-2' : 'grid-cols-1'
                       }`}>
                         {s.chatPrice !== null && s.chatPrice !== undefined && (
                           <div className="text-center bg-green-50/70 rounded-xl p-2 border border-green-100/60">
                             <span className="text-[9px] text-stone-500 block font-semibold uppercase">💬 Chat</span>
-                            <span className="text-xs font-bold text-green-700 font-mono">₹{s.chatPrice.toLocaleString('en-IN')}</span>
+                            {isChart ? (
+                              <span className="text-xs font-bold text-green-700 font-mono">₹{s.chatPrice.toLocaleString('en-IN')}</span>
+                            ) : (
+                              <div className="flex items-center justify-center gap-1">
+                                <span className="text-[10px] text-stone-400 line-through">₹2,100</span>
+                                <span className="text-xs font-bold text-green-700 font-mono">₹1,469</span>
+                              </div>
+                            )}
                           </div>
                         )}
                         {s.callPrice !== null && s.callPrice !== undefined && (
                           <div className="text-center bg-blue-50/70 rounded-xl p-2 border border-blue-100/60">
                             <span className="text-[9px] text-stone-500 block font-semibold uppercase">📞 Call</span>
-                            <span className="text-xs font-bold text-blue-700 font-mono">₹{s.callPrice.toLocaleString('en-IN')}</span>
+                            {isChart ? (
+                              <span className="text-xs font-bold text-blue-700 font-mono">₹{s.callPrice.toLocaleString('en-IN')}</span>
+                            ) : (
+                              <div className="flex items-center justify-center gap-1">
+                                <span className="text-[10px] text-stone-400 line-through">₹3,100</span>
+                                <span className="text-xs font-bold text-blue-700 font-mono">₹2,169</span>
+                              </div>
+                            )}
                           </div>
                         )}
                         {s.videoPrice !== null && s.videoPrice !== undefined && (
@@ -130,8 +150,8 @@ export default function HomePage() {
                     onClick={() => handleBookNow(s.id)}
                     className={`mt-4 w-full py-3 text-xs font-bold uppercase tracking-wider rounded-xl transition-all ${
                       isMiddle 
-                        ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-md' 
-                        : 'bg-stone-900 hover:bg-purple-800 text-white'
+                        ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-md hover:scale-[1.02]' 
+                        : 'bg-stone-900 hover:bg-purple-800 text-white hover:scale-[1.02]'
                     }`}
                   >
                     Book Now
