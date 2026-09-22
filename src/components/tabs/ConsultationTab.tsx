@@ -155,20 +155,20 @@ function ServiceCard({
 
       {/* Badge / Ribbon */}
       {service.badge && (
-        <div className="absolute top-0 left-0 z-10 bg-[#54B435] text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3.5 rounded-br-2xl rounded-tl-[22px] shadow-sm">
+        <div className="absolute top-0 left-0 z-10 bg-[#54B435] text-white text-[10px] sm:text-[11px] font-bold uppercase tracking-wider py-1 px-3.5 rounded-br-2xl rounded-tl-[22px] shadow-sm">
           {service.badge}
         </div>
       )}
 
       {/* 30% OFF tag on top right */}
       {service.id !== 's1' && !service.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART') && (
-        <div className="absolute top-3.5 right-3.5 z-10 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full shadow-sm uppercase tracking-wider">
+        <div className="absolute top-0 right-0 z-10 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3.5 rounded-bl-2xl rounded-tr-[22px] shadow-sm uppercase tracking-wider">
           30% OFF
         </div>
       )}
 
       {/* Left Column */}
-      <div className="flex flex-col items-center shrink-0 w-24 sm:w-28 pt-4">
+      <div className="flex flex-col items-center shrink-0 w-24 sm:w-28 pt-5 sm:pt-4">
         {/* Service Icon in a circle */}
         <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-gradient-to-br ${service.bg} flex items-center justify-center text-4xl border-2 border-stone-100 shadow-md`}>
           {service.icon}
@@ -193,8 +193,8 @@ function ServiceCard({
       </div>
 
       {/* Right Column */}
-      <div className="flex-1 flex flex-col justify-between pt-3">
-        <div className="pr-4">
+      <div className="flex-1 flex flex-col justify-between pt-6 sm:pt-4">
+        <div className="pr-2 sm:pr-4">
           {/* Service Name */}
           <h3 className="text-base sm:text-lg font-bold text-stone-900 leading-tight uppercase font-serif tracking-wide">
             {service.title}

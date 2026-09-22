@@ -131,14 +131,14 @@ Please confirm my booking. Thank you! 🙏`;
                 <button
                   type="button"
                   onClick={() => setSelectedMode('Chat')}
-                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl border-2 transition-all ${
+                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl overflow-hidden border-2 transition-all ${
                     selectedMode === 'Chat'
                       ? 'border-[#54B435] bg-green-50/50 text-stone-850 ring-2 ring-green-100'
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
                   {!isChartService && (
-                    <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-sm uppercase tracking-wider z-10">
+                    <span className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[8px] sm:text-[9px] font-extrabold px-2 py-0.5 rounded-tr-[9px] rounded-bl-md shadow-sm uppercase tracking-wider z-10">
                       30% OFF
                     </span>
                   )}
@@ -162,14 +162,14 @@ Please confirm my booking. Thank you! 🙏`;
                 <button
                   type="button"
                   onClick={() => setSelectedMode('Call')}
-                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl border-2 transition-all ${
+                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl overflow-hidden border-2 transition-all ${
                     selectedMode === 'Call'
                       ? 'border-[#54B435] bg-green-50/50 text-stone-850 ring-2 ring-green-100'
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
                   {!isChartService && (
-                    <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-sm uppercase tracking-wider z-10">
+                    <span className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[8px] sm:text-[9px] font-extrabold px-2 py-0.5 rounded-tr-[9px] rounded-bl-md shadow-sm uppercase tracking-wider z-10">
                       30% OFF
                     </span>
                   )}
@@ -193,14 +193,14 @@ Please confirm my booking. Thank you! 🙏`;
                 <button
                   type="button"
                   onClick={() => setSelectedMode('Video Call')}
-                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl border-2 transition-all ${
+                  className={`relative flex flex-col items-center justify-center py-3.5 px-3 rounded-xl overflow-hidden border-2 transition-all ${
                     selectedMode === 'Video Call'
                       ? 'border-[#54B435] bg-green-50/50 text-stone-850 ring-2 ring-green-100'
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
                   {!isChartService && (
-                    <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-sm uppercase tracking-wider z-10">
+                    <span className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[8px] sm:text-[9px] font-extrabold px-2 py-0.5 rounded-tr-[9px] rounded-bl-md shadow-sm uppercase tracking-wider z-10">
                       30% OFF
                     </span>
                   )}

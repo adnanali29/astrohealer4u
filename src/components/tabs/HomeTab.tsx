@@ -76,20 +76,20 @@ export default function HomePage() {
               return (
                 <div 
                   key={i} 
-                  className={`bg-white text-stone-900 rounded-3xl border transition-all duration-300 flex flex-col justify-between items-center text-center relative ${
+                  className={`bg-white text-stone-900 rounded-3xl border transition-all duration-300 flex flex-col justify-between items-center text-center relative overflow-hidden ${
                     isMiddle 
                       ? 'p-8 border-2 border-purple-400 shadow-2xl md:scale-105 z-10 md:-translate-y-2' 
                       : 'p-6 border-stone-200/80 hover:shadow-xl shadow-md'
                   }`}
                 >
                   {isMiddle && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-700 via-violet-600 to-amber-500 text-white text-[9px] font-extrabold uppercase tracking-widest px-4 py-1 rounded-full shadow-lg whitespace-nowrap">
+                    <div className="absolute top-0 left-0 bg-gradient-to-r from-purple-700 via-violet-600 to-amber-500 text-white text-[9px] font-extrabold uppercase tracking-widest py-1 px-3.5 rounded-tl-[22px] rounded-br-2xl shadow-sm z-10">
                       🔥 Most Popular
                     </div>
                   )}
 
                   {!isChart && (
-                    <div className="absolute -top-3.5 right-4 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold px-3 py-1 rounded-full shadow-md uppercase tracking-wider z-10">
+                    <div className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[10px] font-extrabold py-1 px-3.5 rounded-bl-2xl rounded-tr-[22px] shadow-sm uppercase tracking-wider z-10">
                       30% OFF
                     </div>
                   )}
