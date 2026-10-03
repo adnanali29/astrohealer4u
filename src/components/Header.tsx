@@ -23,7 +23,7 @@ export default function Header() {
           <div className="inline-flex animate-ticker items-center text-[11px] sm:text-xs md:text-sm font-semibold tracking-wide">
             {[...Array(6)].map((_, i) => (
               <span key={i} className="inline-flex items-center gap-4 sm:gap-6 px-3 sm:px-4">
-                <span className="text-amber-200 font-bold">Birthday Sale is live — Flat 30% off on consultation</span>
+                <span className="text-amber-200 font-bold">Birthday Sale is live — Flat 50% off on consultation</span>
                 <span className="text-rose-200 text-[10px]">✦</span>
                 <span className="text-white font-medium">Limited-Time Birthday Offer 🔮</span>
                 <span className="text-rose-200 text-[10px]">✦</span>
@@ -41,7 +41,7 @@ export default function Header() {
             }}
             className="bg-white hover:bg-amber-50 text-red-800 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full shadow-sm transition-all block whitespace-nowrap active:scale-95 cursor-pointer"
           >
-            Claim 30% OFF
+            Claim 50% OFF
           </button>
         </div>
       </div>

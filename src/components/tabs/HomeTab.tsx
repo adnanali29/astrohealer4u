@@ -88,11 +88,9 @@ export default function HomePage() {
                     </div>
                   )}
 
-                  {!isChart && (
-                    <div className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[10px] font-extrabold py-1 px-3.5 rounded-bl-2xl rounded-tr-[22px] shadow-sm uppercase tracking-wider z-10">
-                      30% OFF
-                    </div>
-                  )}
+                  <div className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[10px] font-extrabold py-1 px-3.5 rounded-bl-2xl rounded-tr-[22px] shadow-sm uppercase tracking-wider z-10">
+                    50% OFF
+                  </div>
 
                   <div className="space-y-4 flex flex-col items-center w-full">
                     <div className="w-16 h-16 rounded-2xl bg-purple-50 flex items-center justify-center text-3xl mx-auto shadow-inner">{s.icon}</div>
@@ -114,11 +112,14 @@ export default function HomePage() {
                           <div className="text-center bg-green-50 rounded-xl p-2 border border-green-200/60">
                             <span className="text-[9px] text-stone-600 block font-bold uppercase">💬 Chat</span>
                             {isChart ? (
-                              <span className="text-xs font-bold text-green-700 font-mono">₹{s.chatPrice.toLocaleString('en-IN')}</span>
+                              <div className="flex items-center justify-center gap-1">
+                                <span className="text-[10px] text-stone-400 line-through">₹3,100</span>
+                                <span className="text-xs font-bold text-green-700 font-mono">₹1,550</span>
+                              </div>
                             ) : (
                               <div className="flex items-center justify-center gap-1">
                                 <span className="text-[10px] text-stone-400 line-through">₹2,100</span>
-                                <span className="text-xs font-bold text-green-700 font-mono">₹1,469</span>
+                                <span className="text-xs font-bold text-green-700 font-mono">₹1,050</span>
                               </div>
                             )}
                           </div>
@@ -127,11 +128,14 @@ export default function HomePage() {
                           <div className="text-center bg-blue-50 rounded-xl p-2 border border-blue-200/60">
                             <span className="text-[9px] text-stone-600 block font-bold uppercase">📞 Call</span>
                             {isChart ? (
-                              <span className="text-xs font-bold text-blue-700 font-mono">₹{s.callPrice.toLocaleString('en-IN')}</span>
+                              <div className="flex items-center justify-center gap-1">
+                                <span className="text-[10px] text-stone-400 line-through">₹5,100</span>
+                                <span className="text-xs font-bold text-blue-700 font-mono">₹2,550</span>
+                              </div>
                             ) : (
                               <div className="flex items-center justify-center gap-1">
                                 <span className="text-[10px] text-stone-400 line-through">₹3,100</span>
-                                <span className="text-xs font-bold text-blue-700 font-mono">₹2,169</span>
+                                <span className="text-xs font-bold text-blue-700 font-mono">₹1,550</span>
                               </div>
                             )}
                           </div>
@@ -139,7 +143,10 @@ export default function HomePage() {
                         {s.videoPrice !== null && s.videoPrice !== undefined && (
                           <div className="text-center bg-purple-50 rounded-xl p-2 border border-purple-200/60">
                             <span className="text-[9px] text-stone-600 block font-bold uppercase">📹 Video</span>
-                            <span className="text-xs font-bold text-purple-700 font-mono">₹{s.videoPrice.toLocaleString('en-IN')}</span>
+                            <div className="flex items-center justify-center gap-1">
+                              <span className="text-[10px] text-stone-400 line-through">₹{isChart ? '7,100' : (s.videoPrice ? s.videoPrice * 2 : '5,000')}</span>
+                              <span className="text-xs font-bold text-purple-700 font-mono">₹{isChart ? '3,550' : s.videoPrice.toLocaleString('en-IN')}</span>
+                            </div>
                           </div>
                         )}
                       </div>

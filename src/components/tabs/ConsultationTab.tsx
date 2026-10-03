@@ -31,7 +31,7 @@ export default function ConsultationTab() {
           Birthday Sale is LIVE!
         </h1>
         <p className="text-amber-300 text-base sm:text-xl font-bold tracking-wide">
-          30% OFF on All Astrology Consultations 🔮
+          50% OFF on All Astrology Consultations 🔮
         </p>
         <p className="text-purple-200/90 text-xs sm:text-sm font-light leading-relaxed max-w-lg mx-auto">
           Discover what the stars have in store — personalized guidance via Chat, Call or Video.
@@ -160,10 +160,10 @@ function ServiceCard({
         </div>
       )}
 
-      {/* 30% OFF tag on top right */}
-      {service.id !== 's1' && !service.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART') && (
+      {/* 50% OFF tag on top right */}
+      {!isCombo && (
         <div className="absolute top-0 right-0 z-10 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3.5 rounded-bl-2xl rounded-tr-[22px] shadow-sm uppercase tracking-wider">
-          30% OFF
+          50% OFF
         </div>
       )}
 
@@ -212,11 +212,30 @@ function ServiceCard({
           </p>
         </div>
 
-        {/* CTA Button */}
-        <div className="flex justify-end mt-4">
+        {/* Pricing & CTA Button */}
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-stone-100 gap-2">
+          {!isCombo ? (
+            <div className="flex flex-col">
+              <span className="text-[10px] text-stone-400 font-medium leading-none">Starting from</span>
+              <div className="flex items-center gap-1.5 mt-1">
+                <span className="text-xs text-stone-400 line-through font-medium">
+                  {service.id === 's1' || service.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART') ? '₹3,100' : '₹2,100'}
+                </span>
+                <span className="text-sm sm:text-base font-bold text-[#54B435]">
+                  {service.id === 's1' || service.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART') ? '₹1,550' : '₹1,050'}
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col">
+              <span className="text-[10px] text-purple-600 font-bold uppercase tracking-wider leading-none">Combo Offer</span>
+              <span className="text-xs font-bold text-stone-800 mt-1">Special Discount</span>
+            </div>
+          )}
+
           <button
             onClick={isCombo ? onCombo : () => onBook(service)}
-            className="bg-[#54B435] hover:bg-[#479e2c] text-white active:scale-[0.98] font-bold text-xs sm:text-sm py-2.5 px-6 rounded-full transition-all duration-200 shadow-md hover:shadow-lg"
+            className="bg-[#54B435] hover:bg-[#479e2c] text-white active:scale-[0.98] font-bold text-xs sm:text-sm py-2.5 px-5 sm:px-6 rounded-full transition-all duration-200 shadow-md hover:shadow-lg whitespace-nowrap shrink-0"
           >
             {isCombo ? 'Enquire Now' : 'Book now'}
           </button>
