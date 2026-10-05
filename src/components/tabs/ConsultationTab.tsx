@@ -24,15 +24,12 @@ export default function ConsultationTab() {
 
       {/* ── Seamless Header Content (No boxed hero block, single unified theme) ─── */}
       <div className="pt-12 pb-6 px-4 text-center relative z-10 font-sans max-w-3xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-300/40 text-amber-300 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-1 shadow-md">
-          ✨ Limited Time Birthday Offer
+        <div className="inline-flex items-center gap-2 bg-purple-500/20 border border-purple-400/30 text-purple-300 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-1 shadow-md">
+          ✦ Astro Healing Consultations
         </div>
         <h1 className="text-3xl sm:text-5xl font-serif font-extrabold leading-tight text-white tracking-wide">
-          Birthday Sale is LIVE!
+          Direct Guidance from Masters
         </h1>
-        <p className="text-amber-300 text-base sm:text-xl font-bold tracking-wide">
-          50% OFF on All Astrology Consultations 🔮
-        </p>
         <p className="text-purple-200/90 text-xs sm:text-sm font-light leading-relaxed max-w-lg mx-auto">
           Discover what the stars have in store — personalized guidance via Chat, Call or Video.
         </p>
@@ -160,13 +157,6 @@ function ServiceCard({
         </div>
       )}
 
-      {/* 50% OFF tag on top right */}
-      {!isCombo && (
-        <div className="absolute top-0 right-0 z-10 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3.5 rounded-bl-2xl rounded-tr-[22px] shadow-sm uppercase tracking-wider">
-          50% OFF
-        </div>
-      )}
-
       {/* Left Column */}
       <div className="flex flex-col items-center shrink-0 w-24 sm:w-28 pt-5 sm:pt-4">
         {/* Service Icon in a circle */}
@@ -218,11 +208,8 @@ function ServiceCard({
             <div className="flex flex-col">
               <span className="text-[10px] text-stone-400 font-medium leading-none">Starting from</span>
               <div className="flex items-center gap-1.5 mt-1">
-                <span className="text-xs text-stone-400 line-through font-medium">
-                  {service.id === 's1' || service.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART') ? '₹3,100' : '₹2,100'}
-                </span>
                 <span className="text-sm sm:text-base font-bold text-[#54B435]">
-                  {service.id === 's1' || service.title.toUpperCase().includes('COMPLETE ANALYSIS OF CHART') ? '₹1,550' : '₹1,050'}
+                  ₹{service.chatPrice?.toLocaleString('en-IN') || '2,100'}
                 </span>
               </div>
             </div>

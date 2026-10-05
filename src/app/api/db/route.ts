@@ -11,22 +11,26 @@ import {
 // Helper to seed data if tables are empty
 async function ensureSeeded() {
   // 1. Consultation Services
-  const servicesCount = await query('SELECT COUNT(*) FROM consultation_services');
-  if (parseInt(servicesCount.rows[0].count) === 0) {
-    console.log('Seeding consultation_services...');
-    for (const s of SERVICES) {
-      await query(
-        `INSERT INTO consultation_services (
-          id, name, image, title, description, languages, experience, reviews, rating, 
-          chat_price, chat_dur, call_price, call_dur, video_price, video_dur, badge, icon, bg, is_combo
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)`,
-        [
-          s.id, s.name, s.image, s.title, s.desc, s.languages, s.experience, s.reviews, s.rating,
-          s.chatPrice, s.chatDur, s.callPrice, s.callDur, s.videoPrice || null, s.videoDur || null,
-          s.badge, s.icon, s.bg, s.isCombo || false
-        ]
-      );
-    }
+  for (const s of SERVICES) {
+    await query(
+      `INSERT INTO consultation_services (
+        id, name, image, title, description, languages, experience, reviews, rating, 
+        chat_price, chat_dur, call_price, call_dur, video_price, video_dur, badge, icon, bg, is_combo
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
+      ON CONFLICT (id) DO UPDATE SET
+        chat_price = EXCLUDED.chat_price,
+        call_price = EXCLUDED.call_price,
+        video_price = EXCLUDED.video_price,
+        chat_dur = EXCLUDED.chat_dur,
+        call_dur = EXCLUDED.call_dur,
+        video_dur = EXCLUDED.video_dur,
+        experience = EXCLUDED.experience`,
+      [
+        s.id, s.name, s.image, s.title, s.desc, s.languages, s.experience, s.reviews, s.rating,
+        s.chatPrice, s.chatDur, s.callPrice, s.callDur, s.videoPrice || null, s.videoDur || null,
+        s.badge, s.icon, s.bg, s.isCombo || false
+      ]
+    );
   }
 
   // 2. Testimonials

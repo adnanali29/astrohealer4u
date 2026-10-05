@@ -14,18 +14,24 @@ export default function Header() {
         {/* Left Badge Tag */}
         <div className="shrink-0 z-10 pr-2 sm:pr-3 bg-gradient-to-r from-red-700 via-rose-700 to-transparent flex items-center">
           <span className="bg-black/30 border border-white/20 text-white text-[9px] sm:text-[10px] md:text-xs font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider flex items-center gap-1 sm:gap-1.5 shadow-inner">
-            <span>🎂</span> BIRTHDAY SALE
+            <span>🔮</span> ASTRO GUIDANCE
           </span>
         </div>
 
         {/* Continuously Scrolling Text Carousel */}
         <div className="flex-1 overflow-hidden whitespace-nowrap">
           <div className="inline-flex animate-ticker items-center text-[11px] sm:text-xs md:text-sm font-semibold tracking-wide">
-            {[...Array(6)].map((_, i) => (
-              <span key={i} className="inline-flex items-center gap-4 sm:gap-6 px-3 sm:px-4">
-                <span className="text-amber-200 font-bold">Birthday Sale is live — Flat 50% off on consultation</span>
+            {[...Array(4)].map((_, i) => (
+              <span key={i} className="inline-flex items-center gap-3 sm:gap-5 px-3 sm:px-4">
+                <span className="text-amber-200 font-bold">Shadi me rukawat hai?</span>
                 <span className="text-rose-200 text-[10px]">✦</span>
-                <span className="text-white font-medium">Limited-Time Birthday Offer 🔮</span>
+                <span className="text-white font-medium">Foreign PR me dikkat ?</span>
+                <span className="text-rose-200 text-[10px]">✦</span>
+                <span className="text-amber-200 font-bold">Paiso ki dikkat ?</span>
+                <span className="text-rose-200 text-[10px]">✦</span>
+                <span className="text-white font-medium">Pregnancy me Dikkat ?</span>
+                <span className="text-rose-200 text-[10px]">✦</span>
+                <span className="text-amber-200 font-bold">Business ya Job Career me confusion ?</span>
                 <span className="text-rose-200 text-[10px]">✦</span>
               </span>
             ))}
@@ -41,7 +47,7 @@ export default function Header() {
             }}
             className="bg-white hover:bg-amber-50 text-red-800 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full shadow-sm transition-all block whitespace-nowrap active:scale-95 cursor-pointer"
           >
-            Claim 50% OFF
+            Book Consultation
           </button>
         </div>
       </div>

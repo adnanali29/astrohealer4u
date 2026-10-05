@@ -30,10 +30,10 @@ export default function BookingModal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const price = selectedMode === 'Chat' 
-      ? (isChartService ? 1550 : 1050) 
+      ? booking.chatPrice 
       : selectedMode === 'Call' 
-        ? (isChartService ? 2550 : 1550) 
-        : (isChartService ? 3550 : booking.videoPrice);
+        ? booking.callPrice 
+        : booking.videoPrice;
     const duration = selectedMode === 'Chat' 
       ? booking.chatDur 
       : selectedMode === 'Call' 
@@ -137,23 +137,10 @@ Please confirm my booking. Thank you! 🙏`;
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
-                  <span className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[8px] sm:text-[9px] font-extrabold px-2 py-0.5 rounded-tr-[9px] rounded-bl-md shadow-sm uppercase tracking-wider z-10">
-                    50% OFF
-                  </span>
                   <span className="text-lg">💬</span>
                   <span className="text-xs font-bold mt-1 text-stone-800">Chat ({booking.chatDur || '30 min'})</span>
                   <div className="flex items-center gap-1.5 mt-1">
-                    {isChartService ? (
-                      <>
-                        <span className="text-xs font-medium text-stone-400 line-through">₹3,100</span>
-                        <span className="text-sm font-bold text-[#54B435]">₹1,550</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-xs font-medium text-stone-400 line-through">₹2,100</span>
-                        <span className="text-sm font-bold text-[#54B435]">₹1,050</span>
-                      </>
-                    )}
+                    <span className="text-sm font-bold text-[#54B435]">₹{booking.chatPrice?.toLocaleString('en-IN')}</span>
                   </div>
                 </button>
               )}
@@ -169,23 +156,10 @@ Please confirm my booking. Thank you! 🙏`;
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
-                  <span className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[8px] sm:text-[9px] font-extrabold px-2 py-0.5 rounded-tr-[9px] rounded-bl-md shadow-sm uppercase tracking-wider z-10">
-                    50% OFF
-                  </span>
                   <span className="text-lg">📞</span>
                   <span className="text-xs font-bold mt-1 text-stone-800">Call ({booking.callDur || '45 min'})</span>
                   <div className="flex items-center gap-1.5 mt-1">
-                    {isChartService ? (
-                      <>
-                        <span className="text-xs font-medium text-stone-400 line-through">₹5,100</span>
-                        <span className="text-sm font-bold text-[#54B435]">₹2,550</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-xs font-medium text-stone-400 line-through">₹3,100</span>
-                        <span className="text-sm font-bold text-[#54B435]">₹1,550</span>
-                      </>
-                    )}
+                    <span className="text-sm font-bold text-[#54B435]">₹{booking.callPrice?.toLocaleString('en-IN')}</span>
                   </div>
                 </button>
               )}
@@ -201,23 +175,10 @@ Please confirm my booking. Thank you! 🙏`;
                       : 'border-stone-200 bg-stone-50 text-stone-500 hover:border-stone-300'
                   }`}
                 >
-                  <span className="absolute top-0 right-0 bg-gradient-to-r from-rose-600 to-red-600 text-white text-[8px] sm:text-[9px] font-extrabold px-2 py-0.5 rounded-tr-[9px] rounded-bl-md shadow-sm uppercase tracking-wider z-10">
-                    50% OFF
-                  </span>
                   <span className="text-lg">📹</span>
                   <span className="text-xs font-bold mt-1 text-stone-800">Video ({booking.videoDur || '45 min'})</span>
                   <div className="flex items-center gap-1.5 mt-1">
-                    {isChartService ? (
-                      <>
-                        <span className="text-xs font-medium text-stone-400 line-through">₹7,100</span>
-                        <span className="text-sm font-bold text-[#54B435]">₹3,550</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-xs font-medium text-stone-400 line-through">₹{booking.videoPrice ? booking.videoPrice * 2 : '5,000'}</span>
-                        <span className="text-sm font-bold text-[#54B435]">₹{booking.videoPrice}</span>
-                      </>
-                    )}
+                    <span className="text-sm font-bold text-[#54B435]">₹{booking.videoPrice?.toLocaleString('en-IN')}</span>
                   </div>
                 </button>
               )}
